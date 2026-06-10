@@ -2,9 +2,14 @@
 // All values are placeholders pending James input (Milestone 5 — Content Pass).
 // See ObsidianVault/09_Assets/CV And Contact Assets.md
 
+/** Icon id for a social/profile link; maps to an inline SVG in <SocialLinks/>. */
+export type SocialIcon = "github" | "linkedin" | "itch";
+
 export interface ContactLink {
   label: string;
   href: string;
+  /** Optional icon id. When set, <SocialLinks/> renders the matching glyph. */
+  icon?: SocialIcon;
 }
 
 export interface Profile {
@@ -31,10 +36,15 @@ export const profile: Profile = {
   tools: ["Unity", "Source / Hammer", "Epic Online Services", "Git"],
   email: undefined, // TODO: add public contact email
   cvUrl: undefined, // TODO: add CV file to /public and set its path
+  // Real profiles. Single source of truth — rendered by <SocialLinks/> in the
+  // hero, contact section, and footer (so links live in one place, not per component).
   links: [
-    // TODO: replace with real profiles
-    { label: "GitHub", href: "#" },
-    { label: "LinkedIn", href: "#" },
-    { label: "itch.io", href: "#" },
+    { label: "GitHub", href: "https://github.com/LordJamesSeymour", icon: "github" },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/james-seymour-0941a8188/",
+      icon: "linkedin",
+    },
+    { label: "itch.io", href: "https://james-seymour.itch.io/", icon: "itch" },
   ],
 };

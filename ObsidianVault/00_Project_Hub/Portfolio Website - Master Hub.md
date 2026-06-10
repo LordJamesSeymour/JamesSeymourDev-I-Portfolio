@@ -4,9 +4,11 @@
 > Central navigation note for the entire project. Start here.
 
 ## 🎯 Project Summary
-A professional portfolio website for **James Seymour**, game programmer & designer.
-Built (target) with **Vite + React + TypeScript**, deployed to **GitHub Pages**, using a
-**data-driven project system**. Source of truth: `docs/PRD.md` → see [[PRD Summary]].
+A **cinematic, dark, 3D-enhanced, scrollable immersive** portfolio for **James Seymour**, game
+programmer & designer — built with **Vite + React + TypeScript** (+ **React Three Fiber** for an
+isolated, optional 3D layer), deployed to **GitHub Pages**, using a **data-driven project system**.
+The 3D *enhances* the site; it is never *required*. Source of truth: `docs/PRD.md` → [[PRD Summary]]
+· new direction → [[Immersive 3D Direction]].
 
 ## 🧭 Quick Navigation
 
@@ -21,6 +23,7 @@ Built (target) with **Vite + React + TypeScript**, deployed to **GitHub Pages**,
 - [[Open Questions]]
 
 ### Architecture
+- [[Technical Implementation Plan]]
 - [[Website Architecture Overview]]
 - [[Data Driven Project System]]
 - [[Routing Plan]]
@@ -28,6 +31,9 @@ Built (target) with **Vite + React + TypeScript**, deployed to **GitHub Pages**,
 - [[Folder Structure Plan]]
 
 ### Design
+- [[Immersive 3D Direction]]
+- [[Design System Brief]]
+- [[Skill Assisted Design Plan]]
 - [[Visual Identity]]
 - [[UI Style Guide]]
 - [[Animation Direction]]
@@ -54,6 +60,8 @@ Built (target) with **Vite + React + TypeScript**, deployed to **GitHub Pages**,
 - [[Checkpoint Hub]]
 - [[Prompt Hub]]
 - [[Asset Collection Checklist]]
+- [[3D Asset Requirements]]
+- [[Video Capture Requirements]]
 - [[Archive Notes]]
 
 ### Deployment
@@ -62,6 +70,8 @@ Built (target) with **Vite + React + TypeScript**, deployed to **GitHub Pages**,
 - [[Build And Deploy Checklist]]
 
 ## 📌 At a Glance
-- **Phase:** Planning → Setup
-- **Biggest blocker:** Project content + design preferences (James input).
+- **Phase:** Planning update done → **Stabilize + Cinematic Redesign** (Phases 1–2).
+- **Direction:** 3D scrollable immersive portfolio → [[Immersive 3D Direction]].
+- **Base site:** scaffolded & type-checks clean (orig. Milestones 1–3 done).
+- **Biggest blocker:** James input on motion/3D preferences + real media → [[Missing Content Checklist]].
 - **Next:** See [[Next Actions]].

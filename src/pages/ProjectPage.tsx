@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
+import type { ProjectCover } from "../types/project";
 import { getProjectBySlug } from "../lib/projects";
-import { placeholderImage, isPlaceholder } from "../lib/placeholder";
+import { isPlaceholder, placeholderCaption } from "../lib/placeholder";
+import CoverMedia from "../components/projects/CoverMedia";
 import ProjectCaseStudy from "../components/projects/ProjectCaseStudy";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
@@ -21,10 +23,13 @@ export default function ProjectPage() {
     );
   }
 
-  const heroImage =
-    project.media?.find((m) => m.type === "image")?.src ??
-    project.thumbnail ??
-    placeholderImage(project.name);
+  // Hero cover: prefer an explicit cover, else the first media item, else a thumbnail.
+  // CoverMedia handles the on-brand placeholder when none of these exist.
+  const heroCover: ProjectCover | undefined =
+    project.cover ??
+    project.media?.[0] ??
+    (project.thumbnail ? { type: "image", src: project.thumbnail } : undefined);
+  const caption = placeholderCaption(project.immersive?.showcaseType);
 
   const { links } = project;
   const hasLinks = links && Object.values(links).some(Boolean);
@@ -50,7 +55,7 @@ export default function ProjectPage() {
       </header>
 
       <div className="project-detail__media">
-        <img src={heroImage} alt={`${project.name} preview`} />
+        <CoverMedia cover={heroCover} label={project.name} caption={caption} />
       </div>
 
       {hasLinks && (

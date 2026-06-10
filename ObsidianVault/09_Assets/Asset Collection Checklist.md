@@ -5,12 +5,13 @@
 
 ## Per Project
 For each of the 8 projects → see each note's "Media Needed":
-- [ ] Thumbnail
-- [ ] Screenshots
-- [ ] Gameplay video / GIF
-- [ ] Optional diagram
+- [ ] Thumbnail / poster
+- [ ] Screenshots (2–4)
+- [ ] **Looping cover video** (4–8 s, muted, 16:9) — used by `CoverMedia` **and** the 3D `VideoScreen`
+- [ ] Optional diagram / editor footage
+- [ ] **Optional 3D model (GLB)** — only for model-candidate projects → [[3D Asset Requirements]]
 
-Projects: [[Arcade Machine]], [[Surfers Quest]], [[Bomberman Style Game]],
+Projects: [[Arcade Machine]] *(3D flagship)*, [[Surfers Quest]], [[Bomberman Style Game]],
 [[EOS Dedicated Server]], [[Basilisk Engine]], [[Cursor Zip]], [[Zombies VR]],
 [[Hammer Moonbase Map]].
 
@@ -22,7 +23,10 @@ Projects: [[Arcade Machine]], [[Surfers Quest]], [[Bomberman Style Game]],
 - [ ] CV / resume → [[CV And Contact Assets]].
 
 ## Specs
-- See [[Image Requirements]] and [[Video Requirements]].
+- Video (immersive direction): [[Video Capture Requirements]] *(primary)* · [[Video Requirements]].
+- 3D models: [[3D Asset Requirements]].
+- Images: [[Image Requirements]].
+- Folders: looping video + posters → `public/media/`; web-ready GLBs → `public/models/`.
 
 ## Related
-- [[Missing Content Checklist]] · [[Placeholder Asset Rules]]
+- [[Missing Content Checklist]] · [[Placeholder Asset Rules]] · [[Immersive 3D Direction]] · [[Design System Brief]]

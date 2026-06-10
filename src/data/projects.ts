@@ -7,8 +7,25 @@ import type { Project } from "../types/project";
 // media, and links come during the Content Pass (Milestone 5). Per-project context
 // lives in ObsidianVault/04_Project_Content/Projects/.
 //
-// NOTE: thumbnails/media are intentionally omitted so the app falls back to generated
-// placeholders (see src/lib/placeholder.ts) — never reference a missing file.
+// COVERS: each project's card + detail hero is a `cover`, which can be a looping muted
+// VIDEO, an animated GIF, or a static image. Most covers are still omitted, so the app
+// falls back to generated placeholders (src/lib/placeholder.ts) — never reference a
+// missing file. Cursor.zip already wires a real video cover as a worked example.
+//
+// ASSET PLANNING: each entry also carries `priority`, `missingAssets`, and
+// `immersive.showcaseType` (see src/types/project.ts). `missingAssets` drives a dev-only
+// "James input needed" note on cards (hidden in production). Full per-project asset spec:
+// ObsidianVault/09_Assets/Portfolio Asset Requirements Table.md.
+//
+// When real media exists, add a `cover` (and optionally a `media` gallery), e.g.:
+//
+//   cover: { type: "video", src: "/media/arcade-machine.mp4", poster: "/media/arcade-machine.jpg",
+//            alt: "Arcade Machine gameplay loop" },
+//   cover: { type: "gif",   src: "/media/surfers-quest.gif", alt: "Surfers Quest gameplay" },
+//   cover: { type: "image", src: "/media/basilisk.webp",     alt: "Basilisk Engine editor" },
+//
+// Put files in /public (referenced as "/media/...") or import from src/assets.
+// Always provide a `poster` for videos — it shows before load and for reduced-motion users.
 
 export const projects: Project[] = [
   // ---------------------------------------------------------------- C++
@@ -21,6 +38,16 @@ export const projects: Project[] = [
     technologies: ["C++"],
     featured: true,
     status: "placeholder",
+    priority: "high",
+    immersive: { showcaseType: "model" },
+    missingAssets: [
+      "Cabinet photo (the physical machine)",
+      "Gameplay video loop",
+      "Menu navigation video",
+      "3D arcade cabinet model (.glb)",
+      "Card thumbnail",
+      "Short feature showcase clip",
+    ],
     links: {},
     caseStudy: {
       overview: "TODO: What is the Arcade Machine project? Add a short overview.",
@@ -39,6 +66,15 @@ export const projects: Project[] = [
       "Placeholder description — a C++ game, 'Surfers Quest'. (Final copy pending.)",
     technologies: ["C++"],
     status: "placeholder",
+    priority: "medium",
+    immersive: { showcaseType: "video-screen" },
+    missingAssets: [
+      "Gameplay screenshots",
+      "Level editor screenshot (if available)",
+      "Short gameplay video",
+      "Player movement clip",
+      "Card thumbnail",
+    ],
     links: {},
     caseStudy: {
       overview: "TODO: What is Surfers Quest? Add a short overview.",
@@ -53,6 +89,15 @@ export const projects: Project[] = [
       "Placeholder description — a Bomberman-style C++ game. Final, original name TBD.",
     technologies: ["C++"],
     status: "placeholder",
+    priority: "medium",
+    immersive: { showcaseType: "video-screen" },
+    missingAssets: [
+      "Decide a public-safe, original (non-trademarked) name",
+      "Gameplay screenshot",
+      "Bomb / explosion gameplay clip",
+      "Level editor screenshot",
+      "Card thumbnail",
+    ],
     links: {},
     caseStudy: {
       overview:
@@ -68,6 +113,15 @@ export const projects: Project[] = [
     technologies: ["C++", "Epic Online Services"],
     featured: true,
     status: "placeholder",
+    priority: "high",
+    immersive: { showcaseType: "floating-card" },
+    missingAssets: [
+      "Architecture diagram",
+      "Server console screenshot",
+      "Network / session flow diagram",
+      "Short written explanation of functionality",
+      "Technology stack details",
+    ],
     links: {},
     caseStudy: {
       overview: "TODO: Describe the EOS dedicated server / networking work.",
@@ -84,6 +138,15 @@ export const projects: Project[] = [
     technologies: ["C++"],
     featured: true,
     status: "placeholder",
+    priority: "high",
+    immersive: { showcaseType: "video-screen" },
+    missingAssets: [
+      "Editor screenshot",
+      "Viewport interaction video",
+      "Gizmo / inspector clip",
+      "Scene hierarchy screenshot",
+      "Optional engine logo / 3D mark",
+    ],
     links: {},
     caseStudy: {
       overview: "TODO: Describe the engine's scope and goals.",
@@ -100,7 +163,22 @@ export const projects: Project[] = [
     category: "C#",
     shortDescription: "Placeholder description — a C# project, 'Cursor.zip'.",
     technologies: ["C#"],
-    status: "placeholder",
+    // ✅ First real asset wired in — demonstrates the data-driven media path.
+    // The looping muted clip lives in /public; CoverMedia handles reduced-motion.
+    status: "in-progress",
+    cover: {
+      type: "video",
+      src: "/CursorGameplay.mp4",
+      alt: "Cursor.zip gameplay clip",
+    },
+    priority: "medium",
+    immersive: { showcaseType: "video-screen" },
+    missingAssets: [
+      "Clarify what Cursor.zip is (one-line definition)",
+      "Decide final public-facing title",
+      "Screenshots",
+      "Poster frame for the gameplay video",
+    ],
     links: {},
     caseStudy: {
       overview: "TODO: What is Cursor.zip? Add a short overview.",
@@ -115,6 +193,15 @@ export const projects: Project[] = [
     technologies: ["C#", "Unity", "VR"],
     featured: true,
     status: "placeholder",
+    priority: "high",
+    immersive: { showcaseType: "video-screen" },
+    missingAssets: [
+      "VR gameplay video",
+      "Interaction / combat clip",
+      "Screenshots",
+      "Platform / headset information",
+      "Card thumbnail",
+    ],
     links: {},
     caseStudy: {
       overview: "TODO: Describe the VR game. Confirm engine + target headset.",
@@ -131,6 +218,15 @@ export const projects: Project[] = [
       "Placeholder description — a moonbase map built in the Hammer (Source) editor.",
     technologies: ["Hammer Editor", "Source Engine"],
     status: "placeholder",
+    priority: "medium",
+    immersive: { showcaseType: "environment" },
+    missingAssets: [
+      "In-game screenshots",
+      "Hammer editor screenshot",
+      "Top-down layout image",
+      "Walkthrough video",
+      "Written design explanation",
+    ],
     links: {},
     caseStudy: {
       overview: "TODO: Describe the level. Confirm target game / Source branch.",

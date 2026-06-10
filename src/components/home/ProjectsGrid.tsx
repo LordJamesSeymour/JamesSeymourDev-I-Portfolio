@@ -1,5 +1,6 @@
 import type { Project } from "../../types/project";
 import ProjectCard from "../projects/ProjectCard";
+import Reveal from "../visual/Reveal";
 
 interface ProjectsGridProps {
   projects: Project[];
@@ -12,8 +13,11 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
   return (
     <div className="grid">
-      {projects.map((project) => (
-        <ProjectCard key={project.slug} project={project} />
+      {projects.map((project, i) => (
+        // Stagger entrance, but cap the delay so long lists don't feel sluggish.
+        <Reveal key={project.slug} delay={Math.min(i, 6) * 70}>
+          <ProjectCard project={project} />
+        </Reveal>
       ))}
     </div>
   );

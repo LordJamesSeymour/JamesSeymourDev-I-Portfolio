@@ -2,6 +2,9 @@
 
 > **Status:** In Progress
 > Specs for gameplay video / GIFs.
+> ⚠️ **For the immersive 3D direction, the primary spec is now [[Video Capture Requirements]]**
+> (lengths, aspect ratios, how clips are reused as 2D covers *and* 3D `VideoScreen` textures). This
+> note remains valid for general hosting/embedding guidance and the "host big clips externally" rule.
 
 ## Options
 - **Hosted (recommended):** YouTube/Vimeo embed — keeps repo small, good performance.

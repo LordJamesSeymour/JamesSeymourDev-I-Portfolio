@@ -1,4 +1,5 @@
 import { profile } from "../../data/profile";
+import SocialLinks from "../ui/SocialLinks";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -8,13 +9,7 @@ export default function Footer() {
         <span>
           © {year} {profile.name}
         </span>
-        <nav className="footer-links" aria-label="Footer">
-          {profile.links.map((link) => (
-            <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <SocialLinks variant="footer" />
       </div>
     </footer>
   );

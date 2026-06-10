@@ -1,17 +1,27 @@
 # Technical Implementation Plan
 
-> **Status:** In Progress (planning only — no code yet)
+> **Status:** In Progress — base site scaffolded; now planning the **immersive 3D** layer (2026-06-10)
 > **Last updated:** 2026-06-10
 > Consolidated, decision-making build plan for the James Seymour portfolio website.
 > Source of truth: `docs/PRD.md`. This note turns the PRD + architecture notes into concrete,
 > actionable recommendations for whoever (Claude / Codex / James) builds the site.
 >
-> ⚠️ **This is a planning pass. Do not implement the website yet. Do not install packages
-> until James approves** → [[Milestone 1 - Project Setup]].
+> **Reality check:** the base site is **already built and type-checks clean** — Vite + React 18 + TS
+> + React Router, data-driven `projects.ts`, layout/home/projects/ui components, `CoverMedia`,
+> reduced-motion + placeholder safety, dark tokens. Original Milestones 1–3 are effectively done.
+> The work now is the **cinematic redesign + isolated 3D enhancement layer** → [[Immersive 3D Direction]].
+>
+> ⚠️ **The 3D dependencies below are not yet installed. Do not install them until James approves
+> the move to the 3D phases.** The existing site keeps running without them.
+>
+> 🎯 **Skill-assisted edits:** design/UX skills must follow [[Design System Brief]] under the
+> guardrails in [[Skill Assisted Design Plan]] — phased diffs, evolve existing tokens/classes, stay
+> data-driven, isolate 3D, keep mobile + reduced-motion + GitHub Pages compatibility.
 
 ## Related Notes
-- [[Website Architecture Overview]] · [[Data Driven Project System]] · [[Routing Plan]]
-- [[Component Plan]] · [[Folder Structure Plan]] · [[GitHub Pages Deployment]]
+- [[Design System Brief]] · [[Skill Assisted Design Plan]] · [[Immersive 3D Direction]] · [[Website Architecture Overview]]
+- [[Data Driven Project System]] · [[Routing Plan]] · [[Component Plan]] · [[Folder Structure Plan]] · [[GitHub Pages Deployment]]
+- [[3D Asset Requirements]] · [[Video Capture Requirements]] · [[Animation Direction]]
 - [[Placeholder Asset Rules]] · [[Implementation Hub]] · [[Project Content Hub]]
 
 ---
@@ -25,18 +35,31 @@
 | Language | **TypeScript (strict)** | Type-safe project schema is a PRD requirement. |
 | Routing | **React Router v6 (`BrowserRouter`)** + `public/404.html` SPA fallback | Clean URLs (`/projects/arcade-machine`) read better for recruiters than hash URLs. |
 | Styling | **CSS Modules + CSS custom properties (design tokens)** | Zero extra runtime deps, scoped styles, easy theming. *Tailwind is a viable alternative — pending James* → [[UI Style Guide]]. |
-| Animation | **CSS transitions first**; add **Framer Motion** only if richer motion is needed | Keep the bundle light; respect `prefers-reduced-motion` → [[Animation Direction]]. |
+| Styling | **Global CSS + CSS custom properties (design tokens)** — *as currently built* (`styles/globals.css` + `tokens.css`) | Already in place; CSS Modules/Tailwind optional later → [[UI Style Guide]]. |
+| Animation | **Framer Motion / Motion** for scroll reveals + UI; CSS transitions for micro-interactions | Scroll-triggered reveals, parallax, card motion; respect `prefers-reduced-motion` → [[Animation Direction]]. |
+| **3D engine** | **React Three Fiber + Three.js + Drei** (isolated, lazy-loaded) | Declarative R3F fits React; Drei gives helpers (loaders, controls, env). Code-split so it never blocks first paint → [[Immersive 3D Direction]]. |
+| **3D assets** | **GLB/glTF** + Draco/meshopt; **KTX2** textures | Smallest web-safe 3D; lazy + gated → [[3D Asset Requirements]]. |
+| **Scroll** | Framer Motion `useScroll`/`useTransform` driving a fixed background canvas; Drei `ScrollControls` only where canvas-locked scroll is truly needed | **No scroll hijacking** — read scroll, don't trap it → [[Animation Direction]]. |
 | Icons | **Inline SVG** (or `lucide-react` if many icons needed) | Avoid icon-font weight. |
-| Linting/format | **ESLint + Prettier** (Vite React-TS template includes ESLint) | Consistency, clean diffs. |
+| Linting/format | **ESLint + Prettier** | Consistency, clean diffs. |
 | Deployment | **GitHub Actions → GitHub Pages** | Build-on-push, no manual branch juggling → [[GitHub Pages Deployment]]. |
 
-**Dependencies to add at scaffold time** (await James approval before installing):
-`react`, `react-dom`, `react-router-dom`, `typescript`, `vite`, `@vitejs/plugin-react`, ESLint set.
-Everything else (Framer Motion, icon libs) is optional and added only if needed.
+**Already installed (base site):** `react`, `react-dom`, `react-router-dom`, `typescript`, `vite`,
+`@vitejs/plugin-react`.
 
-> **Decisions still needed from James:** styling approach (CSS Modules vs Tailwind), how
-> animated the site should feel, repo name + custom-domain choice. These do **not** block
-> starting Milestone 1 with the recommended defaults.
+**To add for the 3D phases** (await James approval before installing — see phase plan §8/§9):
+- Core 3D: `three`, `@react-three/fiber`, `@react-three/drei`.
+- Animation: `framer-motion` (a.k.a. `motion`).
+- Optional/as-needed: `@react-three/postprocessing` (bloom/cinematic — desktop only), `maath`
+  (easing/particle helpers), `@studio-freight/lenis` (smooth scroll, reduced-motion aware).
+- Dev-only: `@react-three/drei`'s perf helpers / `r3f-perf`, `leva` (scene tuning) — not shipped.
+- Asset pipeline (CLI, not runtime deps): `@gltf-transform/cli` / `gltfpack` for GLB optimization.
+
+> Keep the 3D bundle **code-split**: the base portfolio must ship and paint before the 3D chunk loads.
+
+> **Decisions still needed from James:** motion intensity (restrained ↔ flashy), which projects get
+> real 3D models vs. video, repo name + custom-domain choice. None of these block the cinematic
+> redesign (Phase 2) starting on the existing site.
 
 ---
 
@@ -53,31 +76,38 @@ JamesSeymourDev - Portfolio/
     404.html              # SPA fallback (redirects to index.html)
     CNAME                 # only if a custom domain is used
     favicon.svg
+    media/                # NEW: short looping MP4s + posters (referenced as "/media/<slug>.mp4")
+    models/               # NEW: web-ready GLBs (referenced as "/models/<slug>.glb")
   src/
     components/
-      layout/             # Layout, Header, Footer
-      home/               # Hero, About, SkillsList, ContactSection
-      projects/           # ProjectCard, ProjectFilter, ProjectCaseStudy, MediaGallery
-      ui/                 # Button, Tag/Badge, Section, Icon
+      layout/             # Layout, Header, Footer            [exists]
+      home/               # Hero, About, ProjectsGrid, ContactSection [exists]
+      sections/           # NEW: section wrappers for the immersive homepage
+                          #   HeroSection, AboutSection, ProjectsSection,
+                          #   ContactSection, ImmersiveShowcaseSection
+      projects/           # ProjectCard, ProjectFilter, ProjectCaseStudy, CoverMedia [exists]
+                          #   + ProjectGrid, ProjectShowcasePanel (new)
+      three/              # NEW — ALL React Three Fiber code lives here, lazy-loaded:
+                          #   HeroCanvas, ScrollScene, CameraRig, SceneLights,
+                          #   FloatingProjectCards, ProjectModel, VideoScreen,
+                          #   Particles, EnvironmentStage, WebGLGate, Canvas3DFallback
+      ui/                 # Button, Tag/Badge, Section, Icon  [exists]
     data/
-      projects.ts         # Typed source of truth for all projects
-      profile.ts          # Name, tagline, bio, skills, contact links
+      projects.ts         # Typed source of truth for all projects [exists]
+      profile.ts          # Name, tagline, bio, skills, contact links [exists]
     pages/
-      Home.tsx
-      ProjectsPage.tsx    # optional full gallery
-      ProjectPage.tsx     # /projects/:slug case study
-      NotFound.tsx
-    hooks/                # e.g. useProjectFilter
-    lib/                  # helpers: getProjectBySlug, formatting
+      Home.tsx            # [exists]
+      ProjectsPage.tsx    # full gallery [exists]
+      ProjectPage.tsx     # /projects/:slug case study [exists]
+      NotFound.tsx        # [exists]
+    hooks/                # usePrefersReducedMotion [exists]; + useHasWebGL, useScrollProgress (new)
+    lib/                  # getProjectBySlug etc. [exists]; placeholder.ts [exists]; + webgl.ts (new)
     styles/
-      globals.css
-      tokens.css          # CSS variables: colors, spacing, type scale
-    assets/
-      images/
-      video/
-      icons/
+      globals.css         # [exists]
+      tokens.css          # CSS variables: colors, spacing, type scale [exists]
+    assets/               # imported images/video/icons (or use /public)
     types/
-      project.ts          # shared Project types (or co-locate in data/projects.ts)
+      project.ts          # shared Project types [exists] — extend additively for immersive
     App.tsx
     main.tsx
   index.html
@@ -86,8 +116,9 @@ JamesSeymourDev - Portfolio/
   package.json
 ```
 
-> `src/` placeholder folders already exist with `.gitkeep`. Scaffolding fills them; don't
-> delete existing files.
+> The `[exists]` folders/files are already built and type-check clean. The immersive work **adds**
+> `components/three/`, `components/sections/`, `public/media/`, `public/models/` and a few hooks/lib
+> helpers — it does not delete or rewrite the working base. Preserve existing files.
 
 ---
 
@@ -116,8 +147,25 @@ Derived from [[Component Plan]], grouped by folder.
 ### Shared UI (`components/ui/`)
 - `Button`, `Tag`/`Badge`, `Section` wrapper, `Icon`.
 
-**Conventions:** typed props; data flows from `data/projects.ts`; one folder per component
-that owns styles. No hard-coded project content inside components.
+### Immersive sections (`components/sections/`) — NEW
+- Thin wrappers that compose the cinematic homepage and own scroll-reveal animation:
+  `HeroSection`, `AboutSection`, `ProjectsSection`, `ContactSection`, `ImmersiveShowcaseSection`.
+- These are **normal DOM/React** (Framer Motion). They may *host* a 3D canvas but contain no
+  Three.js themselves.
+
+### 3D layer (`components/three/`) — NEW, isolated & lazy-loaded
+- `HeroCanvas` — the single background `<Canvas>` (abstract hero scene).
+- `ScrollScene` / `CameraRig` — scroll-progress-driven camera easing/parallax (no hijacking).
+- `SceneLights` / `EnvironmentStage` — cinematic lighting + environment/fog.
+- `FloatingProjectCards` — glassy in-3D panels driven by `projects.ts`.
+- `ProjectModel` — lazy GLB loader with an abstract procedural **fallback** when no model exists.
+- `VideoScreen` — maps a project MP4 as a `VideoTexture` onto an in-scene screen (poster fallback).
+- `Particles` — lightweight drifting particles (capped, mobile-reduced).
+- `WebGLGate` / `Canvas3DFallback` — capability gate + error boundary + 2D fallback wrapper.
+
+**Conventions:** typed props; data flows from `data/projects.ts`; **no hard-coded project content in
+components.** Critically: **no Three.js import outside `components/three/`**, and the whole `three/`
+tree is reached only through a lazy boundary so it never blocks first paint → see §8.
 
 ---
 
@@ -185,6 +233,11 @@ no trademark/art), `eos-dedicated-server`, `basilisk-engine`, `cursor-zip`, `zom
 A separate `src/data/profile.ts` holds site-wide content (name, tagline, bio, skills, contact
 links, CV path) so copy isn't hard-coded in components.
 
+> **Note:** the snippet above is the *original* schema. The **canonical, current + target schema**
+> (with `media.model3d`, the `immersive` showcase block, and the model→video→image→placeholder
+> fallback chain) now lives in [[Data Driven Project System]]. Extend `src/types/project.ts`
+> **additively** during the 3D Project Showcase phase — don't break existing fields/slugs.
+
 ---
 
 ## 5. Routing Strategy
@@ -247,74 +300,124 @@ Full pre-flight in [[Build And Deploy Checklist]].
 
 ---
 
-## 8. Milestone-by-Milestone Implementation Plan
+## 8. 3D / Immersive Architecture (the core of the new direction)
 
-Maps to [[Implementation Hub]]. Each milestone has a clear "done" bar.
+The whole 3D layer is **bolt-on, isolated, lazy, gated, and fault-tolerant.** → [[Immersive 3D Direction]].
 
-### Milestone 1 — Project Setup → [[Milestone 1 - Project Setup]]
-- Confirm package install with James, then scaffold Vite + React + TS (strict).
-- Add folder structure (§2), router shell (`BrowserRouter`), styling base (`tokens.css`).
-- Stub `data/projects.ts` + `data/profile.ts` types.
-- Add `.github/workflows/deploy.yml` and `public/404.html`.
-- **Done:** dev server runs, `vite build` succeeds, deploys a "hello" page to Pages.
+**8.1 Isolation + lazy boundary.** No Three.js import lives outside `components/three/`. The base
+portfolio renders without it. A section mounts 3D only via a lazy boundary so the (large) 3D chunk
+loads *after* first paint:
 
-### Milestone 2 — Core Layout → [[Milestone 2 - Core Layout]]
-- Build `Layout`/`Header`/`Footer`, then `Hero`, `About`, `ProjectsGrid` (placeholder cards),
-  `ContactSection`. Responsive across breakpoints → [[Responsive Design Notes]].
-- **Done:** all home sections render and are responsive; nav works.
+```tsx
+// in a section component (DOM land) — note: no three import here
+const HeroCanvas = React.lazy(() => import("../three/HeroCanvas"));
 
-### Milestone 3 — Project System → [[Milestone 3 - Project System]]
-- Finalize the `Project` schema; seed all **8 placeholder entries**.
-- `ProjectCard` + grid render from data; `ProjectFilter` by category.
-- `/projects/:slug` case-study page via `getProjectBySlug`.
-- **Done:** adding a project = one data entry; all 8 have a working case-study page.
+function HeroSection() {
+  const show3D = useShould3D(); // WebGL && !reducedMotion && !lowPower (see 8.2)
+  return (
+    <section className="hero">
+      {/* readable DOM content ALWAYS renders */}
+      <HeroCopy />
+      {show3D && (
+        <Canvas3DBoundary fallback={<HeroStaticBackdrop />}>
+          <Suspense fallback={null}>
+            <HeroCanvas /> {/* the only path that pulls in three/fiber/drei */}
+          </Suspense>
+        </Canvas3DBoundary>
+      )}
+    </section>
+  );
+}
+```
 
-### Milestone 4 — Visual Polish → [[Milestone 4 - Visual Polish]]
-- Apply palette/typography tokens, hover/focus states, subtle motion (reduced-motion safe).
-- **Done:** site feels modern/intentional, not template-y.
+**8.2 Capability gate (`useShould3D` / `WebGLGate`).** Mount 3D only when **all** are true:
+WebGL is available (`lib/webgl.ts` feature-detect), the user does **not** prefer reduced motion
+(`usePrefersReducedMotion`, already in code), and the device isn't low-power/small-mobile
+(coarse heuristic: small viewport + `navigator.hardwareConcurrency`/`deviceMemory`). Otherwise render
+the static backdrop. Mobile may use a *reduced* scene rather than none — decide per section.
 
-### Milestone 5 — Content Pass → [[Milestone 5 - Content Pass]]  *(needs James input)*
-- Replace placeholder text/media with real content from [[Project Content Hub]]; add real
-  links; fill `profile.ts` (bio, CV, contact) → [[CV And Contact Assets]].
-- **Done:** no placeholders remain; everything real.
+**8.3 Error boundary (`Canvas3DBoundary` / `Canvas3DFallback`).** A class error boundary wraps every
+Canvas. A WebGL context loss or runtime error renders the 2D fallback instead of a white screen.
 
-### Milestone 6 — Final QA → [[Milestone 6 - Final QA]]
-- Accessibility + Lighthouse (Perf/A11y/Best Practices green), cross-browser/device, link
-  check, final deploy → [[Build And Deploy Checklist]].
-- **Done:** green scores, live on Pages, no console errors.
+**8.4 Scene + scroll pattern (no hijacking).** Prefer **one** `<Canvas>` as a fixed/sticky background
+behind the scrolling DOM. Drive the camera/objects from **scroll progress** via Framer Motion
+`useScroll` + `useTransform`, **lerped** for cinematic easing (never 1:1 snapping). Use Drei
+`ScrollControls` only inside a section that genuinely needs canvas-locked scroll. Native scroll always
+stays in control → [[Animation Direction]].
 
----
+**8.5 Performance controls.** `dpr={[1, 2]}` clamp; `frameloop="demand"` where motion is intermittent;
+cap particle counts; dispose geometries/textures on unmount; pause off-screen `VideoScreen`s; **lazy
+load every model/video on viewport** (never all at once); skip postprocessing on mobile. Budgets:
+GLB ≤ 1–3 MB, video loops short/compressed → [[3D Asset Requirements]] · [[Video Capture Requirements]].
 
-## 9. What Codex Should Build First
-
-The smallest valuable, reviewable first slice = **Milestone 1 only** (the skeleton). Concretely:
-
-1. **Wait for James to approve package installs.** Do not install before that.
-2. Scaffold **Vite + React + TypeScript (strict)** at the project root, preserving existing
-   files (`README.md`, vault, `.gitkeep`s) — do not overwrite.
-3. Create the folder structure from §2 (fill the existing placeholder `src/` folders).
-4. Add **typed data stubs**: `src/types/project.ts` (or in `data/projects.ts`), an empty-ish
-   `data/projects.ts` exporting `projects: Project[]`, and `data/profile.ts` with placeholder
-   profile fields.
-5. Set up **routing shell**: `BrowserRouter`, routes for `/`, `/projects/:slug`, `*`
-   (pages can be near-empty placeholders).
-6. Add **styling base**: `styles/globals.css` + `styles/tokens.css` with neutral placeholder
-   tokens (real palette comes later → [[UI Style Guide]]).
-7. Add **deployment plumbing**: `.github/workflows/deploy.yml` and `public/404.html`; set Vite
-   `base: "/"` for now (adjust once repo/domain is decided).
-8. Verify `npm run dev` and `npm run build` both succeed; commit.
-
-**Explicitly NOT in the first build:** real project content, visual polish/animation, the
-optional `/projects` gallery, and any final deploy config that depends on James's repo/domain
-choices. Those are Milestones 3–6.
-
-> First deliverable definition of done: a running, type-checked, deployable skeleton with the
-> data-driven structure in place but no real content — ready for Milestone 2.
+**8.6 Data-driven showcase.** `ProjectModel`/`VideoScreen`/`FloatingProjectCards` read each project's
+`immersive` settings and resolve the **model → video → image → placeholder** fallback chain. Nothing
+hard-codes a project; nothing 404s → [[Data Driven Project System]] · [[Placeholder Asset Rules]].
 
 ---
 
-## Open Decisions Blocking *Completion* (not the first build)
-- [ ] Styling: CSS Modules (recommended) vs Tailwind → [[UI Style Guide]].
+## 9. Phased Implementation Plan
+
+> **Original Milestones 1–3 are effectively DONE** ([[Milestone 1 - Project Setup]],
+> [[Milestone 2 - Core Layout]], [[Milestone 3 - Project System]]) — the scaffolded base exists and
+> type-checks. Old [[Milestone 4 - Visual Polish]] / [[Milestone 5 - Content Pass]] /
+> [[Milestone 6 - Final QA]] are **absorbed and expanded** by the phases below.
+
+Each phase ships **with its fallback** before the next starts. → [[Implementation Hub]].
+
+- **Phase 0 — Planning Update *(this pass)*.** PRD + vault updated to the 3D direction; visual /
+  technical / asset direction defined; checkpoint created. **Done:** docs reflect the new mission.
+- **Phase 1 — Stabilize Current Site.** Confirm `npm run dev` + `npm run build` run; sections work;
+  routing/build/Pages config sound; project data centralized. *(Largely already true.)* **No 3D yet.**
+  **Done:** clean, deployable baseline confirmed.
+- **Phase 2 — Premium Visual Redesign.** Cinematic dark restyle: typography, spacing, glass panels,
+  gradient glows, premium hover/focus, responsiveness; add **Framer Motion** scroll reveals + card
+  motion (reduced-motion safe). **Still no complex 3D.** **Done:** site feels expensive, not template-y.
+- **Phase 3 — Lightweight 3D Hero.** Add `three`/`@react-three/fiber`/`@react-three/drei`; build
+  `HeroCanvas` (abstract particles/fragments), subtle camera parallax + mouse-follow, the capability
+  gate + fallback (§8). Isolated from the rest of the page. **Done:** hero has safe, lazy 3D.
+- **Phase 4 — 3D Project Showcase Layer.** `FloatingProjectCards`, `VideoScreen`, optional
+  `ProjectModel` GLB loading; **Arcade Machine** model showcase if provided. All driven by
+  `projects.ts`. **Done:** featured projects appear in 3D with fallbacks.
+- **Phase 5 — Scroll-Based Immersive Journey.** Stitch featured projects into a continuous,
+  cinematic, scroll-driven camera path. Sections stay readable/accessible. Normal scroll only.
+  **Done:** a cohesive immersive scroll story.
+- **Phase 6 — Real Content Pass.** Real videos/screenshots/GLBs + final descriptions; CV, GitHub,
+  LinkedIn, email; remove/polish placeholders → [[Project Content Hub]] / [[CV And Contact Assets]].
+  **Done:** no placeholders remain.
+- **Phase 7 — Optimization & Deployment.** Compress video, optimize models, lazy-load audit, mobile +
+  reduced-motion + WebGL-off testing, GitHub Pages deploy, Lighthouse, final QA →
+  [[Build And Deploy Checklist]]. **Done:** green scores, live on Pages, graceful everywhere.
+
+---
+
+## 10. What To Build First (now that the base exists)
+
+The skeleton is already built. The smallest valuable, reviewable next slice = **Phase 1 verify +
+Phase 2 cinematic redesign** — **no new dependencies, no 3D yet.** Concretely:
+
+1. **Phase 1 — confirm the baseline.** Run `npm run dev`, `npm run build`, `npm run typecheck`; click
+   through home, `/projects`, a `/projects/:slug`, and a 404. Confirm responsiveness + reduced-motion.
+   Fix anything broken. **Do not add features here.**
+2. **Phase 2 — cinematic dark restyle (DOM/CSS only).** Elevate `tokens.css` (richer dark palette,
+   neon accents, glass surfaces, glow shadows), typography scale, spacing, section rhythm; premium
+   hover/focus states; polish `ProjectCard`/grid/hero. Keep it responsive and accessible.
+3. **Phase 2 — motion.** Add `framer-motion` (**first new dep — get James's OK**) for scroll-reveal of
+   sections + card entrance/hover, gated on `usePrefersReducedMotion`. No 3D, no scroll hijacking.
+4. Verify build + typecheck stay green; commit. **This is the first deliverable.**
+
+**Explicitly NOT in this first slice:** React Three Fiber / any WebGL (Phase 3+), GLB loading,
+real content (Phase 6), and final domain/deploy config that depends on James's choices.
+
+> First deliverable definition of done: the existing site, restyled into a cinematic dark portfolio
+> with tasteful scroll/card motion — still type-checked, deployable, and 3D-free.
+
+---
+
+## Open Decisions (do not block Phase 1/2)
+- [ ] Motion intensity: restrained ↔ flashy → [[Animation Direction]].
+- [ ] Styling: stay on global CSS + tokens (current) vs introduce CSS Modules/Tailwind → [[UI Style Guide]].
+- [ ] Which projects get a real **3D model** vs. **video-only** → [[3D Asset Requirements]].
 - [ ] Repo name + user/project site + custom domain → [[GitHub Pages Deployment]].
 - [ ] Final project names (esp. Bomberman) + content/media → [[Missing Content Checklist]].
-- [ ] Is the standalone `/projects` gallery wanted, or is the home grid enough?
+- [ ] Smooth-scroll (Lenis) yes/no, and whether mobile gets a reduced 3D scene or static fallback.

@@ -21,3 +21,8 @@ pnpm-debug.log*
 
 # vite cache
 .vite/
+
+# Large local media files
+public/CursorGameplay.mp4
+public/videos/raw/
+*.mp4

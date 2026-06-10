@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Section from "../components/ui/Section";
 import ProjectsGrid from "../components/home/ProjectsGrid";
 import ProjectFilter, { type CategoryFilter } from "../components/projects/ProjectFilter";
+import Reveal from "../components/visual/Reveal";
 import { getAllProjects, getUsedCategories } from "../lib/projects";
 
 export default function ProjectsPage() {
@@ -15,9 +16,32 @@ export default function ProjectsPage() {
   );
 
   return (
-    <Section title="Projects" subtitle="C++, C#, and level design work.">
+    <Section
+      eyebrow="The Work"
+      title="Projects"
+      subtitle="C++, C#, and level-design work — grouped by discipline. Filter to focus on one."
+    >
       <ProjectFilter categories={categories} active={active} onChange={setActive} />
-      <ProjectsGrid projects={visible} />
+
+      {active === "All" ? (
+        // Grouped view: one cinematic section per discipline.
+        categories.map((category) => {
+          const inCategory = all.filter((p) => p.category === category);
+          return (
+            <div className="category-group" key={category}>
+              <Reveal as="header" className="category-group__head">
+                <h2 className="category-group__title">{category}</h2>
+                <span className="category-group__count">
+                  {inCategory.length} project{inCategory.length === 1 ? "" : "s"}
+                </span>
+              </Reveal>
+              <ProjectsGrid projects={inCategory} />
+            </div>
+          );
+        })
+      ) : (
+        <ProjectsGrid projects={visible} />
+      )}
     </Section>
   );
 }

@@ -4,7 +4,7 @@ import Tag from "../ui/Tag";
 
 export default function About() {
   return (
-    <Section id="about" title="About" muted>
+    <Section id="about" eyebrow="Profile" title="About" muted>
       <p className="prose">{profile.bio}</p>
 
       <div className="about__columns">

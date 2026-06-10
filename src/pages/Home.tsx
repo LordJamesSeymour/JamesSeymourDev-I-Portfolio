@@ -13,10 +13,15 @@ export default function Home() {
     <>
       <Hero />
       <About />
-      <Section id="projects" title="Featured Projects" subtitle="A selection of recent work.">
+      <Section
+        id="projects"
+        eyebrow="Selected Work"
+        title="Featured Projects"
+        subtitle="A selection of recent C++, C#, and level-design work — engines, gameplay, networking, and worlds."
+      >
         <ProjectsGrid projects={featured} />
         <div className="center-row">
-          <Button to="/projects" variant="ghost">
+          <Button to="/projects" variant="ghost" arrow>
             See all projects
           </Button>
         </div>

@@ -4,15 +4,20 @@
 > The short, prioritized to-do list. Keep this small and current.
 
 ## 🔼 Top Priority (James)
-- [ ] Confirm the final list + public-facing names of projects → [[Project Content Hub]].
-- [ ] Provide design preferences (colors, fonts, vibe) → [[Visual Identity]] / [[UI Style Guide]].
+- [ ] Pick **motion intensity** (restrained ↔ flashy) + accent color → [[Visual Identity]] / [[Animation Direction]].
+- [ ] Decide which projects get a real **3D model** vs. video-only (Arcade Machine = flagship) → [[3D Asset Requirements]].
+- [ ] Start capturing **project videos / screenshots** → [[Video Capture Requirements]].
+- [ ] Confirm final project names (esp. an original name for the Bomberman-style game) → [[Project Content Hub]].
 - [ ] Provide contact email, links, and CV file → [[CV And Contact Assets]].
 - [ ] Decide repo name + whether a custom domain is used → [[GitHub Pages Deployment]].
 
-## 🔧 Next (Claude / Codex)
-- [ ] Scaffold Vite + React + TypeScript → [[Milestone 1 - Project Setup]].
-- [ ] Define `projects.ts` schema → [[Data Driven Project System]].
-- [ ] Build core layout shell → [[Milestone 2 - Core Layout]].
+## 🔧 Next (skills / Claude / Codex)
+- [x] **Install** the design/UX/animation skills + point them at [[Design System Brief]] + [[Skill Assisted Design Plan]].
+- [x] **Phase 1:** verify the running site (routes, responsive, reduced-motion).
+- [x] **Phase 2 (skill-assisted):** cinematic dark restyle per [[Design System Brief]] (tokens, typography, hover, particles) → [[CHECKPOINT 6 - Premium Dala Inspired 2D Redesign Complete]].
+- [x] **Phase 2:** scroll reveals + card motion via IntersectionObserver/CSS (reduced-motion safe; no Framer Motion needed yet) → [[Animation Direction]].
+- [ ] **Content pass:** wire real bio/links + 🔴 high-priority project media → [[Portfolio Asset Requirements Table]].
+- [ ] *(Phase 3, only after approval)* add React Three Fiber `HeroCanvas` (isolated + gated) → [[Immersive 3D Direction]].
 
 ## 🧊 Backlog
 - See [[Feature Backlog]] and [[Open Questions]].

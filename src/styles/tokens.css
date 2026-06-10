@@ -1,38 +1,102 @@
-/* Design tokens (placeholder values).
-   Real palette/typography decisions come later — see
-   ObsidianVault/03_Design_And_Visual_Direction/UI Style Guide.md */
-:root {
-  /* Colors */
-  --color-bg: #0f172a;
-  --color-surface: #1e293b;
-  --color-surface-2: #243044;
-  --color-border: #334155;
-  --color-text: #e2e8f0;
-  --color-muted: #94a3b8;
-  --color-primary: #38bdf8;
-  --color-primary-strong: #0ea5e9;
-  --color-on-primary: #04293b;
+/* ============================================================================
+   Design tokens — Phase 2 "Premium 2D Visual Redesign"
+   ----------------------------------------------------------------------------
+   Visual reference: DESIGN.md (Dala / "particle cosmos on a void") reconciled
+   with ObsidianVault/03_Design_And_Visual_Direction/Design System Brief.md.
 
-  /* Spacing scale (8px base) */
+   Approach (per the brief): EVOLVE, don't replace. Every legacy token name
+   (--color-bg, --color-surface, --space-*, --fs-*, --radius*) is kept so existing
+   selectors keep resolving; values are re-tuned to the cosmic-dark direction and
+   new tokens (cosmos palette, glass, glow, motion) are added additively.
+
+   Direction: void-black canvas · violet (Plum Voltage) as the single authority
+   accent used as light/glow · bone-white type · hairline glass surfaces ·
+   particle/cosmos energy · high contrast · smooth, eased motion.
+   ========================================================================== */
+:root {
+  /* ----- Cosmos palette (DESIGN.md) ------------------------------------- */
+  --color-void: #000000; /* purest field — used behind the particle canvas    */
+  --color-bone: #ffffff; /* the only light that reads on the void             */
+  --color-ash: #c4c4cd; /* secondary text                                     */
+  --color-smoke: #8d8d97; /* tertiary / resting nav                           */
+  --color-plum: #8052ff; /* Plum Voltage — primary accent, the brand pulse    */
+  --color-plum-bright: #9a78ff; /* lifted violet for hover / glow edges        */
+  --color-amber: #ffb829; /* spark — sparing outline/particle accent          */
+  --color-lichen: #1f9d83; /* node — particle / decorative accent only        */
+
+  /* ----- Semantic aliases (legacy names kept; re-tuned to the void) ------ */
+  --color-bg: #050507; /* page canvas — a hair off pure black for depth       */
+  --color-bg-deep: #000000;
+  --color-surface: rgba(255, 255, 255, 0.028); /* hairline glass panel fill   */
+  --color-surface-2: rgba(255, 255, 255, 0.05); /* media well                 */
+  --color-border: rgba(255, 255, 255, 0.1); /* visible hairline               */
+  --color-hairline: rgba(255, 255, 255, 0.07); /* faint structural hairline   */
+  --color-text: #f4f5f8;
+  --color-muted: #9aa0ab; /* AA on the void                                   */
+  --color-faint: #6f7480;
+  --color-primary: #8052ff;
+  --color-primary-strong: #9a78ff;
+  --color-on-primary: #ffffff;
+
+  /* ----- Glass / elevation / glow (used with restraint) ----------------- */
+  --glass-bg: rgba(18, 18, 26, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-blur: 14px;
+  --glow-primary: 0 0 48px rgba(128, 82, 255, 0.28);
+  --glow-soft: 0 18px 60px -30px rgba(0, 0, 0, 0.9);
+  --shadow-panel: 0 40px 90px -50px rgba(0, 0, 0, 0.95);
+  --ring-focus: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-plum);
+
+  /* ----- Typography ----------------------------------------------------- */
+  /* Display: Space Grotesk (geometric grotesk, "etched" thin weights).
+     Body/UI: Plus Jakarta Sans (premium neutral sans — chosen over Inter to
+     honour the high-end-visual-design skill's anti-generic guardrail). Both
+     load via index.html with display=swap and a full system fallback stack so
+     they never block first paint. */
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, Roboto,
+    Helvetica, Arial, sans-serif;
+
+  --fs-sm: 0.875rem;
+  --fs-base: 1.0625rem; /* 17px — generous body on dark                       */
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.6rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: clamp(2.6rem, 5vw, 4rem); /* section display                      */
+  --fs-display: clamp(3.2rem, 9vw, 7rem); /* hero title — "title card"        */
+
+  --tracking-tight: -0.03em; /* large display                                 */
+  --tracking-kicker: 0.22em; /* uppercase eyebrows                            */
+  --leading-display: 1.02;
+  --leading-body: 1.62;
+
+  /* ----- Spacing (8px base; legacy scale kept, macro steps added) -------- */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem; /* macro section breathing room                          */
 
-  /* Radius + layout */
-  --radius: 10px;
-  --radius-sm: 6px;
-  --container-max: 1100px;
+  /* ----- Radius / layout ------------------------------------------------ */
+  --radius: 22px; /* cards / panels                                          */
+  --radius-sm: 14px; /* inner cores / media                                  */
+  --radius-lg: 28px; /* large panels                                         */
+  --radius-pill: 999px; /* buttons, tags, nav                                */
+  --container-max: 1200px;
+  --container-wide: 1320px;
 
-  /* Typography */
-  --font-sans: "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
-  --fs-sm: 0.875rem;
-  --fs-base: 1rem;
-  --fs-lg: 1.25rem;
-  --fs-xl: 1.75rem;
-  --fs-2xl: 2.5rem;
+  /* ----- Motion (eased, cinematic, GPU-safe) ---------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 160ms;
+  --dur-mid: 320ms;
+  --dur-slow: 640ms;
 }

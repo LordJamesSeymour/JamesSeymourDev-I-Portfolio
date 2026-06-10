@@ -1,41 +1,50 @@
 # Roadmap
 
-> **Status:** In Progress
-> High-level delivery plan. Detailed milestone notes live in `ObsidianVault/05_Implementation/`.
+> **Status:** In Progress — pivoted to the immersive 3D direction (2026-06-10)
+> High-level delivery plan. Detailed plan: `ObsidianVault/02_Website_Architecture/Technical Implementation Plan.md`.
+> Mission + design: `ObsidianVault/03_Design_And_Visual_Direction/Immersive 3D Direction.md`.
 
-## Phase 0 — Planning (Current)
-- [x] Create Obsidian vault + project management architecture.
-- [ ] Fill in PRD details (James input).
-- [ ] Lock visual direction.
+## Where we are
+The base site is **scaffolded and type-checks clean** (Vite + React + TS + Router, data-driven
+projects, placeholder-safe media, dark tokens). The original Milestones 1–3 are effectively done.
+The work now is a **cinematic redesign + an isolated, optional 3D enhancement layer** — the site
+stays a fast, readable, recruiter-friendly portfolio; 3D never becomes a requirement.
 
-## Phase 1 — Project Setup
-- [ ] Scaffold Vite + React + TypeScript.
-- [ ] Set up base routing and layout shell.
-- [ ] Configure GitHub Pages deploy.
+## Phase 0 — Planning Update (this pass)
+- [x] Pivot PRD + Obsidian vault to the 3D immersive direction.
+- [x] Define visual, animation, and immersive 3D direction.
+- [x] Define 3D + video asset requirements.
+- [x] Create a checkpoint.
 
-## Phase 2 — Core Layout
-- [ ] Hero, About, Projects grid, Contact sections.
-- [ ] Responsive layout system.
+## Phase 1 — Stabilize Current Site (no 3D)
+- [ ] Confirm `npm run dev` / `build` / `typecheck` and click through all routes.
+- [ ] Confirm sections, responsiveness, reduced-motion, centralized project data.
 
-## Phase 3 — Project System
-- [ ] Data-driven `projects.ts` schema.
-- [ ] Project cards + case-study pages.
-- [ ] Category filtering.
+## Phase 2 — Premium Visual Redesign (no complex 3D)
+- [ ] Cinematic dark restyle: typography, spacing, glass panels, gradient glows, hover/focus.
+- [ ] Add Framer Motion / Motion scroll reveals + card motion (reduced-motion safe).
 
-## Phase 4 — Visual Polish
-- [ ] Animations, transitions, micro-interactions.
-- [ ] Theme and typography refinement.
+## Phase 3 — Lightweight 3D Hero
+- [ ] Add React Three Fiber + Drei; build an isolated `HeroCanvas` (abstract).
+- [ ] Subtle camera parallax + mouse-follow; capability gate + mobile/reduced-motion fallback.
 
-## Phase 5 — Content Pass
-- [ ] Replace placeholders with real project content.
-- [ ] Add screenshots, video, GIFs.
+## Phase 4 — 3D Project Showcase Layer
+- [ ] Floating project panels + in-scene video screens; optional GLB model loading.
+- [ ] Arcade Machine 3D showcase (if model provided). All driven by `projects.ts`.
 
-## Phase 6 — Final QA + Launch
-- [ ] Accessibility + performance audit.
-- [ ] Cross-browser / device testing.
-- [ ] Launch on GitHub Pages.
+## Phase 5 — Scroll-Based Immersive Journey
+- [ ] Scroll-progress camera journey across featured projects (eased, never hijacking scroll).
+- [ ] Sections stay readable + accessible.
 
-## Milestone Index
+## Phase 6 — Real Content Pass
+- [ ] Real videos, screenshots, 3D models, final descriptions; CV, GitHub, LinkedIn, email.
+- [ ] Remove/polish placeholders.
+
+## Phase 7 — Optimization & Deployment
+- [ ] Compress video, optimize models, lazy-load audit.
+- [ ] Test mobile, reduced motion, WebGL-off fallback; GitHub Pages deploy; Lighthouse; final QA.
+
+## Milestone Index (original notes — 1–3 done; 4–6 absorbed into Phases above)
 - [[Milestone 1 - Project Setup]]
 - [[Milestone 2 - Core Layout]]
 - [[Milestone 3 - Project System]]
