@@ -1,7 +1,7 @@
 # Immersive 3D Direction
 
-> **Status:** In Progress (planning — no 3D code yet)
-> **Last updated:** 2026-06-10
+> **Status:** In Progress — **first scroll-driven 3D reveal prototype shipped** (Arcade Machine)
+> **Last updated:** 2026-06-11
 > The governing design note for the project's **new mission**: evolve the portfolio from a
 > standard card-based site into a **premium, cinematic, 3D-enhanced, scrollable immersive
 > experience** — without turning it into a game.
@@ -174,6 +174,34 @@ Driven entirely by the extended `Project` schema → [[Data Driven Project Syste
   and a clear path to each case study. Nothing important is hidden behind an interaction.
 - **It must work everywhere:** WebGL off, old browser, corporate lockdown, mobile, reduced-motion —
   all still yield a polished, complete portfolio.
+
+---
+
+## 9b. Implemented — First Scroll-Driven Reveal Prototype (2026-06-11)
+
+The first piece of the immersive layer is live: a **scroll-driven, exploded-view 3D reveal** of the
+Arcade Machine, added as a portfolio **showcase section** on the home page (not a game, no FP movement).
+
+- **Where:** new section `#arcade-build` ("Inside the Arcade Machine") on the home page, between
+  Featured Projects and Contact. Code isolated under `src/components/three/`:
+  - `ArcadeMachineReveal.tsx` — section shell: capability gating, lazy mount, scroll→progress, callouts.
+  - `ArcadeMachineScene.tsx` — the `<Canvas>` (lights + grounding shadow). **Default-export, lazy-loaded.**
+  - `ArcadeMachineModel.tsx` — `useGLTF` load, measure/centre, per-part explode in `useFrame`.
+  - `ArcadeMachineFallback.tsx` / `ThreeErrorBoundary.tsx` — static panel + GL error boundary.
+  - `arcadeConfig.ts` (three) / `arcadeContent.ts` (three-free copy, keeps three out of the main bundle).
+- **Model:** assembled cabinet GLB at **`public/models/arcade-machine/PiecedTogether.glb`** (~5 MB),
+  served as `/models/arcade-machine/PiecedTogether.glb`. Separate named parts (assembled in Blender):
+  `Chasis`, `Lid`, `Lable`, `Butttonpannel`, `Screem`, `Coinpannel`, `RaspberryPi` (typos preserved —
+  matched case-insensitively with corrected aliases). **No baked animation** — parts are animated in R3F.
+- **Animation:** native scroll drives progress 0→1; the stage **pins (sticky)** while a tall track
+  scrubs. Whole model eases from a near-front view to a 3/4 reveal with fading idle drift; each part
+  lerps along a per-part offset (lid up + faked hinge, screen/panels forward, Pi out to the side).
+- **Honours the rules above:** lazy + code-split (three.js is its own chunk), WebGL-gated, error-bounded,
+  reduced-motion → static assembled model, mobile/small-screen → static fallback panel, recruiter-facing
+  text callouts the whole time. Data flagged in `projects.ts` via `immersive.model` + `revealType`.
+- **Future refinements:** truer hinge pivots for the lid, per-part materials/labels in-scene, an optional
+  local studio environment map, Draco/meshopt compression to shrink the GLB, and reusing the pattern for
+  other model-backed projects (Basilisk, Zombies VR).
 
 ---
 

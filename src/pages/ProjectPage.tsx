@@ -5,6 +5,7 @@ import { isPlaceholder, placeholderCaption } from "../lib/placeholder";
 import { useProjectText } from "../content/content";
 import ProjectMedia from "../components/projects/ProjectMedia";
 import ProjectCaseStudy from "../components/projects/ProjectCaseStudy";
+import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
 
@@ -55,54 +56,89 @@ export default function ProjectPage() {
   const { links } = project;
   const hasLinks = links && Object.values(links).some(Boolean);
 
+  // Projects flagged as an exploded-view showcase (the Arcade Machine) get the
+  // scroll-driven 3D reveal as their hero, in place of the static media panel.
+  const showReveal = project.immersive?.revealType === "exploded-view";
+
+  const breadcrumb = (
+    <p className="breadcrumb">
+      <Link to="/projects">← Projects</Link>
+    </p>
+  );
+
+  const header = (
+    <header className="project-detail__header">
+      <div className="project-detail__heading">
+        <h1>{title}</h1>
+        <Tag emphasis>{project.category}</Tag>
+        {isPlaceholder(project.status) && <Tag>Placeholder</Tag>}
+      </div>
+      <p className="prose">{shortDesc}</p>
+      <div className="tag-row">
+        {project.technologies.map((tech) => (
+          <Tag key={tech}>{tech}</Tag>
+        ))}
+      </div>
+    </header>
+  );
+
+  const linksBlock = hasLinks ? (
+    <div className="project-detail__links">
+      {links?.github && (
+        <Button href={links.github} variant="ghost">
+          GitHub
+        </Button>
+      )}
+      {links?.demo && (
+        <Button href={links.demo} variant="ghost">
+          Live Demo
+        </Button>
+      )}
+      {links?.video && (
+        <Button href={links.video} variant="ghost">
+          Video
+        </Button>
+      )}
+      {links?.download && (
+        <Button href={links.download} variant="ghost">
+          Download
+        </Button>
+      )}
+    </div>
+  ) : null;
+
+  // Exploded-view showcase: title/summary, then the full-width 3D reveal as the
+  // hero, then links + the case-study text. The reveal sits OUTSIDE the centered
+  // article so its sticky scroll stage can span the full width (and so no
+  // `overflow`-setting ancestor breaks position: sticky).
+  if (showReveal) {
+    return (
+      <>
+        <article className="container section project-detail project-detail--lead">
+          {breadcrumb}
+          {header}
+        </article>
+
+        <ArcadeMachineReveal />
+
+        <article className="container section project-detail project-detail--study">
+          {linksBlock}
+          <ProjectCaseStudy caseStudy={caseStudy} />
+        </article>
+      </>
+    );
+  }
+
   return (
     <article className="container section project-detail">
-      <p className="breadcrumb">
-        <Link to="/projects">← Projects</Link>
-      </p>
-
-      <header className="project-detail__header">
-        <div className="project-detail__heading">
-          <h1>{title}</h1>
-          <Tag emphasis>{project.category}</Tag>
-          {isPlaceholder(project.status) && <Tag>Placeholder</Tag>}
-        </div>
-        <p className="prose">{shortDesc}</p>
-        <div className="tag-row">
-          {project.technologies.map((tech) => (
-            <Tag key={tech}>{tech}</Tag>
-          ))}
-        </div>
-      </header>
+      {breadcrumb}
+      {header}
 
       <div className="project-detail__media">
         <ProjectMedia cover={heroCover} label={title} caption={caption} />
       </div>
 
-      {hasLinks && (
-        <div className="project-detail__links">
-          {links?.github && (
-            <Button href={links.github} variant="ghost">
-              GitHub
-            </Button>
-          )}
-          {links?.demo && (
-            <Button href={links.demo} variant="ghost">
-              Live Demo
-            </Button>
-          )}
-          {links?.video && (
-            <Button href={links.video} variant="ghost">
-              Video
-            </Button>
-          )}
-          {links?.download && (
-            <Button href={links.download} variant="ghost">
-              Download
-            </Button>
-          )}
-        </div>
-      )}
+      {linksBlock}
 
       <ProjectCaseStudy caseStudy={caseStudy} />
     </article>

@@ -1,7 +1,7 @@
 # 3D Asset Requirements
 
-> **Status:** In Progress (planning — accepting assets when ready)
-> **Last updated:** 2026-06-10
+> **Status:** In Progress — **first model delivered & wired** (Arcade Machine cabinet)
+> **Last updated:** 2026-06-11
 > Spec for any 3D model James provides for the immersive layer. Goal: cinematic models that stay
 > **light, web-safe, and GitHub Pages-friendly**. Read with [[Immersive 3D Direction]] and
 > [[Video Capture Requirements]].
@@ -122,8 +122,32 @@ Mirrors [[Placeholder Asset Rules]]: **never reference a missing `.glb`.**
   later is a one-line data change (`model3d: "/models/<slug>.glb"`).
 - Track every "stand-in → real model" swap in [[Missing Content Checklist]].
 
+---
+
+## 8. DELIVERED — Arcade Machine cabinet (2026-06-11)
+
+The flagship model is in the repo and drives the live scroll-reveal section (see
+[[Immersive 3D Direction]] §9b).
+
+- **Path:** `public/models/arcade-machine/PiecedTogether.glb` → served as
+  `/models/arcade-machine/PiecedTogether.glb`. (Note: this is the **assembled** file under a
+  per-project subfolder — it does **not** follow the `<slug>.glb` convention in §3/§4 yet; that's
+  fine for the prototype. Renaming later = a one-line change to `immersive.model` in `projects.ts`.)
+- **Size:** ~5 MB (at the §2 hard ceiling). **Not yet Draco/meshopt compressed** — a future pass should
+  shrink it toward the ≤ 1–3 MB target. Acceptable for the first prototype; lazy-loaded + gated so it
+  never blocks the page.
+- **Contents:** one GLB containing **separate named parts**, assembled & aligned in Blender. Object
+  names (typos preserved from Blender, matched case-insensitively in code with corrected aliases):
+  `Chasis`, `Lid`, `Lable`, `Butttonpannel`, `Screem`, `Coinpannel`, `RaspberryPi`. **No baked
+  animation** — the exploded-view motion is done in React Three Fiber.
+- **Future refinements:** correct hinge pivots for the lid, distinct per-part materials and in-scene
+  labels, Draco/meshopt compression, and (optionally) renaming to `arcade-machine.glb` per convention.
+
+---
+
 ## What James Provides
-- [ ] `arcade-machine.glb` (web-ready) **or** its source file to convert — *flagship, do first*.
+- [x] `PiecedTogether.glb` (assembled cabinet) — **delivered & wired** (flagship). *Future: compress + refine pivots.*
+- [ ] (Was) `arcade-machine.glb` web-ready single file — superseded by the assembled multi-part GLB above.
 - [ ] (Optional) Basilisk Engine viewport prop / reference.
 - [ ] (Optional) Zombies VR headset model / reference.
 - [ ] For everything else: video instead → [[Video Capture Requirements]].

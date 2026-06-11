@@ -28,12 +28,20 @@ export interface Profile {
 export const profile: Profile = {
   name: "James Seymour",
   role: "Game Programmer & Designer",
-  tagline: "Placeholder tagline — gameplay, engine, and systems programming. (TODO: James)",
+  // Fallbacks only — the live copy is edited in public/content/site/*.txt
+  // (hero-tagline.txt / about-body.txt). Kept in sync so a failed fetch still
+  // shows real copy rather than a placeholder.
+  tagline:
+    "Building gameplay systems, engine tools and interactive experiences across " +
+    "C++, C#, VR and level design.",
   bio:
-    "Placeholder bio. James Seymour is a game programmer and designer working across C++, " +
-    "C#, and level design. (TODO: replace with real bio.)",
+    "I am a developer with a BSc (Hons) in Game Design and Programming from the " +
+    "University of Staffordshire. My passion for development began through modding my " +
+    "favourite games, which led me towards programming and building original projects " +
+    "of my own. I work across C++, C#, VR, engine tools and level design, combining " +
+    "technical problem-solving with creative design. I am fluent in both English and Spanish.",
   skills: ["C++", "C#", "Gameplay Programming", "Engine / Systems", "Level Design", "Networking"],
-  tools: ["Unity", "Source / Hammer", "Epic Online Services", "Git"],
+  tools: ["Unity", "Unreal Engine", "Source / Hammer", "Epic Online Services", "Git"],
   email: undefined, // TODO: add public contact email
   cvUrl: undefined, // TODO: add CV file to /public and set its path
   // Real profiles. Single source of truth — rendered by <SocialLinks/> in the

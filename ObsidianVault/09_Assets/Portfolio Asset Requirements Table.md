@@ -35,7 +35,7 @@ For each project the page decides what to show, in this order:
 
 | Project | Category | Status | Priority | Screenshots | Videos | 3D model | Written content | Suggested folder |
 |---|---|---|---|---|---|---|---|---|
-| Arcade Machine | C++ | Placeholder | 🔴 High | Cabinet photo, menu UI | Gameplay loop, menu nav, feature clip | ✅ Cabinet `.glb` | Overview, role, tech, outcome | `public/media/arcade-machine/` |
+| Arcade Machine | C++ | Placeholder | 🔴 High | Cabinet photo, menu UI | Gameplay loop, menu nav, feature clip | ✅ **Delivered & wired** — `PiecedTogether.glb` (scroll-reveal) | Overview, role, tech, outcome | `public/media/arcade-machine/` · model: `public/models/arcade-machine/` |
 | Surfers Quest | C++ | Placeholder | 🟡 Medium | Gameplay, level editor | Gameplay clip, movement clip | — (video-screen) | Overview, mechanics | `public/media/surfers-quest/` |
 | Bomberman-style Game | C++ | Placeholder | 🟡 Medium | Gameplay, level editor | Bomb/explosion clip | — (video-screen) | Overview **+ choose original name** | `public/media/bomberman-style-game/` |
 | EOS Dedicated Server | C++ | Placeholder | 🔴 High | Server console | (optional screen-capture) | — (floating-card) | Architecture, session flow, tech stack | `public/media/eos-dedicated-server/` |
@@ -66,10 +66,14 @@ Keep it predictable so wiring assets is copy-paste:
 
 ## Per-project detail
 
-### Arcade Machine — C++ · 🔴 High · showcase: `model`
+### Arcade Machine — C++ · 🔴 High · showcase: `model` (scroll-reveal / exploded-view)
 - **Screenshots:** cabinet photo (the physical machine), menu/attract-mode UI, thumbnail.
 - **Videos:** gameplay loop (cover), menu-navigation walkthrough, short feature showcase clip.
-- **3D model:** arcade cabinet `.glb` — the flagship model for the future 3D layer.
+- **3D model:** ✅ **delivered & wired** — `public/models/arcade-machine/PiecedTogether.glb` (~5 MB,
+  assembled multi-part cabinet). Drives the live scroll-driven **exploded-view** showcase section
+  (`#arcade-build`). Set in data via `immersive.model` + `immersive.revealType: "exploded-view"`.
+  Parts: `Chasis`, `Lid`, `Lable`, `Butttonpannel`, `Screem`, `Coinpannel`, `RaspberryPi`. Future:
+  Draco compression + truer pivots/materials. See [[3D Asset Requirements]] §8 · [[Immersive 3D Direction]] §9b.
 - **Written:** what the project is, James's role, tech, notable challenges, final result.
 - **Optional extra:** marquee art, control-panel close-up, build/BOM photos.
 - **Suggested files:** `arcade-machine-cover.mp4` (+`.jpg`), `arcade-machine-menu.mp4`,

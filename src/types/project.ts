@@ -69,13 +69,21 @@ export type ShowcaseType =
   | "environment" // a small scene / set piece
   | "placeholder"; // nothing yet — generated placeholder
 
+/** Kind of scroll-driven 3D treatment a model-backed project uses. */
+export type RevealType = "scroll-reveal" | "exploded-view";
+
 export interface ProjectImmersive {
   /** Picks how the project is represented in the 3D layer later. */
   showcaseType?: ShowcaseType;
-  /** Optional path to a GLB/glTF model (lazy-loaded + capability-gated later). */
+  /** Optional path to a GLB/glTF model (lazy-loaded + capability-gated). */
   model?: string;
   /** Still image shown before a model/video loads and under reduced motion. */
   poster?: string;
+  /**
+   * When a `model` is set, how the dedicated showcase section animates it.
+   * Drives <ArcadeMachineReveal/> (and future per-project reveal sections).
+   */
+  revealType?: RevealType;
 }
 
 export interface Project {

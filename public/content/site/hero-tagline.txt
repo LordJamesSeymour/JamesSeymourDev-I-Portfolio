@@ -1,1 +1,1 @@
-Building gameplay systems, engine tools, and interactive experiences across C++, C#, VR, and level design.
+Building gameplay systems, engine tools and interactive experiences across C++, C#, VR and level design.

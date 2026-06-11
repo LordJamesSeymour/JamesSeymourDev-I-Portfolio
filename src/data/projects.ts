@@ -40,12 +40,17 @@ export const projects: Project[] = [
     featuredPriority: 5,
     status: "placeholder",
     priority: "high",
-    immersive: { showcaseType: "model" },
+    // First real immersive asset: the assembled cabinet GLB drives the
+    // scroll-driven exploded-view showcase (<ArcadeMachineReveal/>).
+    immersive: {
+      showcaseType: "model",
+      model: "/models/arcade-machine/PiecedTogether.glb",
+      revealType: "exploded-view",
+    },
     missingAssets: [
       "Cabinet photo (the physical machine)",
       "Gameplay video loop",
       "Menu navigation video",
-      "3D arcade cabinet model (.glb)",
       "Card thumbnail",
       "Short feature showcase clip",
     ],

@@ -480,6 +480,19 @@ img {
   color: var(--color-bone);
   margin-bottom: var(--space-4);
 }
+/* Skills / Tools — subtle readability bump. Scoped to the About columns so the
+   smaller tag size is preserved on project cards (which reuse .tag / .tag-row). */
+.about__columns .about__subhead {
+  font-size: 1.45rem;
+}
+.about__columns .tag-row {
+  gap: var(--space-3);
+}
+.about__columns .tag {
+  font-size: 0.92rem;
+  padding: 6px var(--space-4);
+  letter-spacing: 0.01em;
+}
 
 /* ---------- Project grid + cinematic panels ------------------------------ */
 .grid {
@@ -748,6 +761,17 @@ img {
 .project-detail {
   max-width: 980px;
 }
+/* Exploded-view showcase pages split into lead → full-width 3D reveal → case study.
+   Collapse the stacked-section padding so the three read as one continuous page. */
+.project-detail--lead {
+  padding-bottom: var(--space-8);
+}
+.project-detail--lead + .amx {
+  padding-top: var(--space-10);
+}
+.project-detail--study {
+  padding-top: var(--space-12);
+}
 .breadcrumb {
   margin-bottom: var(--space-8);
 }
@@ -1009,6 +1033,432 @@ img {
 .social--footer .social__icon {
   width: 28px;
   height: 28px;
+}
+
+/* ---------- Arcade Machine 3D reveal -------------------------------------
+   Scroll-driven, exploded-view product showcase. The stage PINS (sticky) while
+   a tall track scrubs scroll progress 0→1; the model animates in R3F (see
+   src/components/three/). Premium void/plum panel — never a default 3D viewer.
+   NOTE: no ancestor of .amx__sticky may set overflow (it would break sticky). */
+.amx__head {
+  max-width: 72ch;
+}
+
+/* Track: the sticky stage stays put for its full height as we scroll. Tall enough
+   (~3 viewport scrolls past the pin) that the staged reveal has room to breathe —
+   the model never snaps to the exploded pose, it unfolds part-by-part as you scroll. */
+.amx__scroll {
+  position: relative;
+  height: 420vh;
+}
+.amx__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.amx__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--space-10);
+  align-items: center;
+  width: 100%;
+  /* Widen this section past the normal container so the horizontal exploded layout
+     has room to spread (desktop-first — the 3D area is the showcase). */
+  max-width: min(94vw, 1440px);
+}
+
+/* The 3D stage — a premium glass panel with a faint violet key light. The hero of
+   the Arcade Machine case study, so it takes the lion's share of the layout and is
+   LANDSCAPE (7:5) to fit the side-to-side exploded diagram. */
+.amx__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  max-height: min(82vh, 760px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-hairline);
+  background: radial-gradient(78% 68% at 50% 16%, rgba(128, 82, 255, 0.15), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.42));
+  box-shadow: var(--shadow-panel);
+  overflow: hidden;
+  isolation: isolate;
+}
+.amx__stage canvas {
+  display: block;
+}
+/* gentle inner vignette so the canvas edges melt into the panel */
+.amx__stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(120% 100% at 50% 50%, transparent 60%, rgba(5, 5, 7, 0.55));
+}
+
+/* HUD: tiny "exploded view" label + scrub progress, top-left of the stage. */
+.amx__hud {
+  position: absolute;
+  top: var(--space-5);
+  left: var(--space-5);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  pointer-events: none;
+}
+.amx__hud-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-kicker);
+  color: var(--color-ash);
+}
+.amx__hud-track {
+  width: 110px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--color-hairline);
+  overflow: hidden;
+}
+.amx__hud-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--color-plum), var(--color-plum-bright));
+  transition: transform var(--dur-mid) var(--ease-out);
+}
+
+/* Rail: step tracker + the active callout card. */
+.amx__rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.amx__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.amx__step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-faint);
+  font-size: var(--fs-sm);
+  transition: color var(--dur-mid) var(--ease-out);
+}
+.amx__step-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  transition: background-color var(--dur-mid) var(--ease-out),
+    border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out);
+}
+.amx__step.is-done {
+  color: var(--color-smoke);
+}
+.amx__step.is-done .amx__step-dot {
+  background: var(--color-plum);
+  border-color: var(--color-plum);
+  opacity: 0.55;
+}
+.amx__step.is-active {
+  color: var(--color-bone);
+}
+.amx__step.is-active .amx__step-dot {
+  background: var(--color-plum-bright);
+  border-color: var(--color-plum-bright);
+  box-shadow: 0 0 10px rgba(128, 82, 255, 0.9);
+}
+
+.amx__callout {
+  border: 1px solid var(--color-hairline);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  animation: amx-fade var(--dur-slow) var(--ease-out);
+}
+.amx__callout-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-xl);
+  color: var(--color-bone);
+  margin: 0 0 var(--space-2);
+}
+.amx__callout-body {
+  color: var(--color-ash);
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 0;
+}
+@keyframes amx-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hover callout — a technical-diagram annotation: a thin leader line from the
+   hovered part out to a small speech rectangle. Rendered via drei <Html>, so it
+   tracks the part in screen space. Never intercepts pointer / scroll. */
+.amx-tip-wrap {
+  pointer-events: none !important;
+}
+.amx-tip {
+  position: relative;
+  pointer-events: none;
+  animation: amx-tip-in var(--dur-mid) var(--ease-out);
+}
+/* Leader line + the anchor dot sitting on the part. SVG overflows its 1×1 box.
+   transform-origin at the anchor so the flip mirrors exactly around the part. */
+.amx-tip__line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+  transform-origin: 0 0;
+}
+.amx-tip__line line {
+  stroke: var(--color-plum-bright);
+  stroke-width: 1.5;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px rgba(128, 82, 255, 0.7));
+}
+.amx-tip__dot {
+  fill: var(--color-plum-bright);
+  filter: drop-shadow(0 0 5px rgba(128, 82, 255, 0.9));
+}
+/* The speech rectangle, offset to the upper-right where the leader line lands. */
+.amx-tip__box {
+  position: absolute;
+  left: 76px;
+  top: -64px;
+  transform: translateY(-50%);
+  width: max-content;
+  max-width: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm, 8px);
+  border: 1px solid rgba(128, 82, 255, 0.45);
+  background: linear-gradient(180deg, rgba(22, 18, 36, 0.92), rgba(10, 8, 16, 0.92));
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.3);
+}
+/* Edge-aware flips (classes toggled per-frame from ArcadeMachineModel) so the box
+   always stays inside the canvas — e.g. the far-right Lid shows its box to the LEFT,
+   a part near the top drops its box BELOW. The leader line mirrors to match. */
+.amx-tip.is-flip-x .amx-tip__box {
+  left: auto;
+  right: 76px;
+}
+.amx-tip.is-flip-x .amx-tip__line {
+  transform: scaleX(-1);
+}
+.amx-tip.is-flip-down .amx-tip__box {
+  top: auto;
+  bottom: -64px;
+  transform: translateY(50%);
+}
+.amx-tip.is-flip-down .amx-tip__line {
+  transform: scaleY(-1);
+}
+.amx-tip.is-flip-x.is-flip-down .amx-tip__box {
+  left: auto;
+  right: 76px;
+  top: auto;
+  bottom: -64px;
+  transform: translateY(50%);
+}
+.amx-tip.is-flip-x.is-flip-down .amx-tip__line {
+  transform: scale(-1, -1);
+}
+.amx-tip__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  color: var(--color-bone);
+}
+.amx-tip__desc {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--color-ash);
+}
+@keyframes amx-tip-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading shimmer (3D chunk / model streaming). */
+.amx__loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  color: var(--color-smoke);
+}
+.amx__spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--color-hairline);
+  border-top-color: var(--color-plum-bright);
+  animation: amx-spin 0.9s linear infinite;
+}
+@keyframes amx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.amx__loading-text {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-kicker);
+}
+
+/* Static mode (reduced motion): assembled model + all callouts as a list. */
+.amx__layout--static {
+  align-items: start;
+  margin-top: var(--space-4);
+}
+.amx__stage--static {
+  height: min(60vh, 540px);
+}
+.amx__static-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.amx__static-item {
+  border-left: 2px solid var(--color-hairline);
+  padding-left: var(--space-5);
+}
+
+/* Fallback panel (no WebGL / mobile / missing GLB / canvas error). */
+.amx__fallback {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-10);
+  align-items: center;
+  margin-top: var(--space-4);
+  padding: var(--space-10);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  background: radial-gradient(70% 80% at 18% 8%, rgba(128, 82, 255, 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.35));
+  box-shadow: var(--shadow-panel);
+}
+.amx__fallback--action {
+  border-color: rgba(255, 184, 41, 0.35);
+}
+.amx__fallback-glyph {
+  width: 124px;
+  height: 176px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  background: linear-gradient(160deg, rgba(128, 82, 255, 0.2), rgba(0, 0, 0, 0.45));
+}
+.amx__glyph-marquee {
+  height: 16px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--color-plum), var(--color-plum-bright));
+  opacity: 0.85;
+}
+.amx__glyph-screen {
+  flex: 1;
+  border-radius: 6px;
+  border: 1px solid var(--color-hairline);
+  background: radial-gradient(120% 120% at 50% 30%, rgba(154, 120, 255, 0.5), rgba(0, 0, 0, 0.6));
+}
+.amx__glyph-panel {
+  height: 34px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.14) 0 6px,
+    transparent 6px 14px
+  );
+}
+.amx__fallback-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-xl);
+  color: var(--color-bone);
+  margin: 0 0 var(--space-3);
+}
+.amx__fallback-note {
+  color: var(--color-ash);
+  max-width: 62ch;
+  margin: 0 0 var(--space-5);
+}
+.amx__fallback--action .amx__fallback-note {
+  color: var(--color-amber);
+}
+.amx__fallback-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+}
+
+/* AMX — narrower desktops: tighten the two-column stage. */
+@media (max-width: 1040px) {
+  .amx__layout {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: var(--space-6);
+    max-width: 100%;
+  }
+  .amx__stage {
+    aspect-ratio: 4 / 3;
+    max-height: min(70vh, 560px);
+  }
+  .amx__steps {
+    display: none; /* keep the rail to the active callout when space is tight */
+  }
+}
+
+/* AMX — small screens use the fallback panel; stack it cleanly. */
+@media (max-width: 640px) {
+  .amx__fallback {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: var(--space-6);
+    padding: var(--space-8) var(--space-6);
+  }
 }
 
 /* ---------- Responsive --------------------------------------------------- */
