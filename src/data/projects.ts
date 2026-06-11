@@ -37,6 +37,7 @@ export const projects: Project[] = [
       "Placeholder description — a C++ arcade machine project. (Final copy pending.)",
     technologies: ["C++"],
     featured: true,
+    featuredPriority: 5,
     status: "placeholder",
     priority: "high",
     immersive: { showcaseType: "model" },
@@ -65,6 +66,8 @@ export const projects: Project[] = [
     shortDescription:
       "Placeholder description — a C++ game, 'Surfers Quest'. (Final copy pending.)",
     technologies: ["C++"],
+    featured: true,
+    featuredPriority: 6,
     status: "placeholder",
     priority: "medium",
     immersive: { showcaseType: "video-screen" },
@@ -88,6 +91,7 @@ export const projects: Project[] = [
     shortDescription:
       "Placeholder description — a Bomberman-style C++ game. Final, original name TBD.",
     technologies: ["C++"],
+    featured: false, // not in the featured 6 (kept in the full C++ list)
     status: "placeholder",
     priority: "medium",
     immersive: { showcaseType: "video-screen" },
@@ -112,6 +116,7 @@ export const projects: Project[] = [
       "Placeholder description — a dedicated server using Epic Online Services (EOS).",
     technologies: ["C++", "Epic Online Services"],
     featured: true,
+    featuredPriority: 2,
     status: "placeholder",
     priority: "high",
     immersive: { showcaseType: "floating-card" },
@@ -137,6 +142,7 @@ export const projects: Project[] = [
       "Placeholder description — a custom C++ game engine, 'Basilisk Engine'.",
     technologies: ["C++"],
     featured: true,
+    featuredPriority: 1,
     status: "placeholder",
     priority: "high",
     immersive: { showcaseType: "video-screen" },
@@ -163,12 +169,19 @@ export const projects: Project[] = [
     category: "C#",
     shortDescription: "Placeholder description — a C# project, 'Cursor.zip'.",
     technologies: ["C#"],
+    featured: true,
+    featuredPriority: 4,
     // ✅ First real asset wired in — demonstrates the data-driven media path.
-    // The looping muted clip lives in /public; CoverMedia handles reduced-motion.
+    // `sources` is tried in order (first that loads wins). Today it points at the
+    // heavy local-only file; once an optimized loop exists, PREPEND it, e.g.:
+    //   sources: ["/videos/cursor-preview.mp4", "/CursorGameplay.mp4"]
+    // The full hosted version (YouTube/Vimeo/itch) goes in `links.video` below.
+    // ProjectMedia falls back to the premium placeholder if every source fails.
     status: "in-progress",
     cover: {
       type: "video",
       src: "/CursorGameplay.mp4",
+      sources: ["/CursorGameplay.mp4"],
       alt: "Cursor.zip gameplay clip",
     },
     priority: "medium",
@@ -177,9 +190,13 @@ export const projects: Project[] = [
       "Clarify what Cursor.zip is (one-line definition)",
       "Decide final public-facing title",
       "Screenshots",
+      "Optimized web preview clip (~720p, faststart) for /videos/cursor-preview.mp4",
       "Poster frame for the gameplay video",
     ],
-    links: {},
+    links: {
+      // TODO: paste the hosted full video URL (YouTube / Vimeo / itch) here.
+      // video: "https://...",
+    },
     caseStudy: {
       overview: "TODO: What is Cursor.zip? Add a short overview.",
     },
@@ -192,6 +209,7 @@ export const projects: Project[] = [
       "Placeholder description — a VR zombies game built in C# (likely Unity + XR).",
     technologies: ["C#", "Unity", "VR"],
     featured: true,
+    featuredPriority: 3,
     status: "placeholder",
     priority: "high",
     immersive: { showcaseType: "video-screen" },
@@ -217,6 +235,7 @@ export const projects: Project[] = [
     shortDescription:
       "Placeholder description — a moonbase map built in the Hammer (Source) editor.",
     technologies: ["Hammer Editor", "Source Engine"],
+    featured: false, // intentionally excluded from Featured Projects; stays under Level Design
     status: "placeholder",
     priority: "medium",
     immersive: { showcaseType: "environment" },

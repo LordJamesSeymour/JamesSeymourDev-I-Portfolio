@@ -1,0 +1,6 @@
+Cabinet photo (the physical machine)
+Gameplay video loop
+Menu navigation video
+3D arcade cabinet model (.glb)
+Card thumbnail
+Short feature showcase clip

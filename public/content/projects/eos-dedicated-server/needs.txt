@@ -1,0 +1,5 @@
+Architecture diagram
+Server console screenshot
+Network / session flow diagram
+Short written explanation of functionality
+Technology stack details

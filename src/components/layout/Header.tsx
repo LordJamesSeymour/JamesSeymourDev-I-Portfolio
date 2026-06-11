@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { profile } from "../../data/profile";
+import { useSiteText } from "../../content/content";
 import Button from "../ui/Button";
 
 /** Initials for the brand mark (e.g. "James Seymour" → "JS"). */
@@ -14,14 +15,17 @@ function initials(name: string): string {
 }
 
 export default function Header() {
+  // Brand name editable via public/content/site/hero-name.txt (shared with the footer).
+  const brandName = useSiteText("hero-name", profile.name);
+
   return (
     <header className="site-header">
       <div className="container site-header__inner">
         <Link to="/" className="brand">
           <span className="brand__mark" aria-hidden="true">
-            {initials(profile.name)}
+            {initials(brandName)}
           </span>
-          {profile.name}
+          {brandName}
         </Link>
         <nav className="nav" aria-label="Primary">
           <NavLink to="/" end className="nav__link nav__link--secondary">

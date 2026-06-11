@@ -4,11 +4,17 @@ import ProjectsGrid from "../components/home/ProjectsGrid";
 import ProjectFilter, { type CategoryFilter } from "../components/projects/ProjectFilter";
 import Reveal from "../components/visual/Reveal";
 import { getAllProjects, getUsedCategories } from "../lib/projects";
+import { useSiteText } from "../content/content";
 
 export default function ProjectsPage() {
   const [active, setActive] = useState<CategoryFilter>("All");
   const all = getAllProjects();
   const categories = getUsedCategories();
+  const heading = useSiteText("projects-heading", "Projects");
+  const subtitle = useSiteText(
+    "projects-subtitle",
+    "C++, C#, and level-design work — grouped by discipline. Filter to focus on one.",
+  );
 
   const visible = useMemo(
     () => (active === "All" ? all : all.filter((p) => p.category === active)),
@@ -16,11 +22,7 @@ export default function ProjectsPage() {
   );
 
   return (
-    <Section
-      eyebrow="The Work"
-      title="Projects"
-      subtitle="C++, C#, and level-design work — grouped by discipline. Filter to focus on one."
-    >
+    <Section eyebrow="The Work" title={heading} subtitle={subtitle}>
       <ProjectFilter categories={categories} active={active} onChange={setActive} />
 
       {active === "All" ? (

@@ -1,0 +1,1 @@
+Placeholder description — a C++ arcade machine project. (Final copy pending.)

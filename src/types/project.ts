@@ -13,11 +13,20 @@ export interface ProjectMedia {
   type: MediaType;
   /** Path under src/assets, a /public path, or a hosted URL (mp4/webm/gif/image). */
   src: string;
+  /**
+   * VIDEO only — ordered list of sources tried in order; the first that the browser
+   * can load/decode wins, the rest are fallbacks. Prefer an optimized preview first,
+   * then the heavy/raw local file, e.g.:
+   *   sources: ["/videos/cursor-preview.mp4", "/CursorGameplay.mp4"]
+   * When omitted, `src` is used as the single source. This is how the data model
+   * supports a future optimized preview path without code changes.
+   */
+  sources?: string[];
   /** Required for images for accessibility; describe the content. */
   alt?: string;
   /**
    * Poster image shown before a video loads, and used as the still fallback when
-   * the visitor prefers reduced motion. Recommended for every video/gif cover.
+   * the visitor prefers reduced motion or every source fails. Recommended for video.
    */
   poster?: string;
 }
@@ -77,8 +86,14 @@ export interface Project {
   category: ProjectCategory;
   shortDescription: string;
   technologies: string[];
-  /** Surfaced on the home page grid when true. */
+  /** Surfaced on the home "Featured Projects" grid when true. */
   featured?: boolean;
+  /**
+   * Order within the Featured grid (lower = earlier). The grid sorts featured
+   * projects by this and shows the strongest FEATURED_LIMIT (6) — i.e. 2 rows of 3.
+   * Projects without it sort after those that have it.
+   */
+  featuredPriority?: number;
   status?: ProjectStatus;
   /**
    * Card + detail hero cover. Prefer a short looping muted video or a gif.

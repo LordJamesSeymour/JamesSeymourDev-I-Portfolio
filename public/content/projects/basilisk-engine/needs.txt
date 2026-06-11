@@ -1,0 +1,5 @@
+Editor screenshot
+Viewport interaction video
+Gizmo / inspector clip
+Scene hierarchy screenshot
+Optional engine logo / 3D mark
