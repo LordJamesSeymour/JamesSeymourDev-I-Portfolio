@@ -17,7 +17,7 @@ export interface ProjectMedia {
    * VIDEO only — ordered list of sources tried in order; the first that the browser
    * can load/decode wins, the rest are fallbacks. Prefer an optimized preview first,
    * then the heavy/raw local file, e.g.:
-   *   sources: ["/videos/cursor-preview.mp4", "/CursorGameplay.mp4"]
+   *   sources: ["/media/project-preview.webm", "/media/project-preview.mp4"]
    * When omitted, `src` is used as the single source. This is how the data model
    * supports a future optimized preview path without code changes.
    */
@@ -43,6 +43,18 @@ export interface ProjectLinks {
   demo?: string;
   video?: string;
   download?: string;
+}
+
+export interface ProjectLogo {
+  src: string;
+  alt: string;
+}
+
+export interface ProjectVideoEmbed {
+  youtubeId: string;
+  externalUrl: string;
+  title: string;
+  heading: string;
 }
 
 export interface ProjectCaseStudy {
@@ -109,6 +121,10 @@ export interface Project {
    */
   cover?: ProjectCover;
   media?: ProjectMedia[];
+  /** Optional transparent project mark shown near the detail-page title. */
+  logo?: ProjectLogo;
+  /** Optional hosted showcase video embedded on the project detail page. */
+  showcaseVideo?: ProjectVideoEmbed;
   links?: ProjectLinks;
   caseStudy?: ProjectCaseStudy;
 

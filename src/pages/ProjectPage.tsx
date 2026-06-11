@@ -5,6 +5,8 @@ import { isPlaceholder, placeholderCaption } from "../lib/placeholder";
 import { useProjectText } from "../content/content";
 import ProjectMedia from "../components/projects/ProjectMedia";
 import ProjectCaseStudy from "../components/projects/ProjectCaseStudy";
+import ProjectLogo from "../components/projects/ProjectLogo";
+import YouTubeEmbed from "../components/projects/YouTubeEmbed";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
@@ -68,6 +70,7 @@ export default function ProjectPage() {
 
   const header = (
     <header className="project-detail__header">
+      {project.logo && <ProjectLogo logo={project.logo} />}
       <div className="project-detail__heading">
         <h1>{title}</h1>
         <Tag emphasis>{project.category}</Tag>
@@ -137,6 +140,22 @@ export default function ProjectPage() {
       <div className="project-detail__media">
         <ProjectMedia cover={heroCover} label={title} caption={caption} />
       </div>
+
+      {project.showcaseVideo && (
+        <section className="project-detail__showcase">
+          <div className="project-detail__showcase-head">
+            <h2>{project.showcaseVideo.heading}</h2>
+            <a
+              href={project.showcaseVideo.externalUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Watch on YouTube <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <YouTubeEmbed video={project.showcaseVideo} />
+        </section>
+      )}
 
       {linksBlock}
 

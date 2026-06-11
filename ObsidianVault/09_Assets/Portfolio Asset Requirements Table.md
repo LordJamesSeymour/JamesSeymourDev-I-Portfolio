@@ -6,9 +6,10 @@
 > without any of these (polished generated placeholders fill the gaps) — this table is the
 > plan for *upgrading* it as assets arrive.
 >
-> Wiring assets in is data-only: add `cover` / `media` / `thumbnail` / `screenshots` /
-> `immersive.model` to the matching entry in [`src/data/projects.ts`](../../src/data/projects.ts).
-> No component changes required. Schema: [`src/types/project.ts`](../../src/types/project.ts) ·
+> Wiring assets in is data-driven: add `cover` / `media` / `thumbnail` / `screenshots` /
+> `logo` / `showcaseVideo` / `immersive.model` to the matching entry in
+> [`src/data/projects.ts`](../../src/data/projects.ts). Schema:
+> [`src/types/project.ts`](../../src/types/project.ts) ·
 > see [[Data Driven Project System]] · [[Image Requirements]] · [[Video Capture Requirements]] ·
 > [[3D Asset Requirements]] · [[Placeholder Asset Rules]].
 
@@ -40,9 +41,9 @@ For each project the page decides what to show, in this order:
 | Bomberman-style Game | C++ | Placeholder | 🟡 Medium | Gameplay, level editor | Bomb/explosion clip | — (video-screen) | Overview **+ choose original name** | `public/media/bomberman-style-game/` |
 | EOS Dedicated Server | C++ | Placeholder | 🔴 High | Server console | (optional screen-capture) | — (floating-card) | Architecture, session flow, tech stack | `public/media/eos-dedicated-server/` |
 | Basilisk Engine | C++ | Placeholder | 🔴 High | Editor, scene hierarchy | Viewport interaction, gizmo/inspector | optional engine mark | Scope, subsystems, challenges | `public/media/basilisk-engine/` |
-| Cursor.zip | C# | **In progress** ✅ video wired | 🟡 Medium | A few stills | ✅ `CursorGameplay.mp4` (add poster) | — (video-screen) | **Define what it is** + final name | `public/media/cursor-zip/` |
+| Cursor.zip | C# | **In progress** ✅ media wired | 🟡 Medium | ✅ project logo; a few stills still useful | ✅ 8 s MP4 preview + poster · ✅ YouTube trailer | — (video-screen) | **Define what it is** + final name | `public/Cursor/` |
 | Zombies VR | C# | Placeholder | 🔴 High | In-headset stills | VR gameplay, combat/interaction clip | — (video-screen) | Engine + headset, interactions | `public/media/zombies-vr/` |
-| Hammer Moonbase Map | Level Design | Placeholder | 🟡 Medium | In-game, Hammer editor, top-down | Walkthrough video | — (environment) | Layout, flow & pacing notes | `public/media/hammer-moonbase-map/` |
+| Hammer Moonbase Map | Level Design | **In progress** ✅ media wired | 🟡 Medium | ✅ card thumbnail · Hammer editor/top-down still needed | ✅ YouTube flyby | — (environment) | Layout, flow & pacing notes | `public/Hammer/` |
 
 ---
 
@@ -59,8 +60,9 @@ Keep it predictable so wiring assets is copy-paste:
 - Budgets (see [[Video Capture Requirements]] / [[3D Asset Requirements]]): video loops short &
   compressed (≤ ~1–2 MB), images `.webp`/`.jpg` sized to display, GLB ≤ ~1–3 MB.
 
-> **Note:** the already-wired `Cursor.zip` clip currently lives at `public/CursorGameplay.mp4`.
-> It works as-is; optionally move it to `public/media/cursor-zip/cursor-zip-cover.mp4` later for tidiness.
+> **Current delivered paths:** Cursor.zip preview:
+> `public/Cursor/Videos/cursor-short.mp4` (+ `cursor-short-poster.jpg`); logo:
+> `public/Cursor/cursor-zip-logo.png`. Hammer thumbnail: `public/Hammer/HammerMap.png`.
 
 ---
 
@@ -122,12 +124,14 @@ Keep it predictable so wiring assets is copy-paste:
   engine work — aim for one smooth 8–12s clip.
 
 ### Cursor.zip — C# · 🟡 Medium · showcase: `video-screen`
-- **Status:** ✅ gameplay video already wired (`/CursorGameplay.mp4`).
+- **Status:** ✅ 8-second H.264 preview wired at `/Cursor/Videos/cursor-short.mp4`; source WMV is
+  preserved at `public/Cursor/Videos/Cursor-Short.wmv`.
+- **Poster:** ✅ `/Cursor/Videos/cursor-short-poster.jpg` for first paint and reduced motion.
+- **Trailer:** ✅ YouTube `g4LTAYN-QgE` embedded on the detail page.
+- **Logo:** ✅ web-safe copy at `/Cursor/cursor-zip-logo.png`; original file preserved.
 - **Still needed:** a clear one-line **definition of what Cursor.zip is**, the **final public
-  title**, a poster frame for the video, and 1–2 screenshots.
-- **Suggested files:** `cursor-zip-cover.jpg` (poster), `cursor-zip-01.jpg`.
-- **Notes for James:** add a `poster` to the cover so reduced-motion users see a still; confirm
-  whether "Cursor.zip" is the public-facing name or a working title.
+  title**, and 1–2 screenshots.
+- **Notes for James:** confirm whether "Cursor.zip" is the public-facing name or a working title.
 
 ### Zombies VR — C# · 🔴 High · showcase: `video-screen`
 - **Screenshots:** in-headset gameplay stills, thumbnail.
@@ -139,8 +143,9 @@ Keep it predictable so wiring assets is copy-paste:
   game composited) is the premium option if you can get it.
 
 ### Hammer Moonbase Map — Level Design · 🟡 Medium · showcase: `environment`
-- **Screenshots:** in-game beauty shots, Hammer editor view, top-down layout image.
-- **Videos:** walkthrough video (cover) showing flow.
+- **Thumbnail:** ✅ `/Hammer/HammerMap.png` is wired to the project card and detail hero.
+- **Screenshots still needed:** Hammer editor view and annotated top-down layout image.
+- **Video:** ✅ YouTube flyby/walkthrough `TF4499mnCWE` embedded on the detail page.
 - **Written:** layout/flow/pacing rationale, target game / Source branch.
 - **Optional extra:** annotated top-down (sightlines, cover, objectives).
 - **Suggested files:** `hammer-moonbase-map-cover.mp4` (+`.jpg`), `hammer-moonbase-map-topdown.jpg`,

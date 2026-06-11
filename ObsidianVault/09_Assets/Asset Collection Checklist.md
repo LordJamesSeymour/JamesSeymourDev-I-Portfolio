@@ -15,6 +15,14 @@ Projects: [[Arcade Machine]] *(3D flagship)*, [[Surfers Quest]], [[Bomberman Sty
 [[EOS Dedicated Server]], [[Basilisk Engine]], [[Cursor Zip]], [[Zombies VR]],
 [[Hammer Moonbase Map]].
 
+## Delivered Project Media
+- [x] **Cursor.zip:** source WMV collected and converted to
+  `public/Cursor/Videos/cursor-short.mp4`; poster exported alongside it.
+- [x] **Cursor.zip:** project logo copied to `public/Cursor/cursor-zip-logo.png`.
+- [x] **Cursor.zip:** YouTube trailer collected (`g4LTAYN-QgE`).
+- [x] **Hammer Moonbase Map:** card/detail thumbnail collected at `public/Hammer/HammerMap.png`.
+- [x] **Hammer Moonbase Map:** YouTube flyby/walkthrough collected (`TF4499mnCWE`).
+
 ## Site-Wide
 - [ ] Hero background / imagery.
 - [ ] About photo (optional).

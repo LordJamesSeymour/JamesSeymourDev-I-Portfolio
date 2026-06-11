@@ -176,18 +176,23 @@ export const projects: Project[] = [
     technologies: ["C#"],
     featured: true,
     featuredPriority: 4,
-    // ✅ First real asset wired in — demonstrates the data-driven media path.
-    // `sources` is tried in order (first that loads wins). Today it points at the
-    // heavy local-only file; once an optimized loop exists, PREPEND it, e.g.:
-    //   sources: ["/videos/cursor-preview.mp4", "/CursorGameplay.mp4"]
-    // The full hosted version (YouTube/Vimeo/itch) goes in `links.video` below.
-    // ProjectMedia falls back to the premium placeholder if every source fails.
     status: "in-progress",
     cover: {
       type: "video",
-      src: "/CursorGameplay.mp4",
-      sources: ["/CursorGameplay.mp4"],
-      alt: "Cursor.zip gameplay clip",
+      src: "/Cursor/Videos/cursor-short.mp4",
+      sources: ["/Cursor/Videos/cursor-short.mp4"],
+      poster: "/Cursor/Videos/cursor-short-poster.jpg",
+      alt: "Cursor.zip gameplay preview",
+    },
+    logo: {
+      src: "/Cursor/cursor-zip-logo.png",
+      alt: "Cursor.zip project logo",
+    },
+    showcaseVideo: {
+      youtubeId: "g4LTAYN-QgE",
+      externalUrl: "https://youtu.be/g4LTAYN-QgE",
+      title: "Cursor.zip gameplay trailer",
+      heading: "Gameplay trailer",
     },
     priority: "medium",
     immersive: { showcaseType: "video-screen" },
@@ -195,12 +200,9 @@ export const projects: Project[] = [
       "Clarify what Cursor.zip is (one-line definition)",
       "Decide final public-facing title",
       "Screenshots",
-      "Optimized web preview clip (~720p, faststart) for /videos/cursor-preview.mp4",
-      "Poster frame for the gameplay video",
     ],
     links: {
-      // TODO: paste the hosted full video URL (YouTube / Vimeo / itch) here.
-      // video: "https://...",
+      video: "https://youtu.be/g4LTAYN-QgE",
     },
     caseStudy: {
       overview: "TODO: What is Cursor.zip? Add a short overview.",
@@ -241,17 +243,24 @@ export const projects: Project[] = [
       "Placeholder description — a moonbase map built in the Hammer (Source) editor.",
     technologies: ["Hammer Editor", "Source Engine"],
     featured: false, // intentionally excluded from Featured Projects; stays under Level Design
-    status: "placeholder",
+    status: "in-progress",
+    thumbnail: "/Hammer/HammerMap.png",
+    showcaseVideo: {
+      youtubeId: "TF4499mnCWE",
+      externalUrl: "https://www.youtube.com/watch?v=TF4499mnCWE",
+      title: "Hammer Moonbase Map flyby",
+      heading: "Moonbase map flyby",
+    },
     priority: "medium",
     immersive: { showcaseType: "environment" },
     missingAssets: [
-      "In-game screenshots",
       "Hammer editor screenshot",
       "Top-down layout image",
-      "Walkthrough video",
       "Written design explanation",
     ],
-    links: {},
+    links: {
+      video: "https://www.youtube.com/watch?v=TF4499mnCWE",
+    },
     caseStudy: {
       overview: "TODO: Describe the level. Confirm target game / Source branch.",
       designDecisions: "TODO: layout, flow, and pacing decisions.",

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { ProjectCover } from "../../types/project";
 import { placeholderImage } from "../../lib/placeholder";
+import { resolvePublicAssetPath } from "../../lib/assets";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import VideoPreview from "./VideoPreview";
 import MediaPlaceholder from "./MediaPlaceholder";
@@ -33,18 +34,29 @@ export default function ProjectMedia({ cover, label, className, caption }: Proje
   const cls = className ? `cover-media ${className}` : "cover-media";
 
   const altText = cover?.alt ?? `${label} preview`;
-  const poster =
-    cover?.poster ?? placeholderImage(label, { subtitle: caption ?? "video coming soon" });
+  const poster = resolvePublicAssetPath(
+    cover?.poster ?? placeholderImage(label, { subtitle: caption ?? "video coming soon" }),
+  );
 
   // ---- Video --------------------------------------------------------------
   if (cover?.type === "video" && !failed) {
-    const sources = cover.sources?.length ? cover.sources : cover.src ? [cover.src] : [];
+    const sources = (cover.sources?.length ? cover.sources : cover.src ? [cover.src] : []).map(
+      resolvePublicAssetPath,
+    );
     if (sources.length === 0) {
       return <MediaPlaceholder label={label} caption={caption} className={className} />;
     }
     // Reduced motion → show the still poster instead of an autoplaying video.
     if (reduceMotion) {
-      return <img className={cls} src={poster} alt={altText} loading="lazy" />;
+      return (
+        <img
+          className={cls}
+          src={poster}
+          alt={altText}
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
+      );
     }
     return (
       <VideoPreview
@@ -61,16 +73,28 @@ export default function ProjectMedia({ cover, label, className, caption }: Proje
   if ((cover?.type === "gif" || cover?.type === "image") && cover.src && !failed) {
     // GIF under reduced motion falls back to a poster if one is provided.
     if (cover.type === "gif" && reduceMotion && cover.poster) {
-      return <img className={cls} src={cover.poster} alt={altText} loading="lazy" />;
+      return (
+        <img
+          className={cls}
+          src={resolvePublicAssetPath(cover.poster)}
+          alt={altText}
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
+      );
     }
+    const imageWrapCls = className ? `cover-image ${className}` : "cover-image";
     return (
-      <img
-        className={cls}
-        src={cover.src}
-        alt={altText}
-        loading="lazy"
-        onError={() => setFailed(true)}
-      />
+      <span className={imageWrapCls}>
+        <img
+          className={cls}
+          src={resolvePublicAssetPath(cover.src)}
+          alt={altText}
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
+        <span className="cover-image__veil" aria-hidden="true" />
+      </span>
     );
   }
 

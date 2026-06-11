@@ -1,5 +1,3 @@
 Clarify what Cursor.zip is (one-line definition)
 Decide final public-facing title
 Screenshots
-Optimized web preview clip (~720p, faststart) for /videos/cursor-preview.mp4
-Poster frame for the gameplay video

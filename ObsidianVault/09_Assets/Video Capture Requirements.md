@@ -1,7 +1,7 @@
 # Video Capture Requirements
 
 > **Status:** In Progress (planning — accepting captures when ready)
-> **Last updated:** 2026-06-10
+> **Last updated:** 2026-06-12
 > How James should capture and deliver project footage so it works as **2D card covers** *and* as
 > **video screens inside the 3D scene**. Supersedes the older [[Video Requirements]] for the
 > immersive direction. Read with [[Immersive 3D Direction]] / [[3D Asset Requirements]].
@@ -59,6 +59,12 @@ Aim for **1 hero loop minimum**, plus a few stills. More is better but the loop 
 - **Zombies VR** — in-headset/mixed-reality capture; gameplay from the player view.
 - **Cursor.zip** — screen capture of the app/UI in action.
 - **Hammer Moonbase** — flythrough of the level + editor top-down.
+
+**Delivered media (2026-06-12):**
+- **Cursor.zip:** source WMV preserved; an 8-second, muted, fast-start H.264 card preview is exported
+  to `public/Cursor/Videos/cursor-short.mp4`, with `cursor-short-poster.jpg`. Full trailer:
+  YouTube `g4LTAYN-QgE`.
+- **Hammer Moonbase:** hosted flyby/walkthrough available on YouTube as `TF4499mnCWE`.
 
 Each captured asset maps to a `projects.ts` entry → [[Data Driven Project System]].
 
