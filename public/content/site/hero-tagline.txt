@@ -1,1 +1,1 @@
-Placeholder tagline — gameplay, engine, and systems programming. (TODO: James)
+Building gameplay systems, engine tools, and interactive experiences across C++, C#, VR, and level design.
