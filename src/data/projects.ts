@@ -3,9 +3,9 @@ import type { Project } from "../types/project";
 // Single source of truth for portfolio projects.
 // Adding a project = adding an entry here. Pages/components render from this array.
 //
-// All entries are placeholders for now (status: "placeholder"). Real descriptions,
-// media, and links come during the Content Pass (Milestone 5). Per-project context
-// lives in ObsidianVault/04_Project_Content/Projects/.
+// Status values are public-facing delivery states. Descriptions, media, and links
+// continue to be managed independently during the Content Pass (Milestone 5).
+// Per-project context lives in ObsidianVault/04_Project_Content/Projects/.
 //
 // COVERS: each project's card + detail hero is a `cover`, which can be a looping muted
 // VIDEO, an animated GIF, or a static image. Most covers are still omitted, so the app
@@ -39,7 +39,7 @@ export const projects: Project[] = [
     technologies: ["C++"],
     featured: true,
     featuredPriority: 5,
-    status: "placeholder",
+    status: "in-progress",
     priority: "high",
     cover: {
       type: "video",
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     technologies: ["C++"],
     featured: true,
     featuredPriority: 6,
-    status: "placeholder",
+    status: "completed",
     priority: "medium",
     cover: {
       type: "video",
@@ -114,7 +114,7 @@ export const projects: Project[] = [
       "Placeholder description — a Bomberman-style C++ game. Final, original name TBD.",
     technologies: ["C++"],
     featured: false, // not in the featured 6 (kept in the full C++ list)
-    status: "placeholder",
+    status: "completed",
     priority: "medium",
     cover: {
       type: "video",
@@ -147,7 +147,7 @@ export const projects: Project[] = [
     technologies: ["C++", "Epic Online Services"],
     featured: true,
     featuredPriority: 2,
-    status: "placeholder",
+    status: "completed",
     priority: "high",
     immersive: { showcaseType: "floating-card" },
     missingAssets: [
@@ -173,7 +173,7 @@ export const projects: Project[] = [
     technologies: ["C++"],
     featured: true,
     featuredPriority: 1,
-    status: "placeholder",
+    status: "in-progress",
     priority: "high",
     immersive: { showcaseType: "video-screen" },
     missingAssets: [
@@ -201,7 +201,7 @@ export const projects: Project[] = [
     technologies: ["C#"],
     featured: true,
     featuredPriority: 4,
-    status: "in-progress",
+    status: "completed",
     cover: {
       type: "video",
       src: "/Cursor/Videos/cursor-short.mp4",
@@ -242,7 +242,7 @@ export const projects: Project[] = [
     technologies: ["C#", "Unity", "VR"],
     featured: true,
     featuredPriority: 3,
-    status: "placeholder",
+    status: "in-progress",
     priority: "high",
     immersive: { showcaseType: "video-screen" },
     missingAssets: [
@@ -268,7 +268,7 @@ export const projects: Project[] = [
       "Placeholder description — a moonbase map built in the Hammer (Source) editor.",
     technologies: ["Hammer Editor", "Source Engine"],
     featured: false, // intentionally excluded from Featured Projects; stays under Level Design
-    status: "in-progress",
+    status: "completed",
     thumbnail: "/Hammer/HammerMap.png",
     showcaseVideo: {
       youtubeId: "TF4499mnCWE",

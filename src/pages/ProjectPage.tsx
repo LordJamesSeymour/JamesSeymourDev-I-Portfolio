@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import type { ProjectCover } from "../types/project";
 import { getProjectBySlug } from "../lib/projects";
-import { isPlaceholder, placeholderCaption } from "../lib/placeholder";
+import { placeholderCaption } from "../lib/placeholder";
 import { useProjectText } from "../content/content";
 import ProjectMedia from "../components/projects/ProjectMedia";
 import ProjectCaseStudy from "../components/projects/ProjectCaseStudy";
@@ -74,7 +74,6 @@ export default function ProjectPage() {
       <div className="project-detail__heading">
         <h1>{title}</h1>
         <Tag emphasis>{project.category}</Tag>
-        {isPlaceholder(project.status) && <Tag>Placeholder</Tag>}
       </div>
       <p className="prose">{shortDesc}</p>
       <div className="tag-row">

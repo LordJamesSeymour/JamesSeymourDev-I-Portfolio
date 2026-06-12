@@ -9,12 +9,16 @@ interface ProjectCardProps {
   project: Project;
 }
 
-/** Short status label for the corner badge. Complete projects get no badge. */
-function statusBadge(status?: Project["status"]): string | null {
-  if (status === "in-progress") return "In progress";
-  if (status === "placeholder" || status === undefined) return "Placeholder";
-  return null;
-}
+const STATUS_BADGES = {
+  "in-progress": {
+    label: "IN PROGRESS",
+    className: "card__badge--in-progress",
+  },
+  completed: {
+    label: "COMPLETED",
+    className: "card__badge--completed",
+  },
+} satisfies Record<Project["status"], { label: string; className: string }>;
 
 /**
  * Dev-only "James input needed" note. Reads public/content/projects/<slug>/needs.txt
@@ -42,7 +46,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     project.cover ??
     (project.thumbnail ? { type: "image", src: project.thumbnail } : undefined);
 
-  const badge = statusBadge(project.status);
+  const badge = STATUS_BADGES[project.status];
   const caption = placeholderCaption(project.immersive?.showcaseType);
 
   // Editable copy (public/content/projects/<slug>/*.txt) with data-driven fallbacks.
@@ -61,7 +65,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="card__inner">
         <div className="card__media">
           <ProjectMedia cover={cover} label={title} caption={caption} />
-          {badge && <span className="card__badge">{badge}</span>}
+          <span className={`card__badge ${badge.className}`}>{badge.label}</span>
           {showDevNote && (
             <CardDevNote slug={project.slug} fallback={project.missingAssets ?? []} />
           )}

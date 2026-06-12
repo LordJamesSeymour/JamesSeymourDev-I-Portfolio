@@ -16,7 +16,7 @@ status: Complete
 > **Checkpoint #:** 10
 > **Status:** Complete
 > ← Previous: [[CHECKPOINT 9 - Arcade Chassis Animation]]
-> → Next: _none yet_
+> → Next: [[CHECKPOINT 11 - Logos and Thumbnails 2]]
 > ⬆ Index: [[Checkpoint Hub]]
 
 ## Project Status

@@ -4,8 +4,8 @@
 
 export type ProjectCategory = "C++" | "C#" | "Level Design";
 
-/** Lifecycle of a project's content (drives placeholder badges, etc.). */
-export type ProjectStatus = "complete" | "in-progress" | "placeholder";
+/** Public-facing project delivery status. */
+export type ProjectStatus = "in-progress" | "completed";
 
 export type MediaType = "image" | "video" | "gif";
 
@@ -114,7 +114,7 @@ export interface Project {
    * Projects without it sort after those that have it.
    */
   featuredPriority?: number;
-  status?: ProjectStatus;
+  status: ProjectStatus;
   /**
    * Card + detail hero cover. Prefer a short looping muted video or a gif.
    * If omitted, a generated placeholder is used (no missing-file references).

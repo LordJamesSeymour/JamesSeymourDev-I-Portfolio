@@ -40,6 +40,9 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
       local preview path, poster, logo, and YouTube trailer; Hammer Moonbase Map has a
       real thumbnail/detail hero and YouTube flyby. Reusable `ProjectLogo` / `YouTubeEmbed`
       components, base-aware public paths, graceful fallback, and reduced-motion behavior are live.
+- [x] **Second logo/thumbnail pass complete** ([[CHECKPOINT 11 - Logos and Thumbnails 2]]):
+      Arcade Machine, Surfers Quest, and Bomberman-style logos plus exact case-sensitive preview
+      paths are wired through `projects.ts`; native looping and polished fallback behavior verified.
 - [x] **GitHub Pages deployment workflow exists** at `.github/workflows/deploy.yml`.
 
 ## In Progress
@@ -59,9 +62,9 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [ ] Real content pass (Phase 6) + optimization/deploy (Phase 7).
 
 ## Latest Checkpoint
-- [[CHECKPOINT 10 - Added media 1]] (2026-06-12) — Cursor.zip and Hammer Moonbase real media
-  integrated; reusable logo/YouTube detail media; local previews now await genuine manual MP4
-  exports. Prior: [[CHECKPOINT 9 - Arcade Chassis Animation]]. See [[Checkpoint Hub]].
+- [[CHECKPOINT 11 - Logos and Thumbnails 2]] (2026-06-12) — three additional project logos and
+  exact thumbnail-video paths wired; native looping and fallback verified; local previews await
+  genuine manual MP4 exports. Prior: [[CHECKPOINT 10 - Added media 1]]. See [[Checkpoint Hub]].
 
 ## Links
 - Next steps → [[Next Actions]]

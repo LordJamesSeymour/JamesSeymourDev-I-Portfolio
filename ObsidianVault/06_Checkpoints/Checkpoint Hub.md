@@ -16,13 +16,12 @@
   the **Current Project Baseline**.
 
 ## Latest Checkpoint
-- **[[CHECKPOINT 10 - Added media 1]]** — 2026-06-12
-  - **First focused media batch integrated.** Cursor.zip has a local preview path, poster, logo,
-    and embedded YouTube trailer. Hammer Moonbase Map has a real
-    thumbnail/detail hero and embedded YouTube flyby. Reusable `ProjectLogo` / `YouTubeEmbed`
-    components and data fields were added; public media paths are Vite-base-aware; fallback and
-    reduced-motion behavior remain intact. Build green. Current `.mp4`-named local files were later
-    found to contain ASF/WMV data and now await genuine manual H.264 MP4 exports.
+- **[[CHECKPOINT 11 - Logos and Thumbnails 2]]** — 2026-06-12
+  - Arcade Machine, Surfers Quest, and Bomberman-style logos and exact video-cover paths are wired
+    through the shared data-driven media system. Cursor's path and poster are verified. Native
+    looping and fallback behavior remain intact; the Arcade 3D reveal is unchanged. Build green.
+    Remaining blocker: the current `.mp4`-named files contain ASF/WMV data and require genuine
+    manual H.264 MP4 exports.
 
 ## Chronological List of Checkpoints
 1. [[CHECKPOINT 1 - Vault Architecture Created]] — 2026-06-10 — _baseline: vault architecture created_
@@ -36,15 +35,16 @@
 8b. [[CHECKPOINT 8 - GLB Models Implementation 1]] — 2026-06-11 — _first 3D correction pass: Lid rotation fixed (relative quaternions), zero-clip explode, scroll 360→210vh, hover-inspection callouts_
 9. [[CHECKPOINT 9 - Arcade Chassis Animation]] — 2026-06-11 — _reveal moved to its project page; orbit reversed (front-right hero → inverse 60°); exploded layout matches the Blender ref (screen clip fixed); landscape stage + 420vh; tooltip edge-clamping; scroll-to-top_
 10. [[CHECKPOINT 10 - Added media 1]] — 2026-06-12 — _Cursor + Hammer real media integrated; reusable logo/YouTube detail media; optimized Cursor preview; next raw media batch collected_
+11. [[CHECKPOINT 11 - Logos and Thumbnails 2]] — 2026-06-12 — _three project logos + exact thumbnail paths wired; native looping verified; ASF/WMV container blocker documented_
 
 <!-- Add new checkpoints below in order, newest at the bottom. -->
 
 ## Current Project Baseline
 > The stable reference point for the project as of the latest checkpoint.
 
-- **Phase:** **Phase 2 complete; 3D flagship live; focused content/media pass underway.** Cursor.zip
-  and Hammer Moonbase now have real integrated media. Next: convert and wire the newly collected
-  Arcade Machine, Surfers Quest, and Super Bomberman assets.
+- **Phase:** **Phase 2 complete; 3D flagship live; focused content/media pass underway.** Four local
+  video paths and four project logos are data-driven. Next: manually export genuine H.264 MP4
+  containers over the wired preview paths.
 - **Mission:** 3D scrollable immersive portfolio (enhanced, not a game) → [[Immersive 3D Direction]].
 - **Design source of truth:** [[Design System Brief]] reconciled with [[DESIGN]] "Dala" → **void-black + violet `#8052ff` accent + bone type + hairline glass + particle cosmos**; skill governance: [[Skill Assisted Design Plan]].
 - **Type:** Space Grotesk (display) + Plus Jakarta Sans (body). **Design tooling:** 6 design/UX skills installed (`skills-lock.json`, `.agents/skills/`).

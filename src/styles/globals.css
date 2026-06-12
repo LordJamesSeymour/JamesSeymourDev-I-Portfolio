@@ -568,14 +568,26 @@ img {
   right: var(--space-3);
   z-index: 1;
   font-size: 0.66rem;
+  font-weight: 650;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+  white-space: nowrap;
   padding: 4px 10px;
   border-radius: var(--radius-pill);
   background: rgba(5, 5, 7, 0.7);
   backdrop-filter: blur(6px);
-  color: var(--color-ash);
-  border: 1px solid var(--color-hairline);
+}
+.card__badge--in-progress {
+  color: #f5a524;
+  background: rgba(54, 34, 8, 0.76);
+  border: 1px solid rgba(245, 165, 36, 0.42);
+  box-shadow: 0 0 18px rgba(245, 165, 36, 0.12);
+}
+.card__badge--completed {
+  color: #22c55e;
+  background: rgba(6, 43, 23, 0.76);
+  border: 1px solid rgba(34, 197, 94, 0.42);
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.12);
 }
 /* Dev-only "James input needed" note (hidden in production builds). */
 .card__note {
