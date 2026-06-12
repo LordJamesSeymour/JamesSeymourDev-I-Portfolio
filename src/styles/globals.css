@@ -876,6 +876,110 @@ img {
   height: 100%;
   border: 0;
 }
+
+/* ---------- YouTube carousel (multi-clip showcase, e.g. EOS) --------------
+   One <YouTubeEmbed/> at a time inside a relative stage, with glassy edge arrows
+   and Instagram-style dots below. Active dot uses the violet accent; the rest stay
+   subtle. Matches the single-video showcase styling so multi-clip projects feel
+   like the same site, not a generic carousel. */
+.youtube-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.youtube-carousel__stage {
+  position: relative;
+}
+.youtube-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  color: var(--color-bone);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.youtube-carousel__arrow--prev {
+  left: var(--space-4);
+}
+.youtube-carousel__arrow--next {
+  right: var(--space-4);
+}
+.youtube-carousel__arrow:hover {
+  border-color: var(--color-plum);
+  background: rgba(128, 82, 255, 0.24);
+  transform: translateY(-50%) scale(1.06);
+}
+.youtube-carousel__arrow:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+}
+.youtube-carousel__controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.youtube-carousel__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.youtube-carousel__dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+/* Enlarge the touch/click target without changing the visible dot size. */
+.youtube-carousel__dot::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: var(--radius-pill);
+}
+.youtube-carousel__dot:hover {
+  background: rgba(255, 255, 255, 0.42);
+}
+.youtube-carousel__dot--active {
+  background: var(--color-plum);
+  border-color: var(--color-plum-bright);
+  transform: scale(1.35);
+  box-shadow: 0 0 12px rgba(128, 82, 255, 0.6);
+}
+.youtube-carousel__dot:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+}
+.youtube-carousel__watch {
+  color: var(--color-ash);
+  font-size: var(--fs-sm);
+}
+.youtube-carousel__watch:hover {
+  color: var(--color-bone);
+}
 .project-detail__links {
   display: flex;
   flex-wrap: wrap;

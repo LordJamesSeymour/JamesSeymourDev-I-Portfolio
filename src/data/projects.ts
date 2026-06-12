@@ -10,8 +10,9 @@ import type { Project } from "../types/project";
 // COVERS: each project's card + detail hero is a `cover`, which can be a looping muted
 // VIDEO, an animated GIF, or a static image. Most covers are still omitted, so the app
 // falls back to generated placeholders (src/lib/placeholder.ts) — never reference a
-// missing file. Cursor.zip, Arcade Machine, Surfers Quest, and the Bomberman-style
-// project now wire real video covers through the same shared system.
+// missing file. Cursor.zip, Arcade Machine, Surfers Quest, the Bomberman-style project,
+// Basilisk Engine, and EOS Dedicated Server now wire real video covers through the same
+// shared system (Basilisk adds a single YouTube showcase; EOS a two-video carousel).
 //
 // ASSET PLANNING: each entry also carries `priority`, `missingAssets`, and
 // `immersive.showcaseType` (see src/types/project.ts). `missingAssets` drives a dev-only
@@ -148,6 +149,31 @@ export const projects: Project[] = [
     featured: true,
     featuredPriority: 2,
     status: "completed",
+    cover: {
+      type: "video",
+      src: "/EOS/Videos/eos-short.mp4",
+      sources: ["/EOS/Videos/eos-short.mp4"],
+      alt: "EOS Dedicated Server preview",
+    },
+    logo: {
+      src: "/EOS/EOS-logo.png",
+      alt: "EOS Dedicated Server project logo",
+    },
+    // Two hosted clips rendered as a switchable carousel (<YouTubeCarousel/>).
+    showcaseVideos: [
+      {
+        youtubeId: "qfgG6GS0QKE",
+        externalUrl: "https://www.youtube.com/watch?v=qfgG6GS0QKE",
+        title: "EOS Dedicated Server showcase video 1",
+        heading: "Server showcase",
+      },
+      {
+        youtubeId: "EYpZmPbpHGE",
+        externalUrl: "https://youtu.be/EYpZmPbpHGE",
+        title: "EOS Dedicated Server showcase video 2",
+        heading: "Server showcase",
+      },
+    ],
     priority: "high",
     immersive: { showcaseType: "floating-card" },
     missingAssets: [
@@ -157,7 +183,9 @@ export const projects: Project[] = [
       "Short written explanation of functionality",
       "Technology stack details",
     ],
-    links: {},
+    links: {
+      video: "https://www.youtube.com/watch?v=qfgG6GS0QKE",
+    },
     caseStudy: {
       overview: "TODO: Describe the EOS dedicated server / networking work.",
       keyFeatures: ["TODO: networking feature"],
@@ -174,16 +202,32 @@ export const projects: Project[] = [
     featured: true,
     featuredPriority: 1,
     status: "in-progress",
+    cover: {
+      type: "video",
+      src: "/Basilisk/Videos/basilisk-short.mp4",
+      sources: ["/Basilisk/Videos/basilisk-short.mp4"],
+      alt: "Basilisk Engine preview",
+    },
+    logo: {
+      src: "/Basilisk/basilisk-logo.png",
+      alt: "Basilisk Engine project logo",
+    },
+    showcaseVideo: {
+      youtubeId: "EFVWiAf81z0",
+      externalUrl: "https://youtu.be/EFVWiAf81z0",
+      title: "Basilisk Engine showcase",
+      heading: "Engine showcase",
+    },
     priority: "high",
     immersive: { showcaseType: "video-screen" },
     missingAssets: [
       "Editor screenshot",
-      "Viewport interaction video",
       "Gizmo / inspector clip",
       "Scene hierarchy screenshot",
-      "Optional engine logo / 3D mark",
     ],
-    links: {},
+    links: {
+      video: "https://youtu.be/EFVWiAf81z0",
+    },
     caseStudy: {
       overview: "TODO: Describe the engine's scope and goals.",
       keyFeatures: ["TODO: engine subsystem"],

@@ -143,6 +143,16 @@ Mirrors [[Placeholder Asset Rules]] — the site never references a missing vide
 - Each placeholder→real swap is a **data-only change** in `projects.ts` (set `cover` / `media.video`)
   and is tracked in [[Missing Content Checklist]].
 
+## Delivered local previews + YouTube showcases (2026-06-12)
+- **Basilisk Engine:** local MP4 preview `/Basilisk/Videos/basilisk-short.mp4` (card cover + detail
+  hero, native loop), logo `/Basilisk/basilisk-logo.png`, and a YouTube showcase (`EFVWiAf81z0`)
+  embedded on the detail page.
+- **EOS Dedicated Server:** local MP4 preview `/EOS/Videos/eos-short.mp4` (card cover + detail hero,
+  native loop), logo `/EOS/EOS-logo.png`, and **two** YouTube showcases (`qfgG6GS0QKE`,
+  `EYpZmPbpHGE`) shown as a switchable two-dot carousel (`<YouTubeCarousel/>`).
+- These MP4s are used directly (supplied files, native `loop`) — not trimmed, transcoded, or
+  duplicated. The heavier clips (showcase) live on YouTube to keep the GitHub Pages repo lean.
+
 ## What James Provides
 - [ ] At least **one hero loop per project** (start with featured: Arcade Machine, EOS, Basilisk, Zombies VR).
 - [ ] **Posters/screenshots** for each (also used as fallbacks).

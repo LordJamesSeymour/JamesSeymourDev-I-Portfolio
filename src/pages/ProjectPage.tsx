@@ -7,6 +7,7 @@ import ProjectMedia from "../components/projects/ProjectMedia";
 import ProjectCaseStudy from "../components/projects/ProjectCaseStudy";
 import ProjectLogo from "../components/projects/ProjectLogo";
 import YouTubeEmbed from "../components/projects/YouTubeEmbed";
+import YouTubeCarousel from "../components/projects/YouTubeCarousel";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
 import Tag from "../components/ui/Tag";
@@ -169,6 +170,15 @@ export default function ProjectPage() {
               </a>
             </div>
             <YouTubeEmbed video={project.showcaseVideo} />
+          </section>
+        )}
+
+        {project.showcaseVideos && project.showcaseVideos.length > 0 && (
+          <section className="project-detail__showcase">
+            <div className="project-detail__showcase-head">
+              <h2>{project.showcaseVideos[0].heading}</h2>
+            </div>
+            <YouTubeCarousel videos={project.showcaseVideos} label={title} />
           </section>
         )}
 

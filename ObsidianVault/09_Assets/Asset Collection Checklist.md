@@ -34,6 +34,15 @@ Projects: [[Arcade Machine]] *(3D flagship)*, [[Surfers Quest]], [[Bomberman Sty
 - [x] **Cursor.zip:** YouTube trailer collected (`g4LTAYN-QgE`).
 - [x] **Hammer Moonbase Map:** card/detail thumbnail collected at `public/Hammer/HammerMap.png`.
 - [x] **Hammer Moonbase Map:** YouTube flyby/walkthrough collected (`TF4499mnCWE`).
+- [x] **Basilisk Engine:** project logo collected at `public/Basilisk/basilisk-logo.png`.
+- [x] **Basilisk Engine:** local MP4 thumbnail/preview at `public/Basilisk/Videos/basilisk-short.mp4`
+  (card cover + detail hero, native loop).
+- [x] **Basilisk Engine:** YouTube showcase collected (`EFVWiAf81z0`) → embedded on the detail page.
+- [x] **EOS Dedicated Server:** project logo collected at `public/EOS/EOS-logo.png`.
+- [x] **EOS Dedicated Server:** local MP4 thumbnail/preview at `public/EOS/Videos/eos-short.mp4`
+  (card cover + detail hero, native loop).
+- [x] **EOS Dedicated Server:** two YouTube showcases collected (`qfgG6GS0QKE`, `EYpZmPbpHGE`) →
+  shown as a two-dot carousel on the detail page.
 
 ## Site-Wide
 - [ ] Hero background / imagery.

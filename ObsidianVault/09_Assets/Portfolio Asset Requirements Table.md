@@ -39,8 +39,8 @@ For each project the page decides what to show, in this order:
 | Arcade Machine | C++ | Placeholder | 🔴 High | Cabinet photo, menu UI | Gameplay loop, menu nav, feature clip | ✅ **Delivered & wired** — `PiecedTogether.glb` (scroll-reveal) | Overview, role, tech, outcome | `public/media/arcade-machine/` · model: `public/models/arcade-machine/` |
 | Surfers Quest | C++ | Placeholder | 🟡 Medium | Gameplay, level editor | Gameplay clip, movement clip | — (video-screen) | Overview, mechanics | `public/media/surfers-quest/` |
 | Bomberman-style Game | C++ | Placeholder | 🟡 Medium | Gameplay, level editor | Bomb/explosion clip | — (video-screen) | Overview **+ choose original name** | `public/media/bomberman-style-game/` |
-| EOS Dedicated Server | C++ | Placeholder | 🔴 High | Server console | (optional screen-capture) | — (floating-card) | Architecture, session flow, tech stack | `public/media/eos-dedicated-server/` |
-| Basilisk Engine | C++ | Placeholder | 🔴 High | Editor, scene hierarchy | Viewport interaction, gizmo/inspector | optional engine mark | Scope, subsystems, challenges | `public/media/basilisk-engine/` |
+| EOS Dedicated Server | C++ | **In progress** ✅ media wired | 🔴 High | Server console | ✅ MP4 preview + ✅ 2 YouTube clips (carousel) | — (floating-card) | Architecture, session flow, tech stack | `public/EOS/` |
+| Basilisk Engine | C++ | **In progress** ✅ media wired | 🔴 High | Editor, scene hierarchy | ✅ MP4 preview + ✅ YouTube showcase | ✅ logo wired | Scope, subsystems, challenges | `public/Basilisk/` |
 | Cursor.zip | C# | **In progress** ✅ media wired | 🟡 Medium | ✅ project logo; a few stills still useful | ✅ 8 s MP4 preview + poster · ✅ YouTube trailer | — (video-screen) | **Define what it is** + final name | `public/Cursor/` |
 | Zombies VR | C# | Placeholder | 🔴 High | In-headset stills | VR gameplay, combat/interaction clip | — (video-screen) | Engine + headset, interactions | `public/media/zombies-vr/` |
 | Hammer Moonbase Map | Level Design | **In progress** ✅ media wired | 🟡 Medium | ✅ card thumbnail · Hammer editor/top-down still needed | ✅ YouTube flyby | — (environment) | Layout, flow & pacing notes | `public/Hammer/` |
@@ -63,6 +63,10 @@ Keep it predictable so wiring assets is copy-paste:
 > **Current delivered paths:** Cursor.zip preview:
 > `public/Cursor/Videos/cursor-short.mp4` (+ `cursor-short-poster.jpg`); logo:
 > `public/Cursor/cursor-zip-logo.png`. Hammer thumbnail: `public/Hammer/HammerMap.png`.
+> Basilisk Engine: logo `public/Basilisk/basilisk-logo.png`, preview
+> `public/Basilisk/Videos/basilisk-short.mp4`, YouTube showcase `EFVWiAf81z0`.
+> EOS Dedicated Server: logo `public/EOS/EOS-logo.png`, preview
+> `public/EOS/Videos/eos-short.mp4`, YouTube carousel `qfgG6GS0QKE` + `EYpZmPbpHGE`.
 
 ---
 
@@ -80,6 +84,9 @@ Keep it predictable so wiring assets is copy-paste:
 > - Surfers Quest browser path: `/SurfersQuest/Videos/surfers-short.mp4`.
 > - Cursor.zip browser path: `/Cursor/Videos/cursor-short.mp4` (matching the Git-tracked filename
 >   used by case-sensitive GitHub Pages).
+> - Basilisk Engine browser path: `/Basilisk/Videos/basilisk-short.mp4`.
+> - EOS Dedicated Server browser path: `/EOS/Videos/eos-short.mp4` (folder + logo `EOS-logo.png`
+>   are uppercase — must match exactly on case-sensitive GitHub Pages).
 >
 > Current validation note: the four files presently carrying `.mp4` names have ASF/WMV file
 > signatures rather than MP4 containers. They must be manually exported as genuine MP4 files at
@@ -120,6 +127,10 @@ Keep it predictable so wiring assets is copy-paste:
 - **Notes for James:** use original, non-copyrighted art for any public capture.
 
 ### EOS Dedicated Server — C++ · 🔴 High · showcase: `floating-card`
+- **Logo:** ✅ `/EOS/EOS-logo.png` wired to the detail-page header.
+- **Preview:** ✅ `/EOS/Videos/eos-short.mp4` — card cover + detail hero (native loop, muted, inline).
+- **Showcase videos:** ✅ two YouTube clips (`qfgG6GS0QKE`, `EYpZmPbpHGE`) rendered as a
+  two-dot `<YouTubeCarousel/>` on the detail page (arrows + Instagram-style dots).
 - **Screenshots:** server console output, optional dashboard/log capture.
 - **Videos:** optional — a short console/session screen-capture if it reads well.
 - **Diagrams (key):** architecture diagram, network/session flow diagram.
@@ -131,6 +142,10 @@ Keep it predictable so wiring assets is copy-paste:
   explanation carry it further than gameplay footage. Don't expose private keys/endpoints.
 
 ### Basilisk Engine — C++ · 🔴 High · showcase: `video-screen`
+- **Logo:** ✅ `/Basilisk/basilisk-logo.png` wired to the detail-page header.
+- **Preview:** ✅ `/Basilisk/Videos/basilisk-short.mp4` — card cover + detail hero (native loop,
+  muted, inline). (Engine also has `/Basilisk/basilisk-ascii.txt`, used by the page background.)
+- **Showcase video:** ✅ YouTube `EFVWiAf81z0` embedded on the detail page (single `<YouTubeEmbed/>`).
 - **Screenshots:** editor overview, scene hierarchy/inspector, viewport.
 - **Videos:** viewport interaction (cover), gizmo/inspector manipulation clip.
 - **Written:** engine scope & goals, key subsystems, architecture decisions, challenges.

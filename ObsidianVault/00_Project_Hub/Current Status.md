@@ -46,6 +46,11 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [x] **Project status labels normalized** ([[CHECKPOINT 12 - Label status]]): all eight projects
       now use `in-progress` or `completed`; cards show amber IN PROGRESS or green COMPLETED pills,
       with no visible PLACEHOLDER project-status labels.
+- [x] **Basilisk + EOS media integration** ([[CHECKPOINT 13 - Basilisk and EOS Thumbnail Integration]]):
+      both projects fully media-wired — local looping MP4 card/hero previews with the cinematic veil,
+      header logos, and YouTube showcases. Basilisk uses a single `YouTubeEmbed` (`EFVWiAf81z0`);
+      EOS uses a new reusable two-dot `YouTubeCarousel` (`qfgG6GS0QKE` + `EYpZmPbpHGE`). Schema gained
+      optional `showcaseVideos`. No redesign, no new deps, no re-encoding; build + browser verified.
 - [x] **GitHub Pages deployment workflow exists** at `.github/workflows/deploy.yml`.
 
 ## In Progress
@@ -65,10 +70,11 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [ ] Real content pass (Phase 6) + optimization/deploy (Phase 7).
 
 ## Latest Checkpoint
-- [[CHECKPOINT 12 - Label status]] (2026-06-12) — all eight project cards now use the two-state
-  IN PROGRESS / COMPLETED system with amber and green premium pills. Visible PLACEHOLDER status
-  labels are removed; build and browser verification pass. Prior:
-  [[CHECKPOINT 11 - Logos and Thumbnails 2]]. See [[Checkpoint Hub]].
+- [[CHECKPOINT 13 - Basilisk and EOS Thumbnail Integration]] (2026-06-12) — Basilisk Engine and EOS
+  Dedicated Server are fully media-wired (local MP4 previews, logos, YouTube showcases); EOS adds a
+  reusable two-dot `YouTubeCarousel` and the schema gains optional `showcaseVideos`. No redesign,
+  no new deps; build and browser verification pass. Prior:
+  [[CHECKPOINT 12 - Label status]]. See [[Checkpoint Hub]].
 
 ## Links
 - Next steps → [[Next Actions]]

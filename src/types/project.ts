@@ -123,8 +123,14 @@ export interface Project {
   media?: ProjectMedia[];
   /** Optional transparent project mark shown near the detail-page title. */
   logo?: ProjectLogo;
-  /** Optional hosted showcase video embedded on the project detail page. */
+  /** Optional single hosted showcase video embedded on the project detail page. */
   showcaseVideo?: ProjectVideoEmbed;
+  /**
+   * Optional list of hosted showcase videos rendered as a switchable carousel
+   * (<YouTubeCarousel/>) on the detail page — one frame at a time with dot
+   * indicators. Use this instead of `showcaseVideo` when a project has 2+ clips.
+   */
+  showcaseVideos?: ProjectVideoEmbed[];
   links?: ProjectLinks;
   caseStudy?: ProjectCaseStudy;
 
