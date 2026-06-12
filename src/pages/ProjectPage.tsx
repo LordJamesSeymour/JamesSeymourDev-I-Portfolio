@@ -8,8 +8,11 @@ import ProjectCaseStudy from "../components/projects/ProjectCaseStudy";
 import ProjectLogo from "../components/projects/ProjectLogo";
 import YouTubeEmbed from "../components/projects/YouTubeEmbed";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
+import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
+
+const BASILISK_ASCII_URL = `${import.meta.env.BASE_URL}Basilisk/basilisk-ascii.txt`;
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -61,6 +64,7 @@ export default function ProjectPage() {
   // Projects flagged as an exploded-view showcase (the Arcade Machine) get the
   // scroll-driven 3D reveal as their hero, in place of the static media panel.
   const showReveal = project.immersive?.revealType === "exploded-view";
+  const showBasiliskBackground = project.slug === "basilisk-engine";
 
   const breadcrumb = (
     <p className="breadcrumb">
@@ -132,33 +136,46 @@ export default function ProjectPage() {
   }
 
   return (
-    <article className="container section project-detail">
-      {breadcrumb}
-      {header}
-
-      <div className="project-detail__media">
-        <ProjectMedia cover={heroCover} label={title} caption={caption} />
-      </div>
-
-      {project.showcaseVideo && (
-        <section className="project-detail__showcase">
-          <div className="project-detail__showcase-head">
-            <h2>{project.showcaseVideo.heading}</h2>
-            <a
-              href={project.showcaseVideo.externalUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Watch on YouTube <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <YouTubeEmbed video={project.showcaseVideo} />
-        </section>
+    <>
+      {showBasiliskBackground && (
+          <SplitFlapAsciiBackground
+            asciiUrl={BASILISK_ASCII_URL}
+            duration={4600}
+          />
       )}
 
-      {linksBlock}
+      <article
+        className={`container section project-detail${
+          showBasiliskBackground ? " project-detail--basilisk" : ""
+        }`}
+      >
+        {breadcrumb}
+        {header}
 
-      <ProjectCaseStudy caseStudy={caseStudy} />
-    </article>
+        <div className="project-detail__media">
+          <ProjectMedia cover={heroCover} label={title} caption={caption} />
+        </div>
+
+        {project.showcaseVideo && (
+          <section className="project-detail__showcase">
+            <div className="project-detail__showcase-head">
+              <h2>{project.showcaseVideo.heading}</h2>
+              <a
+                href={project.showcaseVideo.externalUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Watch on YouTube <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <YouTubeEmbed video={project.showcaseVideo} />
+          </section>
+        )}
+
+        {linksBlock}
+
+        <ProjectCaseStudy caseStudy={caseStudy} />
+      </article>
+    </>
   );
 }

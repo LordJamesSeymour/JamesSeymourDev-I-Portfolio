@@ -1,0 +1,43 @@
+.split-flap-ascii {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: #020504;
+}
+
+.split-flap-ascii__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.72;
+}
+
+.split-flap-ascii__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 52% 42%, rgba(1, 4, 3, 0.08) 0%, rgba(1, 4, 3, 0.22) 52%, rgba(0, 2, 1, 0.66) 100%),
+    linear-gradient(90deg, rgba(2, 5, 4, 0.52), rgba(2, 5, 4, 0.16) 46%, rgba(2, 5, 4, 0.46));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .split-flap-ascii__canvas {
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 720px) {
+  .split-flap-ascii__canvas {
+    opacity: 0.64;
+  }
+
+  .split-flap-ascii__veil {
+    background:
+      radial-gradient(circle at 50% 35%, transparent 0%, rgba(1, 4, 3, 0.28) 48%, rgba(0, 2, 1, 0.72) 100%),
+      rgba(2, 5, 4, 0.2);
+  }
+}
