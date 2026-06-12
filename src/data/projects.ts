@@ -10,7 +10,8 @@ import type { Project } from "../types/project";
 // COVERS: each project's card + detail hero is a `cover`, which can be a looping muted
 // VIDEO, an animated GIF, or a static image. Most covers are still omitted, so the app
 // falls back to generated placeholders (src/lib/placeholder.ts) — never reference a
-// missing file. Cursor.zip already wires a real video cover as a worked example.
+// missing file. Cursor.zip, Arcade Machine, Surfers Quest, and the Bomberman-style
+// project now wire real video covers through the same shared system.
 //
 // ASSET PLANNING: each entry also carries `priority`, `missingAssets`, and
 // `immersive.showcaseType` (see src/types/project.ts). `missingAssets` drives a dev-only
@@ -40,6 +41,16 @@ export const projects: Project[] = [
     featuredPriority: 5,
     status: "placeholder",
     priority: "high",
+    cover: {
+      type: "video",
+      src: "/ArcadeMachine/Videos/ArcadeShort.mp4",
+      sources: ["/ArcadeMachine/Videos/ArcadeShort.mp4"],
+      alt: "Arcade Machine gameplay preview",
+    },
+    logo: {
+      src: "/ArcadeMachine/arcade-logo.png",
+      alt: "Arcade Machine project logo",
+    },
     // First real immersive asset: the assembled cabinet GLB drives the
     // scroll-driven exploded-view showcase (<ArcadeMachineReveal/>).
     immersive: {
@@ -49,9 +60,7 @@ export const projects: Project[] = [
     },
     missingAssets: [
       "Cabinet photo (the physical machine)",
-      "Gameplay video loop",
       "Menu navigation video",
-      "Card thumbnail",
       "Short feature showcase clip",
     ],
     links: {},
@@ -75,13 +84,21 @@ export const projects: Project[] = [
     featuredPriority: 6,
     status: "placeholder",
     priority: "medium",
+    cover: {
+      type: "video",
+      src: "/SurfersQuest/Videos/surfers-short.mp4",
+      sources: ["/SurfersQuest/Videos/surfers-short.mp4"],
+      alt: "Surfers Quest gameplay preview",
+    },
+    logo: {
+      src: "/SurfersQuest/surfers-logo.png",
+      alt: "Surfers Quest project logo",
+    },
     immersive: { showcaseType: "video-screen" },
     missingAssets: [
       "Gameplay screenshots",
       "Level editor screenshot (if available)",
-      "Short gameplay video",
       "Player movement clip",
-      "Card thumbnail",
     ],
     links: {},
     caseStudy: {
@@ -99,13 +116,21 @@ export const projects: Project[] = [
     featured: false, // not in the featured 6 (kept in the full C++ list)
     status: "placeholder",
     priority: "medium",
+    cover: {
+      type: "video",
+      src: "/SuperBomberman/Videos/bomberman-short.mp4",
+      sources: ["/SuperBomberman/Videos/bomberman-short.mp4"],
+      alt: "Bomberman-style game gameplay preview",
+    },
+    logo: {
+      src: "/SuperBomberman/bomberman-logo.png",
+      alt: "Bomberman-style game project logo",
+    },
     immersive: { showcaseType: "video-screen" },
     missingAssets: [
       "Decide a public-safe, original (non-trademarked) name",
       "Gameplay screenshot",
-      "Bomb / explosion gameplay clip",
       "Level editor screenshot",
-      "Card thumbnail",
     ],
     links: {},
     caseStudy: {

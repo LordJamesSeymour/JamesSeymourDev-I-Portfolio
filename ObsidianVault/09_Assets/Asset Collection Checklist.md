@@ -16,8 +16,20 @@ Projects: [[Arcade Machine]] *(3D flagship)*, [[Surfers Quest]], [[Bomberman Sty
 [[Hammer Moonbase Map]].
 
 ## Delivered Project Media
-- [x] **Cursor.zip:** source WMV collected and converted to
-  `public/Cursor/Videos/cursor-short.mp4`; poster exported alongside it.
+- [x] **Arcade Machine:** project logo collected at
+  `public/ArcadeMachine/arcade-logo.png`.
+- [ ] **Arcade Machine:** manually export a genuine H.264 MP4 to
+  `public/ArcadeMachine/Videos/ArcadeShort.mp4` (do not rename WMV or create a fixed-length snippet).
+- [x] **Bomberman-style Game:** project logo collected at
+  `public/SuperBomberman/bomberman-logo.png`.
+- [ ] **Bomberman-style Game:** manually export a genuine H.264 MP4 to
+  `public/SuperBomberman/Videos/bomberman-short.mp4` (no Codex trimming or recompilation).
+- [x] **Surfers Quest:** project logo collected at
+  `public/SurfersQuest/surfers-logo.png`.
+- [ ] **Surfers Quest:** manually export a genuine H.264 MP4 to
+  `public/SurfersQuest/Videos/surfers-short.mp4` (no fixed-duration snippet).
+- [ ] **Cursor.zip:** manually export a genuine H.264 MP4 to
+  `public/Cursor/Videos/cursor-short.mp4`; the poster is already present.
 - [x] **Cursor.zip:** project logo copied to `public/Cursor/cursor-zip-logo.png`.
 - [x] **Cursor.zip:** YouTube trailer collected (`g4LTAYN-QgE`).
 - [x] **Hammer Moonbase Map:** card/detail thumbnail collected at `public/Hammer/HammerMap.png`.
@@ -31,6 +43,10 @@ Projects: [[Arcade Machine]] *(3D flagship)*, [[Surfers Quest]], [[Bomberman Sty
 - [ ] CV / resume → [[CV And Contact Assets]].
 
 ## Specs
+- Local project videos are used directly from `public/<Project>/Videos/`, play their full
+  duration, and loop through the native HTML video `loop` attribute.
+- Codex must not create shortened duplicates, duration-limited snippets, or replacement encodes
+  unless James explicitly requests conversion.
 - Video (immersive direction): [[Video Capture Requirements]] *(primary)* · [[Video Requirements]].
 - 3D models: [[3D Asset Requirements]].
 - Images: [[Image Requirements]].

@@ -68,6 +68,23 @@ Keep it predictable so wiring assets is copy-paste:
 
 ## Per-project detail
 
+> **Local video policy (2026-06-12):**
+> - Preview videos are manually exported as real H.264 MP4 files and placed directly in each
+>   project's `public/<Project>/Videos/` folder.
+> - The website references that supplied MP4 directly. Codex must not trim, transcode, overwrite,
+>   duplicate, or generate fixed-duration preview snippets unless explicitly requested.
+> - Playback uses the native HTML video `loop` attribute, so the browser plays the complete file
+>   before returning to the beginning. There is no JavaScript preview-duration cap.
+> - Arcade Machine browser path: `/ArcadeMachine/Videos/ArcadeShort.mp4`.
+> - Bomberman-style Game browser path: `/SuperBomberman/Videos/bomberman-short.mp4`.
+> - Surfers Quest browser path: `/SurfersQuest/Videos/surfers-short.mp4`.
+> - Cursor.zip browser path: `/Cursor/Videos/cursor-short.mp4` (matching the Git-tracked filename
+>   used by case-sensitive GitHub Pages).
+>
+> Current validation note: the four files presently carrying `.mp4` names have ASF/WMV file
+> signatures rather than MP4 containers. They must be manually exported as genuine MP4 files at
+> the paths above. Until then, the shared media system falls back to the polished placeholder.
+
 ### Arcade Machine — C++ · 🔴 High · showcase: `model` (scroll-reveal / exploded-view)
 - **Screenshots:** cabinet photo (the physical machine), menu/attract-mode UI, thumbnail.
 - **Videos:** gameplay loop (cover), menu-navigation walkthrough, short feature showcase clip.
@@ -124,8 +141,8 @@ Keep it predictable so wiring assets is copy-paste:
   engine work — aim for one smooth 8–12s clip.
 
 ### Cursor.zip — C# · 🟡 Medium · showcase: `video-screen`
-- **Status:** ✅ 8-second H.264 preview wired at `/Cursor/Videos/cursor-short.mp4`; source WMV is
-  preserved at `public/Cursor/Videos/Cursor-Short.wmv`.
+- **Preview path:** `/Cursor/Videos/cursor-short.mp4`; replace it with the manually exported,
+  full-duration H.264 MP4. The browser plays the entire supplied file and loops natively.
 - **Poster:** ✅ `/Cursor/Videos/cursor-short-poster.jpg` for first paint and reduced motion.
 - **Trailer:** ✅ YouTube `g4LTAYN-QgE` embedded on the detail page.
 - **Logo:** ✅ web-safe copy at `/Cursor/cursor-zip-logo.png`; original file preserved.

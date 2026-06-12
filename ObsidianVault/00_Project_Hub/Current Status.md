@@ -4,7 +4,8 @@
 > Living snapshot of where the project is right now. Update at each [[Checkpoint Hub|checkpoint]].
 
 ## Phase
-**Phase 2 (Premium 2D Visual Redesign) — COMPLETE.** Next: content pass, then Phase 3 (lightweight R3F hero, after approval).
+**Phase 2 (Premium 2D Visual Redesign) — COMPLETE.** The flagship 3D reveal is live and the focused
+content/media pass is underway.
 Mission: **3D scrollable immersive portfolio** → [[Immersive 3D Direction]].
 Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala" → **void-black + violet accent + bone type + particle cosmos** · governance: [[Skill Assisted Design Plan]].
 
@@ -35,10 +36,17 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [x] **Robust media system** `ProjectMedia` / `VideoPreview` / `MediaPlaceholder` (ordered `sources` → premium placeholder fallback; supports optimized path + external URL); root cause of the desktop video bug found (non-faststart 865 MB MP4) → [[cursor-video-deploy-blocker]].
 - [x] **Editable `.txt` content system** for all visible copy (`public/content/**`, `useTextContent`, in-code fallbacks) + docs → [[Editable Text Content System]].
 - [x] **First 3D layer live — Arcade Machine exploded-view reveal** on `/projects/arcade-machine` (`src/components/three/`, R3F/Three/Drei, lazy + code-split + fallback-backed). Reference-matched: reversed orbit (front-right hero → inverse 60°), chassis-left layout, screen slides clear (no clip), Pi visible, Lid far right, edge-clamped hover tooltips, landscape stage + 420vh staged scroll, scroll-to-top. Verified headlessly + in-browser; build green → [[CHECKPOINT 9 - Arcade Chassis Animation]] / [[Immersive 3D Direction]].
+- [x] **First focused media batch integrated** ([[CHECKPOINT 10 - Added media 1]]): Cursor.zip has a
+      local preview path, poster, logo, and YouTube trailer; Hammer Moonbase Map has a
+      real thumbnail/detail hero and YouTube flyby. Reusable `ProjectLogo` / `YouTubeEmbed`
+      components, base-aware public paths, graceful fallback, and reduced-motion behavior are live.
+- [x] **GitHub Pages deployment workflow exists** at `.github/workflows/deploy.yml`.
 
 ## In Progress
 - [ ] **Content pass:** edit the seeded `.txt` files with real copy (hero tagline, bio, project titles/descriptions); real email in `profile.ts`; start adding 🔴 high-priority project media → [[Editable Text Content System]] / [[Portfolio Asset Requirements Table]].
-- [ ] **Optimize `CursorGameplay.mp4`** (865 MB, non-faststart) → short `+faststart` preview before deploy → [[cursor-video-deploy-blocker]].
+- [ ] **Next media batch:** manually export genuine H.264 MP4 files for Cursor.zip, Arcade Machine,
+      Surfers Quest, and Super Bomberman at the wired `public/<Project>/Videos/` paths. The current
+      `.mp4`-named files still contain ASF/WMV data, so browser previews correctly fall back.
 
 ## Blocked / Needs James Input
 - [ ] Motion intensity (restrained ↔ flashy) + accent color → [[Visual Identity]] / [[Animation Direction]].
@@ -49,10 +57,11 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 ## Not Started
 - [ ] 3D layer (React Three Fiber) — **Arcade Machine reveal done** ([[CHECKPOINT 9 - Arcade Chassis Animation]]); remaining model-backed projects + optional Phase 3 hero pending → [[Immersive 3D Direction]].
 - [ ] Real content pass (Phase 6) + optimization/deploy (Phase 7).
-- [ ] Deployment pipeline (`.github/workflows/deploy.yml`).
 
 ## Latest Checkpoint
-- [[CHECKPOINT 9 - Arcade Chassis Animation]] (2026-06-11) — Arcade Machine 3D reveal finished & reference-matched on `/projects/arcade-machine` (reversed orbit, screen-clip fixed, edge-clamped tooltips, landscape stage, scroll-to-top). Prior: [[CHECKPOINT 8 - GLB Models Import]] / [[CHECKPOINT 8 - GLB Models Implementation 1]]. See [[Checkpoint Hub]].
+- [[CHECKPOINT 10 - Added media 1]] (2026-06-12) — Cursor.zip and Hammer Moonbase real media
+  integrated; reusable logo/YouTube detail media; local previews now await genuine manual MP4
+  exports. Prior: [[CHECKPOINT 9 - Arcade Chassis Animation]]. See [[Checkpoint Hub]].
 
 ## Links
 - Next steps → [[Next Actions]]

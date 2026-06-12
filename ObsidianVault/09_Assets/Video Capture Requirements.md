@@ -12,6 +12,11 @@
 
 Short, looping, no audio dependency — these are *ambient* loops, not trailers.
 
+> **Implementation rule:** durations below are capture recommendations, not code-enforced limits.
+> Manually export the intended full preview as a genuine `.mp4` file. Codex must not create a
+> shortened duplicate or trim/recompile the file unless explicitly requested. The HTML video
+> element plays the complete file and uses native `loop` playback.
+
 | Use | Length | Notes |
 |---|---|---|
 | Card cover loop (2D grid) | **4–8 s**, seamless loop | Autoplays muted; should look fine looping forever. |
@@ -61,10 +66,20 @@ Aim for **1 hero loop minimum**, plus a few stills. More is better but the loop 
 - **Hammer Moonbase** — flythrough of the level + editor top-down.
 
 **Delivered media (2026-06-12):**
-- **Cursor.zip:** source WMV preserved; an 8-second, muted, fast-start H.264 card preview is exported
-  to `public/Cursor/Videos/cursor-short.mp4`, with `cursor-short-poster.jpg`. Full trailer:
+- **Arcade Machine:** expected manual MP4 export:
+  `public/ArcadeMachine/Videos/ArcadeShort.mp4`.
+- **Bomberman-style Game:** expected manual MP4 export:
+  `public/SuperBomberman/Videos/bomberman-short.mp4`.
+- **Surfers Quest:** expected manual MP4 export:
+  `public/SurfersQuest/Videos/surfers-short.mp4`.
+- **Cursor.zip:** expected manual MP4 export:
+  `public/Cursor/Videos/cursor-short.mp4`, with `cursor-short-poster.jpg`. Full trailer:
   YouTube `g4LTAYN-QgE`.
 - **Hammer Moonbase:** hosted flyby/walkthrough available on YouTube as `TF4499mnCWE`.
+
+**Format validation:** changing a `.wmv` filename to `.mp4` does not convert the media container.
+The current four files have ASF/WMV signatures and need genuine manual H.264 MP4 exports. Invalid
+or failed video sources use the generated project placeholder.
 
 Each captured asset maps to a `projects.ts` entry → [[Data Driven Project System]].
 
@@ -76,6 +91,8 @@ Already supported in code by `CoverMedia` + the `Project.cover` field — drop t
 
 - `cover: { type: "video", src: "/media/<slug>.mp4", poster: "/media/<slug>.jpg", alt: "…" }`.
 - Plays **muted + looped + inline**, autoplay, no controls (so the card link still receives clicks).
+- Native `loop` plays the **full supplied file** before restarting; no `timeupdate`, timeout, or
+  maximum-preview-duration logic is used.
 - **Reduced motion → the `poster` still is shown instead** (so always supply a poster).
 - Missing file → generated SVG placeholder (never 404s) → [[Placeholder Asset Rules]].
 

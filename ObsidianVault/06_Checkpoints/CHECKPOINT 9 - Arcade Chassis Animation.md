@@ -11,7 +11,7 @@ status: Complete
 > **Checkpoint #:** 9
 > **Status:** Complete
 > ← Previous: [[CHECKPOINT 8 - GLB Models Implementation 1]]
-> → Next: _none yet_
+> → Next: [[CHECKPOINT 10 - Added media 1]]
 > ⬆ Index: [[Checkpoint Hub]]
 
 ## Project Status
