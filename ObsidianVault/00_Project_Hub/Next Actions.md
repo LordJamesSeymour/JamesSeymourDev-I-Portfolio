@@ -8,6 +8,8 @@
 - [ ] Decide which projects get a real **3D model** vs. video-only (Arcade Machine = flagship) → [[3D Asset Requirements]].
 - [x] Collect and wire **project logos / preview paths** for Cursor, Arcade Machine, Surfers Quest,
       and the Bomberman-style project → [[CHECKPOINT 11 - Logos and Thumbnails 2]].
+- [x] Normalize project cards to **IN PROGRESS** or **COMPLETED** with amber/green status pills
+      and remove visible PLACEHOLDER status labels → [[CHECKPOINT 12 - Label status]].
 - [ ] Manually export genuine H.264 MP4 containers over the four wired preview paths. Do not rename
       WMV files to `.mp4` or create fixed-duration snippets → [[Video Capture Requirements]].
 - [ ] Confirm final project names (esp. an original name for the Bomberman-style game) → [[Project Content Hub]].

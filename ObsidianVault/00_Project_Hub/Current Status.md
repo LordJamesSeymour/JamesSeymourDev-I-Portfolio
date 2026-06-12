@@ -43,6 +43,9 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [x] **Second logo/thumbnail pass complete** ([[CHECKPOINT 11 - Logos and Thumbnails 2]]):
       Arcade Machine, Surfers Quest, and Bomberman-style logos plus exact case-sensitive preview
       paths are wired through `projects.ts`; native looping and polished fallback behavior verified.
+- [x] **Project status labels normalized** ([[CHECKPOINT 12 - Label status]]): all eight projects
+      now use `in-progress` or `completed`; cards show amber IN PROGRESS or green COMPLETED pills,
+      with no visible PLACEHOLDER project-status labels.
 - [x] **GitHub Pages deployment workflow exists** at `.github/workflows/deploy.yml`.
 
 ## In Progress
@@ -62,9 +65,10 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [ ] Real content pass (Phase 6) + optimization/deploy (Phase 7).
 
 ## Latest Checkpoint
-- [[CHECKPOINT 11 - Logos and Thumbnails 2]] (2026-06-12) — three additional project logos and
-  exact thumbnail-video paths wired; native looping and fallback verified; local previews await
-  genuine manual MP4 exports. Prior: [[CHECKPOINT 10 - Added media 1]]. See [[Checkpoint Hub]].
+- [[CHECKPOINT 12 - Label status]] (2026-06-12) — all eight project cards now use the two-state
+  IN PROGRESS / COMPLETED system with amber and green premium pills. Visible PLACEHOLDER status
+  labels are removed; build and browser verification pass. Prior:
+  [[CHECKPOINT 11 - Logos and Thumbnails 2]]. See [[Checkpoint Hub]].
 
 ## Links
 - Next steps → [[Next Actions]]

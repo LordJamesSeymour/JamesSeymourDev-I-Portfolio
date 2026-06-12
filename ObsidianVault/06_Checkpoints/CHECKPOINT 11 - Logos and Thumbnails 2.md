@@ -11,7 +11,7 @@ status: Complete
 > **Checkpoint #:** 11
 > **Status:** Complete
 > ← Previous: [[CHECKPOINT 10 - Added media 1]]
-> → Next: _none yet_
+> → Next: [[CHECKPOINT 12 - Label status]]
 > ⬆ Index: [[Checkpoint Hub]]
 
 ## Project Status
