@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Surfers Quest — Web Demo</title>
+    <style>
+        :root {
+            --bg: #0e1014;
+            --panel: #161a22;
+            --panel-border: #262c39;
+            --text: #e6e9ef;
+            --muted: #9aa3b2;
+            --accent: #ffd400;
+            --accent-2: #38bdf8;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 18px 16px 32px;
+        }
+
+        header.demo-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        header.demo-head h1 {
+            font-size: clamp(18px, 2.4vw, 26px);
+            margin: 0;
+            letter-spacing: 0.3px;
+        }
+
+        header.demo-head h1 .accent { color: var(--accent); }
+
+        header.demo-head .tag {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .stage {
+            position: relative;
+            background: #000;
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            overflow: hidden;
+            /* Keep the native 1024x640 (16:10) aspect; scales to fit width. */
+            aspect-ratio: 1024 / 640;
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        canvas#canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            image-rendering: auto;
+            outline: none;
+            background: #000;
+        }
+
+        /* Loading / status overlay */
+        #overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: radial-gradient(ellipse at center, #11151c 0%, #06080c 100%);
+            color: var(--text);
+            text-align: center;
+            padding: 24px;
+            transition: opacity 0.4s ease;
+        }
+
+        #overlay.hidden { opacity: 0; pointer-events: none; }
+
+        #overlay .spinner {
+            width: 42px;
+            height: 42px;
+            border: 4px solid #2a3140;
+            border-top-color: var(--accent-2);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        #status { font-size: 14px; color: var(--muted); min-height: 18px; }
+
+        .bar {
+            width: min(360px, 70%);
+            height: 8px;
+            background: #20262f;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .bar > i {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent));
+            transition: width 0.2s ease;
+        }
+
+        #playGate {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(4, 6, 10, 0.55);
+            cursor: pointer;
+            z-index: 5;
+        }
+        #playGate .btn {
+            background: var(--accent);
+            color: #1a1300;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 26px;
+            cursor: pointer;
+        }
+
+        .panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 16px;
+        }
+        @media (max-width: 720px) { .panels { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+        .keys { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 14px; }
+        .keys kbd {
+            background: #0c0f15;
+            border: 1px solid #2c3340;
+            border-bottom-width: 2px;
+            border-radius: 6px;
+            padding: 2px 7px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .keys .d { color: var(--muted); }
+
+        .note { color: var(--muted); font-size: 13px; line-height: 1.5; }
+        .note code { color: var(--accent-2); }
+
+        .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+        .toolbar button {
+            background: #1d2330;
+            color: var(--text);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .toolbar button:hover { border-color: var(--accent-2); }
+        .toolbar .hint { color: var(--muted); font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="demo-head">
+            <h1>Surfers Quest <span class="accent">— Web Demo</span></h1>
+            <span class="tag">C++17 · SFML 3 · WebAssembly (Emscripten)</span>
+        </header>
+
+        <div class="stage">
+            <canvas id="canvas" tabindex="0" oncontextmenu="event.preventDefault()"></canvas>
+
+            <div id="overlay">
+                <div class="spinner"></div>
+                <div id="status">Preparing…</div>
+                <div class="bar"><i id="barFill"></i></div>
+            </div>
+
+            <div id="playGate" title="Click to start (enables audio)">
+                <button class="btn" type="button">▶ Click to play</button>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <button id="fullscreenBtn" type="button">⤢ Fullscreen</button>
+            <button id="resetMapsBtn" type="button">↺ Reset browser maps</button>
+            <span class="hint">Click the game first to capture keyboard.</span>
+        </div>
+
+        <div class="panels">
+            <div class="card">
+                <h2>Controls — Play</h2>
+                <div class="keys">
+                    <span><kbd>A</kbd> / <kbd>D</kbd> or <kbd>←</kbd> <kbd>→</kbd></span><span class="d">Move</span>
+                    <span><kbd>Space</kbd></span><span class="d">Jump (press again mid-air = double jump; jump into a wall = wall jump)</span>
+                    <span><kbd>E</kbd> / <kbd>Shift</kbd></span><span class="d">Drop through one-way platforms</span>
+                    <span><kbd>R</kbd></span><span class="d">Restart current level</span>
+                    <span><kbd>Esc</kbd></span><span class="d">Back to level select / menu</span>
+                    <span><kbd>Enter</kbd> / <kbd>Space</kbd></span><span class="d">Menu: confirm · Level complete: continue</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Controls — Level Editor</h2>
+                <div class="keys">
+                    <span><kbd>Left-click</kbd></span><span class="d">Paint tile / place object</span>
+                    <span><kbd>Right-click</kbd></span><span class="d">Erase</span>
+                    <span><kbd>Middle-click</kbd></span><span class="d">Pick tile under cursor</span>
+                    <span><kbd>Scroll</kbd></span><span class="d">Cycle the hotbar</span>
+                    <span><kbd>F5</kbd></span><span class="d">Save map (to this browser)</span>
+                    <span><kbd>Esc</kbd></span><span class="d">Cancel selection / leave editor</span>
+                </div>
+                <p class="note" style="margin-top:12px">
+                    Maps you save are stored in <strong>this browser only</strong>
+                    (IndexedDB) — they are not uploaded or shared. Use
+                    <em>Reset browser maps</em> to restore the shipped defaults.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var canvas = document.getElementById('canvas');
+            var overlay = document.getElementById('overlay');
+            var statusEl = document.getElementById('status');
+            var barFill = document.getElementById('barFill');
+            var playGate = document.getElementById('playGate');
+
+            var totalDeps = 0, doneDeps = 0;
+
+            function setProgress(text, frac) {
+                statusEl.textContent = text;
+                if (typeof frac === 'number') {
+                    barFill.style.width = Math.max(0, Math.min(1, frac)) * 100 + '%';
+                }
+            }
+
+            // Stop arrow keys / space / page keys from scrolling the page while
+            // the game has focus.
+            var blockKeys = new Set([
+                'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+                'Space', 'PageUp', 'PageDown', 'Home', 'End'
+            ]);
+            window.addEventListener('keydown', function (e) {
+                if (document.activeElement === canvas && blockKeys.has(e.code)) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            // Audio in the browser needs a user gesture. Show a one-time play gate.
+            var started = false;
+            function unlockAudio() {
+                if (window.SurfersQuestUnlockAudio) {
+                    Promise.resolve(window.SurfersQuestUnlockAudio()).then(function (unlocked) {
+                        canvas.dataset.audioUnlocked = unlocked ? 'yes' : 'no';
+                    });
+                    return;
+                }
+
+                console.info('Audio locked until user interaction');
+                canvas.dataset.audioUnlocked = 'no';
+            }
+
+            function startInteraction() {
+                unlockAudio();
+                if (!started) {
+                    started = true;
+                    playGate.style.display = 'none';
+                }
+                canvas.focus();
+            }
+            playGate.addEventListener('click', startInteraction);
+            canvas.addEventListener('pointerdown', function () { canvas.focus(); startInteraction(); });
+            window.addEventListener('keydown', startInteraction);
+
+            document.getElementById('resetMapsBtn').addEventListener('click', function () {
+                if (window.SurfersQuestResetMaps) {
+                    if (confirm('Delete all maps saved in this browser and restore the defaults?')) {
+                        window.SurfersQuestResetMaps();
+                    }
+                } else {
+                    alert('Game is still loading — try again in a moment.');
+                }
+            });
+
+            document.getElementById('fullscreenBtn').addEventListener('click', function () {
+                var stage = canvas.parentElement;
+                if (stage.requestFullscreen) stage.requestFullscreen();
+            });
+
+            // ---- Emscripten Module configuration ----
+            window.Module = {
+                canvas: canvas,
+                locateFile: function (path, prefix) {
+                    return prefix + path + '?v=20260612-font-animation-audio-5';
+                },
+                print: function (t) { console.log(t); },
+                printErr: function (t) { console.warn(t); },
+                setStatus: function (text) {
+                    if (!text) return;
+                    var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+                    if (m) {
+                        var cur = parseFloat(m[2]), max = parseFloat(m[4]);
+                        setProgress('Downloading game data… ' + Math.round(cur / max * 100) + '%', cur / max);
+                    } else {
+                        setProgress(text);
+                    }
+                },
+                monitorRunDependencies: function (left) {
+                    totalDeps = Math.max(totalDeps, left);
+                    doneDeps = totalDeps - left;
+                    if (left > 0) {
+                        setProgress('Loading assets… (' + doneDeps + '/' + totalDeps + ')',
+                            totalDeps ? doneDeps / totalDeps : 0);
+                    }
+                },
+                onRuntimeInitialized: function () {
+                    setProgress('Starting…', 1);
+                },
+                postRun: [function () {
+                    overlay.classList.add('hidden');
+                    playGate.style.display = 'flex';
+                    setTimeout(function () { canvas.focus(); }, 50);
+                }]
+            };
+
+            setProgress('Downloading game…', 0.05);
+        })();
+    </script>
+    <!-- Generated by build_web_surfers_quest.ps1 (Emscripten). -->
+    <script async src="surfers-quest.js?v=20260612-font-animation-audio-5"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Portfolio website for James Seymour — game programmer & designer.",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --strictPort",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
