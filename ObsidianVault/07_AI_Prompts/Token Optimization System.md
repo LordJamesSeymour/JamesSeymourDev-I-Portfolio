@@ -87,3 +87,6 @@ removed. Unrelated commands, checkpoints, and vault notes are never touched.
 - 2026-06-13 — Enabled. Created skill, three commands, `state.json`, this note, and the
   `## Token Optimization Routing` section in a new root `CLAUDE.md`. Routing mode:
   policy-based (no verified model-switch command in this environment).
+- 2026-06-13 — Re-enabled / refreshed via `/token-optimize`. Verified skill, commands,
+  `state.json` (`enabled=true`, `paused=false`), CLAUDE.md section, and this note all
+  present and current. Routing mode unchanged: policy-based.

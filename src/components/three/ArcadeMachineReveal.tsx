@@ -9,6 +9,10 @@ import { ARCADE_INTRO, CALLOUTS, CALLOUT_CHIPS, MODEL_URL } from "./arcadeConten
 // Code-split the entire three.js scene — it only downloads when this section is
 // near the viewport (gated by `hasEntered` below), keeping initial load light.
 const ArcadeMachineScene = lazy(() => import("./ArcadeMachineScene"));
+// Decorative NES controller — also lazy, so three.js stays out of the initial
+// bundle. Two instances are parked in section-relative, CSS-clamped boxes (upper-
+// right + lower-left), behind the content, in scroll mode only (see below).
+const ArcadeControllerDecoration = lazy(() => import("./ArcadeControllerBackdrop"));
 
 /** One-time WebGL capability probe. */
 function detectWebGL(): boolean {
@@ -181,6 +185,30 @@ export default function ArcadeMachineReveal() {
       className="section amx"
       aria-labelledby="arcade-build-title"
     >
+      {/* Decorative NES controllers — section-relative, CSS-clamped boxes so they
+          stay proportional to the content (never scale up with the viewport/zoom).
+          One upper-right by the intro, one lower-left near the transition. They sit
+          behind the content (z-index), never intercept pointer/scroll, and only
+          mount in scroll mode once the section is near the viewport. */}
+      {mode === "scroll" && hasEntered && (
+        <>
+          <div className="amx__deco amx__deco--one" aria-hidden="true">
+            <ThreeErrorBoundary fallback={null}>
+              <Suspense fallback={null}>
+                <ArcadeControllerDecoration variant="one" activeRef={activeRef} />
+              </Suspense>
+            </ThreeErrorBoundary>
+          </div>
+          <div className="amx__deco amx__deco--two" aria-hidden="true">
+            <ThreeErrorBoundary fallback={null}>
+              <Suspense fallback={null}>
+                <ArcadeControllerDecoration variant="two" activeRef={activeRef} />
+              </Suspense>
+            </ThreeErrorBoundary>
+          </div>
+        </>
+      )}
+
       <div className="container">
         <Reveal as="header" className="section__head amx__head">
           <span className="kicker">Technical Showcase</span>

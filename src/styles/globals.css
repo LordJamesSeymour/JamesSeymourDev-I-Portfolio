@@ -1435,6 +1435,17 @@ img {
    a tall track scrubs scroll progress 0→1; the model animates in R3F (see
    src/components/three/). Premium void/plum panel — never a default 3D viewer.
    NOTE: no ancestor of .amx__sticky may set overflow (it would break sticky). */
+
+/* The section is the positioning context for the decorative controllers, which are
+   absolutely placed in its corners. Content (header + scroll track) is lifted above
+   them with z-index so the controllers read as a background decoration. */
+.amx {
+  position: relative;
+}
+.amx > .container {
+  position: relative;
+  z-index: 1;
+}
 .amx__head {
   max-width: 72ch;
 }
@@ -1444,6 +1455,7 @@ img {
    the model never snaps to the exploded pose, it unfolds part-by-part as you scroll. */
 .amx__scroll {
   position: relative;
+  z-index: 1;
   height: 420vh;
 }
 .amx__sticky {
@@ -1462,6 +1474,53 @@ img {
   /* Widen this section past the normal container so the horizontal exploded layout
      has room to spread (desktop-first — the 3D area is the showcase). */
   max-width: min(94vw, 1440px);
+  /* Keep the stage + rail as their own positioned layer within the pinned track. */
+  position: relative;
+  z-index: 1;
+}
+
+/* Decorative NES controllers — each sits in a section-relative, CSS-clamped box so
+   the controller stays proportional to the Arcade Machine content and NEVER scales up
+   with the viewport / browser zoom (the clamp max caps it). They sit BEHIND the
+   content (z-index 0 < content z-index 1) and never intercept pointer/scroll. */
+.amx__deco {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  /* Width is the single source of truth for size; clamp() caps it so zooming the
+     browser out can't make the controller dominate the section. This is exactly
+     2x the original 180px / 20vw / 300px sizing. */
+  width: clamp(360px, 40vw, 600px);
+  aspect-ratio: 4 / 5; /* room for the controller body + the cable rising above it */
+}
+.amx__deco canvas {
+  display: block;
+}
+/* The controllers anchor to the CONTENT block's edges (not the viewport edges) so
+   they stay tucked beside the Arcade Machine content at every width — on ultrawide
+   screens they don't drift out into the empty margins. `--content-inset` is the
+   side gutter between the viewport edge and the centred, capped content column
+   (mirrors .amx__layout's `max-width: min(94vw, 1440px)`). */
+.amx__deco {
+  --content-inset: calc((100% - min(94vw, 1440px)) / 2);
+}
+/* Anchor 1 — upper-right: lift the taller canvas so the enlarged controller body
+   starts below the intro copy, then pull it inward toward the title composition. */
+.amx__deco--one {
+  top: clamp(-72px, -4vw, -44px);
+  right: calc(var(--content-inset) + clamp(72px, 8vw, 128px));
+}
+/* Anchor 2 — lower-left: sit below the showcase, closer to its text rail, with the
+   controller body occupying the clear transition band before the Overview copy. */
+.amx__deco--two {
+  bottom: clamp(-178px, -11.5vw, -128px);
+  left: calc(var(--content-inset) + clamp(220px, 20vw, 340px));
+}
+/* Desktop-first decoration — drop it on smaller screens rather than crowd content. */
+@media (max-width: 1024px) {
+  .amx__deco {
+    display: none;
+  }
 }
 
 /* The 3D stage — a premium glass panel with a faint violet key light. The hero of
