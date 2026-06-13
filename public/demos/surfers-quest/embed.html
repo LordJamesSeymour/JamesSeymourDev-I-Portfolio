@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Surfers Quest playable demo</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --text: #e6e9ef;
+            --muted: #9aa3b2;
+            --accent: #ffd400;
+            --accent-2: #38bdf8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .stage {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        canvas#canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            background: #000;
+            image-rendering: auto;
+        }
+
+        #overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 24px;
+            background: radial-gradient(ellipse at center, #11151c 0%, #06080c 100%);
+            color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            text-align: center;
+            transition: opacity 0.4s ease;
+        }
+
+        #overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 42px;
+            height: 42px;
+            border: 4px solid #2a3140;
+            border-top-color: var(--accent-2);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #status {
+            min-height: 18px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .bar {
+            width: min(360px, 70%);
+            height: 8px;
+            overflow: hidden;
+            border-radius: 6px;
+            background: #20262f;
+        }
+
+        .bar > i {
+            display: block;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent));
+            transition: width 0.2s ease;
+        }
+
+        #playGate {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(4, 6, 10, 0.55);
+            cursor: pointer;
+        }
+
+        #playGate .btn {
+            padding: 12px 26px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #1a1300;
+            font: 700 16px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+            cursor: pointer;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #overlay,
+            .bar > i {
+                transition: none;
+            }
+
+            .spinner {
+                animation-duration: 1.8s;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="stage">
+        <canvas id="canvas" tabindex="0" oncontextmenu="event.preventDefault()"></canvas>
+
+        <div id="overlay">
+            <div class="spinner"></div>
+            <div id="status">Preparing...</div>
+            <div class="bar"><i id="barFill"></i></div>
+        </div>
+
+        <div id="playGate" title="Click to start and enable audio">
+            <button class="btn" type="button">Click to play</button>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            var canvas = document.getElementById('canvas');
+            var overlay = document.getElementById('overlay');
+            var statusEl = document.getElementById('status');
+            var barFill = document.getElementById('barFill');
+            var playGate = document.getElementById('playGate');
+            var totalDeps = 0;
+            var audioMuted = false;
+            var audioMuteRetry = 0;
+            var audioMasterGain = null;
+            var audioMasterContext = null;
+            var audioSourceNode = null;
+
+            function setProgress(text, fraction) {
+                statusEl.textContent = text;
+                if (typeof fraction === 'number') {
+                    barFill.style.width =
+                        Math.max(0, Math.min(1, fraction)) * 100 + '%';
+                }
+            }
+
+            var blockKeys = new Set([
+                'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+                'Space', 'PageUp', 'PageDown', 'Home', 'End'
+            ]);
+
+            window.addEventListener('keydown', function (event) {
+                if (document.activeElement === canvas && blockKeys.has(event.code)) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+
+            var started = false;
+
+            function getAudioContext() {
+                return window.Module &&
+                    window.Module.SDL2 &&
+                    window.Module.SDL2.audioContext;
+            }
+
+            function reportAudioState() {
+                var context = getAudioContext();
+                canvas.dataset.audioContextState =
+                    context ? context.state : 'unavailable';
+                canvas.dataset.audioMasterGain =
+                    audioMasterGain ? String(audioMasterGain.gain.value) : 'unavailable';
+                window.parent.postMessage({
+                    type: 'SURFERS_QUEST_AUDIO_STATE',
+                    muted: audioMuted,
+                    contextState: context ? context.state : 'unavailable',
+                    masterGain: audioMasterGain
+                        ? audioMasterGain.gain.value
+                        : null
+                }, window.location.origin);
+            }
+
+            function getAudioSourceNode() {
+                return window.Module &&
+                    window.Module.SDL2 &&
+                    window.Module.SDL2.audio &&
+                    window.Module.SDL2.audio.scriptProcessorNode;
+            }
+
+            function ensureAudioMasterGain() {
+                var context = getAudioContext();
+                var source = getAudioSourceNode();
+                if (!context || !source) return false;
+
+                if (!audioMasterGain || audioMasterContext !== context) {
+                    audioMasterGain = context.createGain();
+                    audioMasterGain.connect(context.destination);
+                    audioMasterContext = context;
+                    audioSourceNode = null;
+                }
+
+                if (audioSourceNode !== source) {
+                    try {
+                        source.disconnect();
+                    } catch (error) {}
+                    source.connect(audioMasterGain);
+                    audioSourceNode = source;
+                }
+
+                return true;
+            }
+
+            function applyAudioMute() {
+                if (!ensureAudioMasterGain()) {
+                    if (audioMuteRetry) window.clearTimeout(audioMuteRetry);
+                    audioMuteRetry = window.setTimeout(applyAudioMute, 250);
+                    return;
+                }
+
+                if (audioMuteRetry) {
+                    window.clearTimeout(audioMuteRetry);
+                    audioMuteRetry = 0;
+                }
+
+                audioMasterGain.gain.value = audioMuted ? 0 : 1;
+                reportAudioState();
+            }
+
+            function setAudioMuted(muted) {
+                audioMuted = muted === true;
+                canvas.dataset.audioMuted = audioMuted ? 'yes' : 'no';
+                applyAudioMute();
+            }
+
+            function unlockAudio() {
+                if (window.SurfersQuestUnlockAudio) {
+                    Promise.resolve(window.SurfersQuestUnlockAudio()).then(function (unlocked) {
+                        canvas.dataset.audioUnlocked = unlocked ? 'yes' : 'no';
+                        applyAudioMute();
+                    });
+                    return;
+                }
+
+                console.info('Audio locked until user interaction');
+                canvas.dataset.audioUnlocked = 'no';
+            }
+
+            function startInteraction() {
+                unlockAudio();
+                if (!started) {
+                    started = true;
+                    playGate.style.display = 'none';
+                }
+                canvas.focus();
+            }
+
+            playGate.addEventListener('click', startInteraction);
+            canvas.addEventListener('pointerdown', startInteraction);
+            window.addEventListener('keydown', startInteraction);
+
+            function reportResetReadiness() {
+                window.parent.postMessage({
+                    type: 'surfers-quest:reset-ready',
+                    ready: typeof window.SurfersQuestResetMaps === 'function'
+                }, window.location.origin);
+            }
+
+            window.addEventListener('message', function (event) {
+                if (
+                    event.origin !== window.location.origin ||
+                    event.source !== window.parent
+                ) {
+                    return;
+                }
+
+                if (event.data && event.data.type === 'surfers-quest:query-reset-ready') {
+                    reportResetReadiness();
+                    return;
+                }
+
+                if (event.data && event.data.type === 'SURFERS_QUEST_AUDIO_MUTE') {
+                    setAudioMuted(event.data.muted);
+                    return;
+                }
+
+                if (
+                    event.data &&
+                    event.data.type === 'surfers-quest:reset-maps' &&
+                    typeof window.SurfersQuestResetMaps === 'function'
+                ) {
+                    window.SurfersQuestResetMaps();
+                }
+            });
+
+            window.Module = {
+                canvas: canvas,
+                locateFile: function (path, prefix) {
+                    return prefix + path + '?v=20260612-font-animation-audio-5';
+                },
+                print: function (text) {
+                    console.log(text);
+                },
+                printErr: function (text) {
+                    console.warn(text);
+                },
+                setStatus: function (text) {
+                    if (!text) return;
+                    var match = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+                    if (match) {
+                        var current = parseFloat(match[2]);
+                        var maximum = parseFloat(match[4]);
+                        setProgress(
+                            'Downloading game data... ' +
+                                Math.round(current / maximum * 100) + '%',
+                            current / maximum
+                        );
+                    } else {
+                        setProgress(text);
+                    }
+                },
+                monitorRunDependencies: function (left) {
+                    totalDeps = Math.max(totalDeps, left);
+                    if (left > 0) {
+                        var completed = totalDeps - left;
+                        setProgress(
+                            'Loading assets... (' + completed + '/' + totalDeps + ')',
+                            totalDeps ? completed / totalDeps : 0
+                        );
+                    }
+                },
+                onRuntimeInitialized: function () {
+                    setProgress('Starting...', 1);
+                    applyAudioMute();
+                },
+                postRun: [function () {
+                    overlay.classList.add('hidden');
+                    playGate.style.display = 'flex';
+                    reportResetReadiness();
+                    applyAudioMute();
+                    setTimeout(function () {
+                        canvas.focus();
+                    }, 50);
+                }]
+            };
+
+            setProgress('Downloading game...', 0.05);
+        })();
+    </script>
+    <script async src="surfers-quest.js?v=20260612-font-animation-audio-5"></script>
+</body>
+</html>
