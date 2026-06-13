@@ -1,0 +1,266 @@
+/*
+ * Super Bomberman decorative showcase.
+ * Sequence timing and travel coordinates live in the component; this file
+ * owns scale, layering, sprite treatment, and responsive placement.
+ */
+.sb-showcase {
+  --sb-small-player-size: clamp(39px, 4.5vw, 48px);
+  --sb-bomb-size: clamp(25.5px, 3vw, 33px);
+  --sb-blast-tile-size: clamp(25.5px, 3vw, 33px);
+  --sb-side-player-size: clamp(270px, 27vw, 340px);
+  --sb-side-chomper-size: clamp(320px, 30vw, 390px);
+  --sb-layer-decoration: 0;
+  --sb-layer-content: 1;
+  --sb-layer-sequence: 2;
+  position: relative;
+  isolation: isolate;
+}
+
+.sb-showcase > .project-detail__media-section {
+  position: relative;
+  z-index: var(--sb-layer-content);
+}
+
+.sb-showcase__preview-stage {
+  position: relative;
+  overflow: visible;
+}
+
+.sb-showcase__side {
+  position: absolute;
+  z-index: var(--sb-layer-decoration);
+  pointer-events: none;
+  opacity: 0.82;
+  transform-origin: center;
+}
+
+.sb-showcase__side img,
+.sb-sequence img,
+.sb-sequence__explosion img {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  user-select: none;
+}
+
+.sb-showcase__side img {
+  filter: drop-shadow(0 0 13px rgba(128, 82, 255, 0.26))
+    drop-shadow(0 10px 8px rgba(0, 0, 0, 0.48));
+}
+
+.sb-showcase__side--player {
+  top: 7%;
+  left: clamp(-190px, -14vw, -145px);
+  width: var(--sb-side-player-size);
+  aspect-ratio: 2 / 3;
+  transform: rotate(-7deg);
+}
+
+.sb-showcase__side--chomper {
+  top: 44%;
+  right: calc((100vw - 100%) / -2 + 150px);
+  width: var(--sb-side-chomper-size);
+  aspect-ratio: 1;
+  transform: rotate(11deg);
+}
+
+.sb-sequence {
+  position: absolute;
+  inset: -22px -28px -32px;
+  z-index: var(--sb-layer-sequence);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.sb-sequence__player {
+  position: absolute;
+  top: 3.6%;
+  left: 31.5%;
+  width: var(--sb-small-player-size);
+  opacity: 1;
+  transform: translate(-50%, -76%);
+  transform-origin: bottom center;
+  transition:
+    opacity 140ms ease-out,
+    transform 140ms ease-out;
+}
+
+.sb-sequence__player[data-state="punch"] {
+  transform: translate(-43%, -72%) scale(1.04);
+}
+
+.sb-sequence__player[data-state="hidden"] {
+  opacity: 0;
+}
+
+.sb-sequence__player img {
+  filter: drop-shadow(0 0 7px rgba(128, 82, 255, 0.7))
+    drop-shadow(0 6px 4px rgba(0, 0, 0, 0.66));
+}
+
+.sb-sequence__bomb-carrier {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.sb-sequence__bomb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--sb-bomb-size);
+  transform: translate(-50%, -50%);
+}
+
+.sb-sequence__bomb img {
+  filter: drop-shadow(0 0 7px rgba(255, 212, 0, 0.46))
+    drop-shadow(0 5px 4px rgba(0, 0, 0, 0.68));
+}
+
+.sb-sequence__bomb-carrier[data-phase="flying"] .sb-sequence__bomb img {
+  animation: none;
+}
+
+.sb-sequence__explosion {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: var(--sb-layer-sequence);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  animation: sb-blast-enter 160ms ease-out both;
+  filter: drop-shadow(0 0 10px rgba(255, 212, 0, 0.7))
+    drop-shadow(0 0 18px rgba(255, 91, 27, 0.4));
+}
+
+.sb-sequence__blast-part {
+  position: absolute;
+  width: var(--sb-blast-tile-size);
+  height: var(--sb-blast-tile-size);
+}
+
+.sb-sequence__blast-part--center {
+  top: calc(var(--sb-blast-tile-size) * -0.5);
+  left: calc(var(--sb-blast-tile-size) * -0.5);
+}
+
+.sb-sequence__blast-part--horizontal {
+  top: calc(var(--sb-blast-tile-size) * -0.5);
+  left: calc(var(--sb-blast-tile-size) * -1.5);
+}
+
+.sb-sequence__blast-part--horizontal-end {
+  top: calc(var(--sb-blast-tile-size) * -0.5);
+  left: calc(var(--sb-blast-tile-size) * -2.5);
+}
+
+.sb-sequence__blast-part--horizontal-end img {
+  transform: scaleX(-1);
+}
+
+.sb-sequence__blast-part--horizontal-right {
+  top: calc(var(--sb-blast-tile-size) * -0.5);
+  left: calc(var(--sb-blast-tile-size) * 0.5);
+}
+
+.sb-sequence__blast-part--horizontal-end-right {
+  top: calc(var(--sb-blast-tile-size) * -0.5);
+  left: calc(var(--sb-blast-tile-size) * 1.5);
+}
+
+.sb-sequence__blast-part--vertical {
+  top: calc(var(--sb-blast-tile-size) * -1.5);
+  left: calc(var(--sb-blast-tile-size) * -0.5);
+}
+
+.sb-sequence__blast-part--vertical-end {
+  top: calc(var(--sb-blast-tile-size) * -2.5);
+  left: calc(var(--sb-blast-tile-size) * -0.5);
+}
+
+.sb-sequence__blast-part--vertical-bottom {
+  top: calc(var(--sb-blast-tile-size) * 0.5);
+  left: calc(var(--sb-blast-tile-size) * -0.5);
+}
+
+.sb-sequence__blast-part--vertical-end-bottom {
+  top: calc(var(--sb-blast-tile-size) * 1.5);
+  left: calc(var(--sb-blast-tile-size) * -0.5);
+}
+
+.sb-sequence__blast-part--vertical-bottom img,
+.sb-sequence__blast-part--vertical-end-bottom img {
+  transform: scaleY(-1);
+}
+
+@keyframes sb-blast-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1400px) {
+  .sb-showcase__side--chomper {
+    right: calc((100vw - 100%) / -2 + 70px);
+  }
+}
+
+@media (max-width: 1180px) {
+  .sb-showcase {
+    --sb-side-player-size: clamp(230px, 25vw, 290px);
+    --sb-side-chomper-size: clamp(280px, 29vw, 340px);
+  }
+
+  .sb-showcase__side--player {
+    left: -155px;
+    opacity: 0.72;
+  }
+
+  .sb-showcase__side--chomper {
+    right: calc((100vw - 100%) / -2 + 55px);
+    opacity: 0.72;
+  }
+}
+
+@media (max-width: 1060px) {
+  .sb-showcase__side,
+  .sb-sequence {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-showcase__side,
+  .sb-sequence__bomb img,
+  .sb-sequence__explosion {
+    animation: none !important;
+  }
+
+  .sb-sequence__player {
+    opacity: 0.84;
+    transform: translate(-50%, -76%);
+  }
+
+  .sb-sequence__bomb-carrier {
+    top: 3.6%;
+    left: 36%;
+    opacity: 0.84;
+    transform: none !important;
+  }
+
+  .sb-sequence__explosion {
+    display: none;
+  }
+}

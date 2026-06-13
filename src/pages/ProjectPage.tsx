@@ -10,6 +10,8 @@ import ProjectLogo from "../components/projects/ProjectLogo";
 import YouTubeEmbed from "../components/projects/YouTubeEmbed";
 import YouTubeCarousel from "../components/projects/YouTubeCarousel";
 import PlayableDemo from "../components/projects/PlayableDemo";
+import SurfersQuestSpriteShowcase from "../components/projects/SurfersQuestSpriteShowcase";
+import SuperBombermanSpriteShowcase from "../components/projects/SuperBombermanSpriteShowcase";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
 import Tag from "../components/ui/Tag";
@@ -239,19 +241,15 @@ export default function ProjectPage() {
         {header}
 
         {showSurfersQuestDemo ? (
-          <div className="project-detail__surfers-media">
-            <section
-              className="project-detail__media-section"
-              aria-labelledby="surfers-preview-heading"
-            >
-              <div className="project-detail__showcase-head">
-                <h2 id="surfers-preview-heading">Gameplay Preview</h2>
-              </div>
-              <div className="project-detail__media project-detail__media--surfers-video">
-                <ProjectMedia cover={heroCover} label={title} caption={caption} />
-              </div>
-            </section>
-
+          <SurfersQuestSpriteShowcase
+            preview={
+              <ProjectMedia
+                cover={heroCover}
+                label={title}
+                caption={caption}
+              />
+            }
+          >
             <section
               className="project-detail__media-section project-demo"
               aria-labelledby="surfers-demo-heading"
@@ -406,21 +404,17 @@ export default function ProjectPage() {
                 </section>
               </div>
             </section>
-          </div>
+          </SurfersQuestSpriteShowcase>
         ) : showBombermanDemo ? (
-          <div className="project-detail__playable-media">
-            <section
-              className="project-detail__media-section"
-              aria-labelledby="bomberman-preview-heading"
-            >
-              <div className="project-detail__showcase-head">
-                <h2 id="bomberman-preview-heading">Gameplay Preview</h2>
-              </div>
-              <div className="project-detail__media project-detail__media--playable-video">
-                <ProjectMedia cover={heroCover} label={title} caption={caption} />
-              </div>
-            </section>
-
+          <SuperBombermanSpriteShowcase
+            preview={
+              <ProjectMedia
+                cover={heroCover}
+                label={title}
+                caption={caption}
+              />
+            }
+          >
             <PlayableDemo
               demoUrl={BOMBERMAN_DEMO_URL}
               title="Bomberman"
@@ -501,7 +495,7 @@ export default function ProjectPage() {
                 </p>
               </section>
             </PlayableDemo>
-          </div>
+          </SuperBombermanSpriteShowcase>
         ) : (
           <div className="project-detail__media">
             <ProjectMedia cover={heroCover} label={title} caption={caption} />

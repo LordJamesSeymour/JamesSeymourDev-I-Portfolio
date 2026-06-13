@@ -42,4 +42,6 @@ optional 3D layer** — the site stays a fast, readable, recruiter-friendly port
 
 ## Related
 - [[Design System Brief]] · [[Skill Assisted Design Plan]] · [[Technical Implementation Plan]] · [[Immersive 3D Direction]]
+- [[Surfers Quest Sprite Showcase]]
+- [[Super Bomberman Sprite Showcase]]
 - [[Roadmap]] (in `docs/`) · [[Checkpoint Hub]] · [[Portfolio Website - Master Hub]]

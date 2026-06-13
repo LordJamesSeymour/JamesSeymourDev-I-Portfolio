@@ -1,0 +1,262 @@
+/*
+ * Surfers Quest decorative route.
+ * Movement offsets and timing live beside ROUTE_CYCLE_MS in the component;
+ * this file owns presentation, scale, and responsive placement.
+ */
+.sq-showcase {
+  --sq-player-size: clamp(52px, 6.8vw, 68px);
+  --sq-pickup-size: clamp(34px, 4.4vw, 46px);
+  --sq-side-size: clamp(416px, 36vw, 496px);
+  --sq-frog-rotation: -30deg;
+  --sq-melon-rotation: 20deg;
+  --sq-layer-decoration: 0;
+  --sq-layer-content: 1;
+  --sq-layer-route: 2;
+  position: relative;
+  isolation: isolate;
+}
+
+.sq-showcase > .project-detail__media-section {
+  position: relative;
+  z-index: var(--sq-layer-content);
+}
+
+.sq-showcase__preview-stage {
+  position: relative;
+}
+
+.sq-showcase__side {
+  position: absolute;
+  z-index: var(--sq-layer-decoration);
+  width: var(--sq-side-size);
+  aspect-ratio: 1;
+  pointer-events: none;
+  opacity: 0.82;
+  transform-origin: center;
+}
+
+.sq-showcase__side img,
+.sq-route img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  user-select: none;
+}
+
+.sq-showcase__side img {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 0 12px rgba(128, 82, 255, 0.24))
+    drop-shadow(0 10px 8px rgba(0, 0, 0, 0.42));
+}
+
+.sq-showcase__side--frog {
+  top: 8%;
+  left: clamp(-315px, -22vw, -255px);
+  opacity: 0.86;
+}
+
+.sq-showcase__side--frog img {
+  transform: rotate(var(--sq-frog-rotation));
+}
+
+.sq-showcase__side--melon {
+  top: 44%;
+  right: calc((100vw - 100%) / -2 + 150px);
+  width: clamp(320px, 28vw, 380px);
+  aspect-ratio: 22 / 16;
+  transform: rotate(var(--sq-melon-rotation));
+}
+
+.sq-showcase__crop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.sq-showcase__crop--melon img {
+  top: -50%;
+  left: -22.727%;
+  width: 145.455%;
+  max-width: none;
+  height: auto;
+  transform: none;
+}
+
+.sq-route {
+  position: absolute;
+  inset: -24px -28px -34px;
+  z-index: var(--sq-layer-route);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.sq-route__edge {
+  position: absolute;
+  top: 6%;
+  right: 27px;
+  width: 2px;
+  height: 69%;
+  background: rgba(128, 82, 255, 0.22);
+  box-shadow: 0 0 10px rgba(128, 82, 255, 0.34);
+}
+
+.sq-route__player-carrier {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.sq-route__player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--sq-player-size);
+  transform: translate(-42%, -50%);
+  transform-origin: center;
+}
+
+.sq-route__player--returning {
+  transform: translate(-42%, -50%) scaleX(-1);
+}
+
+.sq-route__player-carrier[data-state="wall-grab"] .sq-route__player {
+  transform: translate(-56%, -48%);
+}
+
+.sq-route__player img {
+  filter: drop-shadow(0 0 7px rgba(128, 82, 255, 0.72))
+    drop-shadow(0 6px 4px rgba(0, 0, 0, 0.62));
+}
+
+.sq-route__pickup {
+  position: absolute;
+  top: 0;
+  left: 44%;
+  width: var(--sq-pickup-size);
+  transform: translate(-50%, -50%);
+}
+
+.sq-route__pickup::after {
+  content: "";
+  position: absolute;
+  inset: 22%;
+  border: 1px solid rgba(255, 184, 41, 0.86);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.sq-route__pickup img {
+  animation: sq-pickup-hover 1.35s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 184, 41, 0.48));
+}
+
+.sq-route__exit {
+  position: absolute;
+  left: 78%;
+  bottom: -28px;
+  width: 30px;
+  aspect-ratio: 1;
+  transform: translateX(-50%) rotate(45deg);
+  border: 1px solid rgba(244, 245, 248, 0.72);
+  background: rgba(5, 6, 10, 0.88);
+  box-shadow: inset 0 0 0 4px rgba(128, 82, 255, 0.15);
+  animation: sq-exit-pulse 2.4s ease-in-out infinite;
+}
+
+.sq-route__exit--active {
+  box-shadow:
+    inset 0 0 0 4px rgba(128, 82, 255, 0.36),
+    0 0 18px rgba(128, 82, 255, 0.72);
+}
+
+.sq-route__exit-core {
+  position: absolute;
+  inset: 7px;
+  background: var(--color-primary-strong);
+  opacity: 0.82;
+}
+
+@keyframes sq-pickup-hover {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes sq-exit-pulse {
+  0%,
+  100% {
+    opacity: 0.62;
+    filter: brightness(0.88);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.25);
+  }
+}
+
+@media (max-width: 1400px) {
+  .sq-showcase__side--melon {
+    right: calc((100vw - 100%) / -2 + 70px);
+  }
+}
+
+@media (max-width: 1180px) {
+  .sq-showcase {
+    --sq-side-size: clamp(340px, 34vw, 400px);
+  }
+
+  .sq-showcase__side--frog {
+    left: -210px;
+    opacity: 0.72;
+  }
+
+  .sq-showcase__side--melon {
+    right: calc((100vw - 100%) / -2 + 55px);
+    opacity: 0.72;
+  }
+}
+
+@media (max-width: 1060px) {
+  .sq-showcase__side {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .sq-route {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sq-showcase__side,
+  .sq-route__pickup img,
+  .sq-route__exit {
+    animation: none !important;
+  }
+
+  .sq-route__player-carrier {
+    transform: translate3d(5%, -3%, 0);
+    opacity: 0.82;
+  }
+
+  .sq-route__pickup {
+    opacity: 0.78;
+    filter: none;
+  }
+
+  .sq-route__exit {
+    opacity: 0.72;
+    filter: none;
+  }
+}

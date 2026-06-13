@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "paused": false,
+  "created_by": "token-optimizer",
+  "project_name": "JamesSeymourDev - Portfolio",
+  "obsidian_vault_path": "ObsidianVault",
+  "obsidian_note_path": "ObsidianVault/07_AI_Prompts/Token Optimization System.md",
+  "model_switching_available": false,
+  "routing_mode": "policy-based",
+  "last_updated": "2026-06-13"
+}

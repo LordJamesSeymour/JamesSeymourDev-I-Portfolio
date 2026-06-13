@@ -67,15 +67,27 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
       build-failed fallback). ~10 MB bundle. Additive only — the Surfers Quest demo, Arcade Machine
       3D reveal, media and other pages are untouched; browser-verified and `npm run build` green.
 
+- [x] **Surfers Quest decorative background complete** ([[CHECKPOINT 19 - Surfers Quest Background]]):
+      the player route, Cherry/exit loop, and animated Frog/Melon decorations are isolated to the
+      Surfers Quest project page. Frog and Melon remain beneath content with `pointer-events: none`;
+      desktop positioning, responsive hiding, reduced motion, wall-grab edge alignment, and playable
+      demo input are verified. `npm run build` remains green.
+- [x] **Super Bomberman sprite showcase complete**
+      ([[CHECKPOINT 20 - Super Bomberman Sprite Showcase]]): large animated Blue player and Chomper
+      decorations sit behind the preview/demo. The tuned 10-second sequence starts beside the
+      Gameplay Preview heading, uses 25% smaller sprites, slides the bomb linearly along the top
+      border, and explodes outside the clipped card at the top-right corner. The blast now renders
+      the complete center/top/bottom/left/right cross, and the large player uses left-walk frames →
+      [[CHECKPOINT 22 - Super Bomberman Explosion Cross]].
+
 ## In Progress
 - [ ] **Content pass:** edit the seeded `.txt` files with real copy (hero tagline, bio, project titles/descriptions); real email in `profile.ts`; start adding 🔴 high-priority project media → [[Editable Text Content System]] / [[Portfolio Asset Requirements Table]].
 - [ ] **Next media batch:** manually export genuine H.264 MP4 files for Cursor.zip, Arcade Machine,
       Surfers Quest, and Super Bomberman at the wired `public/<Project>/Videos/` paths. The current
       `.mp4`-named files still contain ASF/WMV data, so browser previews correctly fall back.
-- [ ] **Surfers Quest playable demo:** final rebuild + redeploy + in-browser re-verification of the
-      animation-flip and footstep fixes; wire `/demos/surfers-quest/index.html` into the project data
-      system as an embed; decide whether to trim the ~75 MB asset bundle before public GitHub Pages
-      hosting → [[CHECKPOINT 14 - Extracted Surfers Quest]] / [[Data Driven Project System]].
+- [ ] **Surfers Quest hosting footprint:** decide whether to trim the playable demo's ~75 MB asset
+      bundle before public GitHub Pages hosting → [[CHECKPOINT 14 - Extracted Surfers Quest]] /
+      [[Data Driven Project System]].
 
 ## Blocked / Needs James Input
 - [ ] Motion intensity (restrained ↔ flashy) + accent color → [[Visual Identity]] / [[Animation Direction]].
@@ -88,12 +100,10 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [ ] Real content pass (Phase 6) + optimization/deploy (Phase 7).
 
 ## Latest Checkpoint
-- [[CHECKPOINT 15 - Extracted Bomberman]] (2026-06-13) — Second playable in-browser demo: the
-  Bomberman-style game (Game 0) extracted and compiled to WebAssembly under `public/demos/bomberman/`,
-  reusing the same SFML 3 → SDL2 shim (only `sf::CircleShape` added) + IDBFS maps/templates. Embedded
-  on its project page via a new reusable `PlayableDemo` component (full-size panel, page-level mute
-  overlay, no inner-scroll, build-failed fallback); ~10 MB bundle. Additive only; browser-verified and
-  build green. Prior: [[CHECKPOINT 14 - Extracted Surfers Quest]]. See [[Checkpoint Hub]].
+- [[CHECKPOINT 22 - Super Bomberman Explosion Cross]] (2026-06-13) — Completed the decorative
+  impact with synchronized right and bottom continuation/end-cap pieces. The external blast now
+  renders a full nine-tile center/top/bottom/left/right cross without clipping or page overflow.
+  Prior: [[CHECKPOINT 21 - Super Bomberman Sprite Tuning]]. See [[Checkpoint Hub]].
 
 ## Links
 - Next steps → [[Next Actions]]

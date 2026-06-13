@@ -15,5 +15,8 @@
 - Reinforce: **do not install packages without approval**; **do not overwrite existing files**.
 - Point it at the relevant milestone note for scope.
 
+## AI Systems
+- [[Token Optimization System]] — project-local token/cost routing for Claude.
+
 ## Related
 - [[Implementation Hub]] · [[Portfolio Website - Master Hub]]

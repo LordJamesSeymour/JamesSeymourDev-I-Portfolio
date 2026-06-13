@@ -11,7 +11,7 @@ status: Complete
 > **Checkpoint #:** 15
 > **Status:** Complete
 > ← Previous: [[CHECKPOINT 14 - Extracted Surfers Quest]]
-> → Next: _none yet_
+> → Next: [[CHECKPOINT 16 - Surfers Quest Sprite Showcase]]
 > ⬆ Index: [[Checkpoint Hub]]
 
 ## Project Status

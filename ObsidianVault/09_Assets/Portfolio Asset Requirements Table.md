@@ -108,6 +108,9 @@ Keep it predictable so wiring assets is copy-paste:
   signature moment. Prioritise the cabinet photo and one clean gameplay loop first.
 
 ### Surfers Quest — C++ · 🟡 Medium · showcase: `video-screen`
+- **Decorative sprites:** integrated under `public/SurfersQuest/Sprites/` (player idle/run/wall
+  grab, Frog idle, Melon, and Cherry). Rendered only on the Surfers Quest detail page by
+  `SurfersQuestSpriteShowcase` → [[Surfers Quest Sprite Assets]].
 - **Screenshots:** in-game gameplay (2–3), level-editor view if you have one, thumbnail.
 - **Videos:** short gameplay clip (cover), player-movement showcase.
 - **Written:** overview + core mechanic / what makes it interesting.
@@ -117,6 +120,10 @@ Keep it predictable so wiring assets is copy-paste:
 - **Notes for James:** a 5–8s movement loop sells this well; doesn't need a model.
 
 ### Bomberman-style Game — C++ · 🟡 Medium · showcase: `video-screen`
+- **Decorative sprites:** integrated under `public/SuperBomberman/Sprites/` (Blue player left/right
+  walk, right punch, bomb, five-part explosion, and Chomper front frames). Rendered only on the
+  Bomberman-style detail page by `SuperBombermanSpriteShowcase` →
+  [[Super Bomberman Sprite Assets]].
 - **Decision first:** ⚠️ pick an **original, non-trademarked public name** (rename the entry's
   `name`; keep the `slug` or update it consistently).
 - **Screenshots:** gameplay grid, level-editor view, thumbnail.
