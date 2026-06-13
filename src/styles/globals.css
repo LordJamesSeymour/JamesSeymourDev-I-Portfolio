@@ -829,13 +829,15 @@ img {
   background: var(--color-surface-2);
   box-shadow: var(--shadow-panel);
 }
-.project-detail__surfers-media {
+.project-detail__surfers-media,
+.project-detail__playable-media {
   margin: var(--space-12) 0;
 }
 .project-detail__media-section + .project-detail__media-section {
   margin-top: var(--space-12);
 }
 .project-detail__media--surfers-video,
+.project-detail__media--playable-video,
 .project-detail__media--demo {
   margin: 0;
 }

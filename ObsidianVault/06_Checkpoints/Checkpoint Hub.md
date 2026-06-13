@@ -16,12 +16,14 @@
   the **Current Project Baseline**.
 
 ## Latest Checkpoint
-- **[[CHECKPOINT 13 - Basilisk and EOS Thumbnail Integration]]** — 2026-06-12
-  - Basilisk Engine and EOS Dedicated Server are fully media-wired: local looping MP4 card/hero
-    previews with the cinematic veil, header logos, and YouTube showcases. Basilisk uses a single
-    embed (`EFVWiAf81z0`); EOS introduces a reusable `YouTubeCarousel` (two clips, edge arrows +
-    accent dots). Schema gained optional `showcaseVideos`. No redesign, no new deps, no re-encoding.
-    Browser verification and the production build pass.
+- **[[CHECKPOINT 15 - Extracted Bomberman]]** — 2026-06-13
+  - Second playable in-browser demo: the **Bomberman-style game** (Game 0) extracted and compiled to
+    **WebAssembly (Emscripten)** under `public/demos/bomberman/`, reusing the same **SFML 3 → SDL2
+    shim** (only `sf::CircleShape` was added). Embedded on `/projects/bomberman-style-game` via a new
+    reusable `PlayableDemo` component (full-size panel, page-level mute overlay, no inner-scroll trap,
+    build-failed fallback). `bomberman.data` is only ~10 MB. IDBFS persists user maps + editor
+    templates. Additive only — Surfers Quest demo, Arcade Machine 3D reveal, media and other pages
+    untouched; `npm run build` green and browser-verified.
 
 ## Chronological List of Checkpoints
 1. [[CHECKPOINT 1 - Vault Architecture Created]] — 2026-06-10 — _baseline: vault architecture created_
@@ -38,6 +40,8 @@
 11. [[CHECKPOINT 11 - Logos and Thumbnails 2]] — 2026-06-12 — _three project logos + exact thumbnail paths wired; native looping verified; ASF/WMV container blocker documented_
 12. [[CHECKPOINT 12 - Label status]] — 2026-06-12 — _project statuses normalized to IN PROGRESS and COMPLETED; amber/green card pills verified_
 13. [[CHECKPOINT 13 - Basilisk and EOS Thumbnail Integration]] — 2026-06-12 — _Basilisk + EOS fully media-wired (logos, local MP4 previews, YouTube showcases); new reusable `YouTubeCarousel` (two-dot) + additive `showcaseVideos` schema field_
+14. [[CHECKPOINT 14 - Extracted Surfers Quest]] — 2026-06-13 — _first playable in-browser demo: Surfers Quest extracted → WebAssembly (Emscripten) under `public/demos/surfers-quest/` via an SFML 3 → SDL2 shim (`sfml_shim/`); IDBFS map persistence; fixed negative-scale sprite flip + real animation folders + rate-limited footsteps; native arcade build untouched_
+15. [[CHECKPOINT 15 - Extracted Bomberman]] — 2026-06-13 — _second playable demo: Bomberman (Game 0) → WebAssembly under `public/demos/bomberman/` reusing the SDL2 shim (added `sf::CircleShape`); ~10 MB bundle; new reusable `PlayableDemo` component (mute overlay, no inner-scroll, build-fail fallback) + IDBFS maps/templates; additive integration, build green & browser-verified_
 
 <!-- Add new checkpoints below in order, newest at the bottom. -->
 
@@ -66,6 +70,12 @@
   showcases (Basilisk single `EFVWiAf81z0`; EOS two-clip `YouTubeCarousel`). The Arcade Machine
   exploded-view reveal remains live on `/projects/arcade-machine`. Every project card displays
   either an amber IN PROGRESS badge or a green COMPLETED badge.
+- **Playable demo capability:** `public/demos/{surfers-quest,bomberman}/` host real WebAssembly builds
+  of two arcade games (Emscripten), via a shared SFML 3 → SDL2 shim (`sfml_shim/`) so the unmodified
+  game code compiles; IDBFS persists user maps in-browser. Embedded on their project pages via the
+  reusable `PlayableDemo` component (fixed-aspect iframe, page-level mute overlay, no inner-scroll).
+  Surfers Quest's ~75 MB `.data` is the main hosting consideration; Bomberman is ~10 MB →
+  [[CHECKPOINT 14 - Extracted Surfers Quest]] · [[CHECKPOINT 15 - Extracted Bomberman]].
 - **Main blocker:** Remaining placeholder copy/media and manual export of genuine H.264 MP4
   previews. The files currently named `.mp4` still have ASF/WMV container signatures.
 

@@ -9,6 +9,7 @@ import ProjectCaseStudy from "../components/projects/ProjectCaseStudy";
 import ProjectLogo from "../components/projects/ProjectLogo";
 import YouTubeEmbed from "../components/projects/YouTubeEmbed";
 import YouTubeCarousel from "../components/projects/YouTubeCarousel";
+import PlayableDemo from "../components/projects/PlayableDemo";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
 import Tag from "../components/ui/Tag";
@@ -18,6 +19,8 @@ const BASILISK_ASCII_URL = `${import.meta.env.BASE_URL}Basilisk/basilisk-ascii.t
 const SURFERS_QUEST_DEMO_URL =
   `${import.meta.env.BASE_URL}demos/surfers-quest/embed.html`;
 const SURFERS_QUEST_MUTE_KEY = "surfers-quest-demo-muted";
+const BOMBERMAN_DEMO_URL =
+  `${import.meta.env.BASE_URL}demos/bomberman/embed.html`;
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -117,6 +120,7 @@ export default function ProjectPage() {
   const showReveal = project.immersive?.revealType === "exploded-view";
   const showBasiliskBackground = project.slug === "basilisk-engine";
   const showSurfersQuestDemo = project.slug === "surfers-quest";
+  const showBombermanDemo = project.slug === "bomberman-style-game";
 
   const handleDemoFullscreen = () => {
     const demoContainer = demoContainerRef.current;
@@ -402,6 +406,101 @@ export default function ProjectPage() {
                 </section>
               </div>
             </section>
+          </div>
+        ) : showBombermanDemo ? (
+          <div className="project-detail__playable-media">
+            <section
+              className="project-detail__media-section"
+              aria-labelledby="bomberman-preview-heading"
+            >
+              <div className="project-detail__showcase-head">
+                <h2 id="bomberman-preview-heading">Gameplay Preview</h2>
+              </div>
+              <div className="project-detail__media project-detail__media--playable-video">
+                <ProjectMedia cover={heroCover} label={title} caption={caption} />
+              </div>
+            </section>
+
+            <PlayableDemo
+              demoUrl={BOMBERMAN_DEMO_URL}
+              title="Bomberman"
+              heading="Play the Bomberman Demo"
+              muteMessageType="BOMBERMAN_AUDIO_MUTE"
+              messagePrefix="bomberman"
+              muteStorageKey="bomberman-demo-muted"
+              resetConfirmText="Delete all Bomberman maps saved in this browser and restore the defaults?"
+            >
+              <section
+                className="project-demo__control-card"
+                aria-labelledby="bomberman-play-controls"
+              >
+                <h3 id="bomberman-play-controls">Controls — Play</h3>
+                <dl className="project-demo__key-list">
+                  <div>
+                    <dt><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></dt>
+                    <dd>Move</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>Space</kbd></dt>
+                    <dd>Place bomb</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>E</kbd> / <kbd>Shift</kbd></dt>
+                    <dd>Punch / kick bomb</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>R</kbd></dt>
+                    <dd>Restart level</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>Esc</kbd></dt>
+                    <dd>Back to level select / menu</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>Enter</kbd> / <kbd>Space</kbd></dt>
+                    <dd>Menu confirm</dd>
+                  </div>
+                </dl>
+              </section>
+
+              <section
+                className="project-demo__control-card"
+                aria-labelledby="bomberman-editor-controls"
+              >
+                <h3 id="bomberman-editor-controls">Controls — Level Editor</h3>
+                <dl className="project-demo__key-list">
+                  <div>
+                    <dt><kbd>Left-click</kbd></dt>
+                    <dd>Paint tile / place object</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>Right-click</kbd></dt>
+                    <dd>Erase</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>Middle-click</kbd></dt>
+                    <dd>Pick tile under cursor</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>Scroll</kbd></dt>
+                    <dd>Cycle the hotbar</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>F5</kbd></dt>
+                    <dd>Save map (to this browser)</dd>
+                  </div>
+                  <div>
+                    <dt><kbd>Esc</kbd></dt>
+                    <dd>Leave editor</dd>
+                  </div>
+                </dl>
+                <p className="project-demo__storage-note">
+                  Maps you save are stored in <strong>this browser only</strong>{" "}
+                  (IndexedDB) — they are not uploaded or shared. Use Reset browser
+                  maps to restore the shipped defaults.
+                </p>
+              </section>
+            </PlayableDemo>
           </div>
         ) : (
           <div className="project-detail__media">

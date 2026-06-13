@@ -52,12 +52,30 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
       EOS uses a new reusable two-dot `YouTubeCarousel` (`qfgG6GS0QKE` + `EYpZmPbpHGE`). Schema gained
       optional `showcaseVideos`. No redesign, no new deps, no re-encoding; build + browser verified.
 - [x] **GitHub Pages deployment workflow exists** at `.github/workflows/deploy.yml`.
+- [x] **First playable in-browser demo** ([[CHECKPOINT 14 - Extracted Surfers Quest]]): the Surfers
+      Quest platformer was extracted from the native SFML arcade project and compiled to
+      **WebAssembly (Emscripten)** under `public/demos/surfers-quest/`. Since SFML 3 has no web
+      backend, a thin **SFML 3 → SDL2 shim** (`sfml_shim/`) lets the unmodified game code compile;
+      IDBFS persists user-created maps per-browser. The negative-scale sprite-flip invisibility bug
+      and footstep audio spam were fixed; real player/enemy animation folders are packaged with
+      natural sort, a debug report, and safe fallbacks. Native arcade build untouched.
+- [x] **Second playable in-browser demo** ([[CHECKPOINT 15 - Extracted Bomberman]]): the
+      Bomberman-style game (Game 0) extracted and compiled to **WebAssembly** under
+      `public/demos/bomberman/`, reusing the same SDL2 shim (only `sf::CircleShape` added) and IDBFS
+      maps/templates. Embedded on `/projects/bomberman-style-game` via a new reusable
+      `PlayableDemo.tsx` (full-size panel, page-level mute overlay, no inner-scroll trap,
+      build-failed fallback). ~10 MB bundle. Additive only — the Surfers Quest demo, Arcade Machine
+      3D reveal, media and other pages are untouched; browser-verified and `npm run build` green.
 
 ## In Progress
 - [ ] **Content pass:** edit the seeded `.txt` files with real copy (hero tagline, bio, project titles/descriptions); real email in `profile.ts`; start adding 🔴 high-priority project media → [[Editable Text Content System]] / [[Portfolio Asset Requirements Table]].
 - [ ] **Next media batch:** manually export genuine H.264 MP4 files for Cursor.zip, Arcade Machine,
       Surfers Quest, and Super Bomberman at the wired `public/<Project>/Videos/` paths. The current
       `.mp4`-named files still contain ASF/WMV data, so browser previews correctly fall back.
+- [ ] **Surfers Quest playable demo:** final rebuild + redeploy + in-browser re-verification of the
+      animation-flip and footstep fixes; wire `/demos/surfers-quest/index.html` into the project data
+      system as an embed; decide whether to trim the ~75 MB asset bundle before public GitHub Pages
+      hosting → [[CHECKPOINT 14 - Extracted Surfers Quest]] / [[Data Driven Project System]].
 
 ## Blocked / Needs James Input
 - [ ] Motion intensity (restrained ↔ flashy) + accent color → [[Visual Identity]] / [[Animation Direction]].
@@ -70,11 +88,12 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [ ] Real content pass (Phase 6) + optimization/deploy (Phase 7).
 
 ## Latest Checkpoint
-- [[CHECKPOINT 13 - Basilisk and EOS Thumbnail Integration]] (2026-06-12) — Basilisk Engine and EOS
-  Dedicated Server are fully media-wired (local MP4 previews, logos, YouTube showcases); EOS adds a
-  reusable two-dot `YouTubeCarousel` and the schema gains optional `showcaseVideos`. No redesign,
-  no new deps; build and browser verification pass. Prior:
-  [[CHECKPOINT 12 - Label status]]. See [[Checkpoint Hub]].
+- [[CHECKPOINT 15 - Extracted Bomberman]] (2026-06-13) — Second playable in-browser demo: the
+  Bomberman-style game (Game 0) extracted and compiled to WebAssembly under `public/demos/bomberman/`,
+  reusing the same SFML 3 → SDL2 shim (only `sf::CircleShape` added) + IDBFS maps/templates. Embedded
+  on its project page via a new reusable `PlayableDemo` component (full-size panel, page-level mute
+  overlay, no inner-scroll, build-failed fallback); ~10 MB bundle. Additive only; browser-verified and
+  build green. Prior: [[CHECKPOINT 14 - Extracted Surfers Quest]]. See [[Checkpoint Hub]].
 
 ## Links
 - Next steps → [[Next Actions]]
