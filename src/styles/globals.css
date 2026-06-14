@@ -631,7 +631,7 @@ img {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 7;
+  -webkit-line-clamp: 3;
   color: var(--color-muted);
   font-size: 0.95rem;
   line-height: 1.55;

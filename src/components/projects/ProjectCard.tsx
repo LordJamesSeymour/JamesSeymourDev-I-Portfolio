@@ -80,7 +80,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             ))}
           </div>
           <span className="card__cta">
-            View case study <span aria-hidden="true">→</span>
+            Click to see more <span aria-hidden="true">→</span>
           </span>
         </div>
       </div>
