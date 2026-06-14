@@ -1,17 +1,23 @@
+import type { ReactNode } from "react";
 import type { ProjectCaseStudy as CaseStudy } from "../../types/project";
 
 interface ProjectCaseStudyProps {
   caseStudy?: CaseStudy;
+  afterOverview?: ReactNode;
 }
 
 /** Renders whichever case-study sections are present. Empty sections are skipped. */
-export default function ProjectCaseStudy({ caseStudy }: ProjectCaseStudyProps) {
+export default function ProjectCaseStudy({
+  caseStudy,
+  afterOverview,
+}: ProjectCaseStudyProps) {
   if (!caseStudy) {
     return <p className="muted-text">Case study coming soon.</p>;
   }
 
   const textSections: { label: string; value?: string }[] = [
     { label: "Overview", value: caseStudy.overview },
+    { label: "Creative Process", value: caseStudy.creativeProcess },
     { label: "My Role", value: caseStudy.role },
     { label: "Technical Challenges", value: caseStudy.technicalChallenges },
     { label: "Design Decisions", value: caseStudy.designDecisions },
@@ -24,6 +30,15 @@ export default function ProjectCaseStudy({ caseStudy }: ProjectCaseStudyProps) {
         <section className="case-study__block">
           <h3>Overview</h3>
           <p>{caseStudy.overview}</p>
+        </section>
+      )}
+
+      {afterOverview}
+
+      {caseStudy.creativeProcess && (
+        <section className="case-study__block">
+          <h3>Creative Process</h3>
+          <p>{caseStudy.creativeProcess}</p>
         </section>
       )}
 

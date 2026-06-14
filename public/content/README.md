@@ -46,6 +46,8 @@ Each project folder (e.g. `projects/cursor-zip/`) has:
 | `title.txt` | Project name on the card and detail page |
 | `short-description.txt` | One-line description on the card + detail intro |
 | `long-description.txt` | The "Overview" paragraph in the case study |
+| `creative-process.txt` | The "Creative Process" paragraph in the case study, when present |
+| `inside-description.txt` | Optional project-specific showcase intro |
 | `needs.txt` | Your private "still needed" checklist — one item per line. **Dev-only**, never shown on the live site. |
 
 The project slugs are: `arcade-machine`, `surfers-quest`, `bomberman-style-game`,

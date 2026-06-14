@@ -12,7 +12,7 @@
       and remove visible PLACEHOLDER status labels → [[CHECKPOINT 12 - Label status]].
 - [ ] Manually export genuine H.264 MP4 containers over the four wired preview paths. Do not rename
       WMV files to `.mp4` or create fixed-duration snippets → [[Video Capture Requirements]].
-- [ ] Confirm final project names (esp. an original name for the Bomberman-style game) → [[Project Content Hub]].
+- [ ] Confirm the final public-facing title for the Bomberman-style game → [[Project Content Hub]].
 - [ ] Provide contact email, links, and CV file → [[CV And Contact Assets]].
 - [ ] Decide repo name + whether a custom domain is used → [[GitHub Pages Deployment]].
 
@@ -25,8 +25,11 @@
       exact case-sensitive thumbnail paths → [[CHECKPOINT 11 - Logos and Thumbnails 2]].
 - [ ] After James exports valid MP4 containers, verify full-duration native looping in cards and
       detail media; optionally add dedicated posters → [[Portfolio Asset Requirements Table]].
-- [ ] **Content pass:** replace remaining placeholder project descriptions/case-study copy →
-      [[Editable Text Content System]].
+- [x] **Content pass (arcade trio):** real descriptions + case-study Overview + new **Creative
+      Process** section for Arcade Machine, Surfers Quest, and the Bomberman-style game →
+      [[CHECKPOINT 24 - Project Copy and Creative Process Pass]].
+- [ ] **Content pass (remaining):** real copy for Cursor.zip, Hammer Moonbase, Basilisk, EOS, and
+      Zombies VR, plus the site-level hero tagline/bio → [[Editable Text Content System]].
 - [ ] *(Phase 3, only after approval)* add React Three Fiber `HeroCanvas` (isolated + gated) → [[Immersive 3D Direction]].
 
 ## 🧊 Backlog

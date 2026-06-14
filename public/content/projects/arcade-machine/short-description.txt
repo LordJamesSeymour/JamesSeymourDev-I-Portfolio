@@ -1,1 +1,1 @@
-Placeholder description — a C++ arcade machine project. (Final copy pending.)
+Arcade Machine is a hand-built C++/SFML arcade cabinet project that combines custom game development, physical fabrication, Raspberry Pi deployment, controller integration, audio, and a polished portfolio-ready presentation. The machine runs a small arcade hub with playable games, menus, level selection, level editors, controller support, music, sound effects, and a custom cabinet designed around a 7-inch display.

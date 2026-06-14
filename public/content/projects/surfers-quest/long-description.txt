@@ -1,1 +1,1 @@
-TODO: What is Surfers Quest? Add a short overview.
+Surfers Quest is a platform game built around movement feel and level readability. The player can run, jump, double jump, wall grab, wall jump, drop through one-way platforms, avoid spike traps and interact with enemies across scrolling tile-based stages. The project uses SFML for rendering, input and audio, with a custom level format that supports world metadata, player spawns, enemies, terrain types, hazards and platform tiles.

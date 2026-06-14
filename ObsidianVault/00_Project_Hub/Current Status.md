@@ -79,9 +79,25 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
       border, and explodes outside the clipped card at the top-right corner. The blast now renders
       the complete center/top/bottom/left/right cross, and the large player uses left-walk frames →
       [[CHECKPOINT 22 - Super Bomberman Explosion Cross]].
+- [x] **Arcade Machine controller backdrop complete**
+      ([[CHECKPOINT 23 - Arcade Machine Controller Backdrop]]): two decorative NES-style controllers
+      built entirely from three.js primitives sit behind the "Inside the Arcade Machine" section.
+      Each renders into its own `clamp()`-bounded canvas so it never scales with viewport/zoom; A/B
+      caps depress in alternation, cables sway, `pointer-events:none`, lazy/code-split. The
+      exploded-view reveal, callouts, and media are untouched.
+- [x] **First real content pass complete**
+      ([[CHECKPOINT 24 - Project Copy and Creative Process Pass]]): Arcade Machine, Surfers Quest, and
+      the Bomberman-style game now have genuine card + Overview copy, replacing the seeded TODO/
+      placeholder text. A new **Creative Process** case-study section was added through the schema
+      (`creativeProcess`), `ProjectCaseStudy.tsx`, `projects.ts`, and editable
+      `creative-process.txt` files; the Arcade reveal subtitle is now editable via
+      `inside-description.txt` → [[Editable Text Content System]].
 
 ## In Progress
-- [ ] **Content pass:** edit the seeded `.txt` files with real copy (hero tagline, bio, project titles/descriptions); real email in `profile.ts`; start adding 🔴 high-priority project media → [[Editable Text Content System]] / [[Portfolio Asset Requirements Table]].
+- [ ] **Content pass (continuing):** real copy for the remaining projects (Cursor.zip, Hammer
+      Moonbase, Basilisk, EOS, Zombies VR) + site-level hero tagline/bio; real email in `profile.ts`;
+      confirm the Bomberman-style game's final public title; start adding 🔴 high-priority project
+      media → [[Editable Text Content System]] / [[Portfolio Asset Requirements Table]].
 - [ ] **Next media batch:** manually export genuine H.264 MP4 files for Cursor.zip, Arcade Machine,
       Surfers Quest, and Super Bomberman at the wired `public/<Project>/Videos/` paths. The current
       `.mp4`-named files still contain ASF/WMV data, so browser previews correctly fall back.
@@ -100,10 +116,12 @@ Design source of truth: [[Design System Brief]] reconciled with [[DESIGN]] "Dala
 - [ ] Real content pass (Phase 6) + optimization/deploy (Phase 7).
 
 ## Latest Checkpoint
-- [[CHECKPOINT 22 - Super Bomberman Explosion Cross]] (2026-06-13) — Completed the decorative
-  impact with synchronized right and bottom continuation/end-cap pieces. The external blast now
-  renders a full nine-tile center/top/bottom/left/right cross without clipping or page overflow.
-  Prior: [[CHECKPOINT 21 - Super Bomberman Sprite Tuning]]. See [[Checkpoint Hub]].
+- [[CHECKPOINT 24 - Project Copy and Creative Process Pass]] (2026-06-14) — First real written
+  content: genuine descriptions and case-study Overview for Arcade Machine, Surfers Quest, and the
+  Bomberman-style game, plus a new **Creative Process** case-study section wired through the schema,
+  UI, `projects.ts`, and editable `.txt` files. Prior:
+  [[CHECKPOINT 23 - Arcade Machine Controller Backdrop]] (2026-06-14) — decorative three.js
+  controller backdrop behind the Arcade Machine section. See [[Checkpoint Hub]].
 
 ## Links
 - Next steps → [[Next Actions]]

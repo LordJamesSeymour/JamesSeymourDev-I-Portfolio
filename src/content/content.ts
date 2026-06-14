@@ -9,7 +9,13 @@ import { useTextContent } from "./useTextContent";
  */
 
 /** Editable project text fields (one `.txt` file each). */
-export type ProjectTextField = "title" | "short-description" | "long-description" | "needs";
+export type ProjectTextField =
+  | "title"
+  | "short-description"
+  | "long-description"
+  | "inside-description"
+  | "creative-process"
+  | "needs";
 
 export const siteContentPath = (name: string): string => `content/site/${name}.txt`;
 

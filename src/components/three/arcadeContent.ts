@@ -59,6 +59,5 @@ export const CALLOUT_CHIPS: string[] = [
   "Custom menus and level tools",
 ];
 
-export const ARCADE_INTRO =
-  "A C++ / SFML arcade hub I built and deployed onto a hand-made cabinet running on a Raspberry Pi. " +
-  "Scroll to take the machine apart and see how it goes together.";
+export const ARCADE_INSIDE_DESCRIPTION_FALLBACK =
+  "A C++/SFML arcade hub built and deployed onto a hand-made cabinet running on a Raspberry Pi. Scroll to take the machine apart and see how the hardware, screen, controls, audio and internal layout come together.";

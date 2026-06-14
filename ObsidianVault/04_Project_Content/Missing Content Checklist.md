@@ -7,9 +7,9 @@
 For each project: description, final name, technologies, media, links, status.
 
 ### C++
-- [ ] [[Arcade Machine]] — desc / media / links
-- [ ] [[Surfers Quest]] — desc / media / links
-- [ ] [[Bomberman Style Game]] — desc / media / links / **final name (avoid trademark)**
+- [ ] [[Arcade Machine]] — ✅ desc + Creative Process written; still need media / links → [[CHECKPOINT 24 - Project Copy and Creative Process Pass]]
+- [ ] [[Surfers Quest]] — ✅ desc + Creative Process written; still need screenshots / links
+- [ ] [[Bomberman Style Game]] — ✅ desc + Creative Process written; still need screenshots / links / **final public-facing title**
 - [ ] [[EOS Dedicated Server]] — desc / media / links
 - [ ] [[Basilisk Engine]] — desc / media / links
 

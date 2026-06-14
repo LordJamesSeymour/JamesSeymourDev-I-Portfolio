@@ -1,1 +1,1 @@
-Placeholder description — a Bomberman-style C++ game. Final, original name TBD.
+A C++/SFML maze-action game built for the Arcade Machine project, featuring grid-based movement, bombs, chain explosions, enemies, power-ups, hidden exits, level progression, audio, controller support and a custom editor for building playable stages.

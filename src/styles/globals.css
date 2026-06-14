@@ -628,6 +628,10 @@ img {
   margin: 0;
 }
 .card__desc {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
   color: var(--color-muted);
   font-size: 0.95rem;
   line-height: 1.55;
@@ -1184,6 +1188,9 @@ img {
 .case-study {
   display: grid;
   gap: var(--space-10);
+}
+.case-study > .project-detail__showcase {
+  margin: 0;
 }
 .case-study__block {
   max-width: 70ch;

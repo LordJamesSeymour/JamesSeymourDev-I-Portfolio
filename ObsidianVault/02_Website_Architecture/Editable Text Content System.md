@@ -29,6 +29,8 @@ public/content/
     title.txt
     short-description.txt
     long-description.txt       # → case-study "Overview"
+    creative-process.txt       # → optional case-study "Creative Process"
+    inside-description.txt     # → optional project-specific showcase intro
     needs.txt                  # dev-only checklist, one item per line
 ```
 
@@ -55,9 +57,10 @@ Edit the files in `public/content/site/` (e.g. `hero-title.txt`, `hero-tagline.t
 The headline auto-accents the **last word** of `hero-title.txt`.
 
 ### How to edit project titles/descriptions
-Edit `public/content/projects/<slug>/title.txt`, `short-description.txt`, and
-`long-description.txt`. `long-description.txt` becomes the case-study **Overview**;
-other case-study sections still come from `projects.ts`.
+Edit `public/content/projects/<slug>/title.txt`, `short-description.txt`,
+`long-description.txt`, and any optional project-specific prose files.
+`long-description.txt` becomes the case-study **Overview** and
+`creative-process.txt` becomes **Creative Process**.
 
 ### How fallbacks work
 Every `useSiteText` / `useProjectText` call passes a hard-coded fallback (the original
@@ -67,7 +70,8 @@ shows the fallback. Fallbacks are intentionally **not** removed from code.
 ### How to add a new project's text folder
 1. Add the project entry in `src/data/projects.ts` (this sets the `slug`).
 2. Create `public/content/projects/<slug>/` with `title.txt`, `short-description.txt`,
-   `long-description.txt`, and `needs.txt`.
+   `long-description.txt`, and `needs.txt`. Add optional prose files only when that
+   project renders the matching section.
    (Until those files exist, the card/detail page just uses the `projects.ts` fallbacks.)
 
 ## What still lives in `projects.ts` (NOT in .txt)

@@ -36,7 +36,7 @@ export const projects: Project[] = [
     name: "Arcade Machine",
     category: "C++",
     shortDescription:
-      "Placeholder description — a C++ arcade machine project. (Final copy pending.)",
+      "Arcade Machine is a hand-built C++/SFML arcade cabinet project that combines custom game development, physical fabrication, Raspberry Pi deployment, controller integration, audio, and a polished portfolio-ready presentation. The machine runs a small arcade hub with playable games, menus, level selection, level editors, controller support, music, sound effects, and a custom cabinet designed around a 7-inch display.",
     technologies: ["C++"],
     featured: true,
     featuredPriority: 5,
@@ -66,12 +66,10 @@ export const projects: Project[] = [
     ],
     links: {},
     caseStudy: {
-      overview: "TODO: What is the Arcade Machine project? Add a short overview.",
-      role: "TODO: James's role.",
-      keyFeatures: ["TODO: key feature"],
-      technicalChallenges: "TODO: notable technical challenges.",
-      designDecisions: "TODO: key design decisions.",
-      finalResult: "TODO: outcome / final result.",
+      overview:
+        "Arcade Machine began as a software project and grew into a full physical build. The final system combines a Raspberry Pi, a 7-inch display, USB controllers, external audio, custom power routing and a 3D-printed cabinet into a portable arcade unit. The software includes an arcade hub, playable games, level selection, in-game audio, controller mapping, and editor tools for creating new levels.",
+      creativeProcess:
+        "The build required research across both software and hardware. I compared display options, controller layouts, Raspberry Pi requirements, power sources, USB hubs, audio speakers, cable types and port clearances before committing to the final layout. I learned to modify and adapt cabinet meshes in Tinkercad, printed and tested physical parts, designed screen brackets, adjusted clearances, routed cables, solved power delivery issues, and ported the C++/SFML project from desktop development to Raspberry Pi. A large part of the process was iterative: testing physical tolerances, improving cable management, checking controller behaviour, tuning audio output and making the machine reliable enough to be shown at events.",
     },
   },
   {
@@ -79,7 +77,7 @@ export const projects: Project[] = [
     name: "Surfers Quest",
     category: "C++",
     shortDescription:
-      "Placeholder description — a C++ game, 'Surfers Quest'. (Final copy pending.)",
+      "Surfers Quest is a C++/SFML side-scrolling platformer built for the Arcade Machine project. It focuses on responsive movement, animated 2D characters, layered tile-based levels, hazards, enemies, surface-aware audio, and a custom level editor designed for quick iteration.",
     technologies: ["C++"],
     featured: true,
     featuredPriority: 6,
@@ -103,7 +101,10 @@ export const projects: Project[] = [
     ],
     links: {},
     caseStudy: {
-      overview: "TODO: What is Surfers Quest? Add a short overview.",
+      overview:
+        "Surfers Quest is a platform game built around movement feel and level readability. The player can run, jump, double jump, wall grab, wall jump, drop through one-way platforms, avoid spike traps and interact with enemies across scrolling tile-based stages. The project uses SFML for rendering, input and audio, with a custom level format that supports world metadata, player spawns, enemies, terrain types, hazards and platform tiles.",
+      creativeProcess:
+        "The creative process focused on translating familiar platformer ideas into a responsive custom implementation. I researched common platforming techniques such as coyote time, jump buffering, variable jump height, wall interaction and enemy behaviour, then tuned them through repeated testing. One of the biggest challenges was making movement feel forgiving without losing precision, especially when combining double jumps, wall grabs, drop-through platforms and hazards. I also built a custom level editor shared in concept with the maze-action project, allowing levels to be painted with tile tools, saved, loaded and previewed quickly. This made it much faster to test layouts, enemy placement, world themes and difficulty progression.",
     },
   },
   {
@@ -112,7 +113,7 @@ export const projects: Project[] = [
     name: "Bomberman-style Game (placeholder name)",
     category: "C++",
     shortDescription:
-      "Placeholder description — a Bomberman-style C++ game. Final, original name TBD.",
+      "A C++/SFML maze-action game built for the Arcade Machine project, featuring grid-based movement, bombs, chain explosions, enemies, power-ups, hidden exits, level progression, audio, controller support and a custom editor for building playable stages.",
     technologies: ["C++"],
     featured: false, // not in the featured 6 (kept in the full C++ list)
     status: "completed",
@@ -127,16 +128,33 @@ export const projects: Project[] = [
       src: "/SuperBomberman/bomberman-logo.png",
       alt: "Bomberman-style game project logo",
     },
+    showcaseVideos: [
+      {
+        youtubeId: "l2EcKWQ__p8",
+        externalUrl: "https://youtu.be/l2EcKWQ__p8",
+        title: "TRD",
+        heading: "Project videos",
+      },
+      {
+        youtubeId: "rJoKEOcevms",
+        externalUrl: "https://youtu.be/rJoKEOcevms",
+        title: "Project Description",
+        heading: "Project videos",
+      },
+    ],
+    showcaseVideosPlacement: "after-overview",
     immersive: { showcaseType: "video-screen" },
     missingAssets: [
-      "Decide a public-safe, original (non-trademarked) name",
+      "Confirm the final public-facing project title",
       "Gameplay screenshot",
       "Level editor screenshot",
     ],
     links: {},
     caseStudy: {
       overview:
-        "TODO: Describe the game. NOTE: choose an original, non-trademarked public name.",
+        "This project was created for my final university module, where the brief was to recreate the feel of a classic game while implementing my own systems and design choices. The result is a grid-based maze-action game with destructible blocks, bomb placement, explosion propagation, enemy behaviours, power-ups, hidden exits and multiple levels. It runs inside the Arcade Machine hub and is designed to work with both keyboard input and the arcade controller setup.",
+      creativeProcess:
+        "The project began with research into classic maze-action level structure, readable grid movement, timed hazards, enemy pressure and risk-reward design. The biggest technical challenges were building reliable tile collision, bomb timing, explosion spread, destructible blocks, enemy interactions, power-up progression and level transitions while keeping the game responsive on the Raspberry Pi build. I also developed a custom level editor, shared in concept with the Surfers Quest editor, so levels could be created, saved, loaded and tested without manually editing map files. The editor supports world selection, tile tools, enemy placement, player spawns, exits, breakable blocks and level file management, which made iteration much faster.",
     },
   },
   {

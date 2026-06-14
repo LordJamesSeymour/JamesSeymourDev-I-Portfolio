@@ -1,1 +1,1 @@
-TODO: Describe the game. NOTE: choose an original, non-trademarked public name.
+This project was created for my final university module, where the brief was to recreate the feel of a classic game while implementing my own systems and design choices. The result is a grid-based maze-action game with destructible blocks, bomb placement, explosion propagation, enemy behaviours, power-ups, hidden exits and multiple levels. It runs inside the Arcade Machine hub and is designed to work with both keyboard input and the arcade controller setup.

@@ -11,7 +11,7 @@ status: Complete
 > **Checkpoint #:** 22
 > **Status:** Complete
 > Previous: [[CHECKPOINT 21 - Super Bomberman Sprite Tuning]]
-> Next: _none yet_
+> Next: [[CHECKPOINT 23 - Arcade Machine Controller Backdrop]]
 > Index: [[Checkpoint Hub]]
 
 ## Project Status

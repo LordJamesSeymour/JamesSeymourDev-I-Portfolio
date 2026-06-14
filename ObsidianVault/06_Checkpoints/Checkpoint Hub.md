@@ -16,6 +16,15 @@
   the **Current Project Baseline**.
 
 ## Latest Checkpoint
+- **[[CHECKPOINT 24 - Project Copy and Creative Process Pass]]** — 2026-06-14
+  - First real written-content pass: genuine descriptions and case-study Overview text for Arcade
+    Machine, Surfers Quest, and the Bomberman-style game, plus a new **Creative Process** case-study
+    section wired through the schema, UI, `projects.ts`, and editable `.txt` files
+    (`creative-process.txt`, `inside-description.txt`).
+- **[[CHECKPOINT 23 - Arcade Machine Controller Backdrop]]** — 2026-06-14
+  - Decorative NES-style 3D controllers (built entirely from three.js primitives) anchored behind
+    the "Inside the Arcade Machine" section; clamp-bounded per-canvas sizing so they never scale
+    with zoom, animated A/B caps + swaying cables, `pointer-events:none`, lazy/code-split.
 - **[[CHECKPOINT 22 - Super Bomberman Explosion Cross]]** — 2026-06-13
   - Completed the decorative blast with synchronized right and bottom continuation/end-cap pieces,
     producing the full nine-tile Bomberman cross outside the clipped preview card.
@@ -76,6 +85,8 @@
 20. [[CHECKPOINT 20 - Super Bomberman Sprite Showcase]] — 2026-06-13 — _Large Blue player/Chomper background sprites plus a bomb placement, punch, corner-flight, explosion, and reset loop isolated to the Bomberman-style project page_
 21. [[CHECKPOINT 21 - Super Bomberman Sprite Tuning]] — 2026-06-13 — _Title-line sequence placement, 25% smaller sprites, straight top-border bomb slide, external top-right explosion, and left-walking large player_
 22. [[CHECKPOINT 22 - Super Bomberman Explosion Cross]] — 2026-06-13 — _Completed the external nine-tile explosion with synchronized center, top, bottom, left, and right arms_
+23. [[CHECKPOINT 23 - Arcade Machine Controller Backdrop]] — 2026-06-14 — _Decorative NES-style three.js controllers anchored behind the "Inside the Arcade Machine" section; clamp-bounded per-canvas sizing (no zoom scaling), animated caps + cables, pointer-events:none, lazy/code-split_
+24. [[CHECKPOINT 24 - Project Copy and Creative Process Pass]] — 2026-06-14 — _First real content pass: genuine descriptions + case-study Overview for Arcade Machine / Surfers Quest / Bomberman, plus a new Creative Process case-study section wired through schema, UI, projects.ts, and editable .txt files (creative-process.txt, inside-description.txt)_
 
 <!-- Add new checkpoints below in order, newest at the bottom. -->
 
@@ -95,7 +106,11 @@
   two-state project status, media sources, `logo`, `showcaseVideo` / `showcaseVideos` (carousel),
   links, immersive settings, missing assets, and priority →
   [[Data Driven Project System]]. Written copy remains editable via `public/content/**.txt` with
-  in-code fallbacks → [[Editable Text Content System]].
+  in-code fallbacks → [[Editable Text Content System]]. The case study now has a **Creative Process**
+  section (`creativeProcess` on `ProjectCaseStudy`, fed by `creative-process.txt`), and the Arcade
+  reveal subtitle is editable via `inside-description.txt`. **Arcade Machine, Surfers Quest, and the
+  Bomberman-style game now carry real descriptions** (card + Overview + Creative Process) →
+  [[CHECKPOINT 24 - Project Copy and Creative Process Pass]].
 - **Hosting:** GitHub Pages, static, no backend → [[GitHub Pages Deployment]].
 - **Website code:** Build green. Cursor.zip uses `/Cursor/Videos/cursor-short.mp4` with a poster,
   logo, and trailer; Hammer Moonbase uses `/Hammer/HammerMap.png` with an embedded flyby.
@@ -114,6 +129,11 @@
   `PlayableDemo`, existing media, project data, or other project pages. The tuned sequence runs
   beside the preview heading, slides linearly along the top border, and explodes outside the clipped
   card at the top-right corner using a complete center/top/bottom/left/right cross.
+- **Arcade Machine presentation:** `ArcadeControllerBackdrop` adds two decorative NES-style
+  controllers built entirely from three.js primitives behind the "Inside the Arcade Machine"
+  section. Each renders into its own `clamp()`-bounded canvas so it never scales with viewport/zoom;
+  caps depress in alternation, cables sway, `pointer-events:none`, lazy/code-split. The exploded-view
+  reveal, callouts, and media are untouched → [[CHECKPOINT 23 - Arcade Machine Controller Backdrop]].
 - **Playable demo capability:** `public/demos/{surfers-quest,bomberman}/` host real WebAssembly builds
   of two arcade games (Emscripten), via a shared SFML 3 → SDL2 shim (`sfml_shim/`) so the unmodified
   game code compiles; IDBFS persists user maps in-browser. Embedded on their project pages via the

@@ -1,10 +1,16 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import Reveal from "../visual/Reveal";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { useProjectText } from "../../content/content";
 import ArcadeMachineFallback from "./ArcadeMachineFallback";
 import type { FallbackVariant } from "./ArcadeMachineFallback";
 import ThreeErrorBoundary from "./ThreeErrorBoundary";
-import { ARCADE_INTRO, CALLOUTS, CALLOUT_CHIPS, MODEL_URL } from "./arcadeContent";
+import {
+  ARCADE_INSIDE_DESCRIPTION_FALLBACK,
+  CALLOUTS,
+  CALLOUT_CHIPS,
+  MODEL_URL,
+} from "./arcadeContent";
 
 // Code-split the entire three.js scene — it only downloads when this section is
 // near the viewport (gated by `hasEntered` below), keeping initial load light.
@@ -58,6 +64,11 @@ export default function ArcadeMachineReveal() {
   const reduced = usePrefersReducedMotion();
   const isSmall = useIsSmallScreen();
   const [webglOK] = useState(detectWebGL);
+  const insideDescription = useProjectText(
+    "arcade-machine",
+    "inside-description",
+    ARCADE_INSIDE_DESCRIPTION_FALLBACK,
+  );
 
   const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -215,7 +226,7 @@ export default function ArcadeMachineReveal() {
           <h2 id="arcade-build-title" className="section__title">
             Inside the Arcade Machine
           </h2>
-          <p className="section__subtitle">{ARCADE_INTRO}</p>
+          <p className="section__subtitle">{insideDescription}</p>
         </Reveal>
       </div>
 

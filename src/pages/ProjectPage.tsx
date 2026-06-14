@@ -52,6 +52,11 @@ export default function ProjectPage() {
     "long-description",
     project?.caseStudy?.overview ?? "",
   );
+  const creativeProcess = useProjectText(
+    safeSlug,
+    "creative-process",
+    project?.caseStudy?.creativeProcess ?? "",
+  );
 
   useEffect(() => {
     const handleDemoMessage = (event: MessageEvent) => {
@@ -109,10 +114,16 @@ export default function ProjectPage() {
     (project.thumbnail ? { type: "image", src: project.thumbnail } : undefined);
   const caption = placeholderCaption(project.immersive?.showcaseType);
 
-  // Use the editable long-description as the case-study Overview (keeps other sections).
-  const caseStudy = longDesc
-    ? { ...(project.caseStudy ?? {}), overview: longDesc }
-    : project.caseStudy;
+  // Editable text files supply the case-study prose while structural metadata stays
+  // in projects.ts.
+  const caseStudy =
+    longDesc || creativeProcess
+      ? {
+          ...(project.caseStudy ?? {}),
+          overview: longDesc || undefined,
+          creativeProcess: creativeProcess || undefined,
+        }
+      : project.caseStudy;
 
   const { links } = project;
   const hasLinks = links && Object.values(links).some(Boolean);
@@ -200,6 +211,18 @@ export default function ProjectPage() {
       )}
     </div>
   ) : null;
+
+  const showcaseVideosBlock =
+    project.showcaseVideos && project.showcaseVideos.length > 0 ? (
+      <section className="project-detail__showcase">
+        <div className="project-detail__showcase-head">
+          <h2>{project.showcaseVideos[0].heading}</h2>
+        </div>
+        <YouTubeCarousel videos={project.showcaseVideos} label={title} />
+      </section>
+    ) : null;
+  const showcaseVideosAfterOverview =
+    project.showcaseVideosPlacement === "after-overview";
 
   // Exploded-view showcase: title/summary, then the full-width 3D reveal as the
   // hero, then links + the case-study text. The reveal sits OUTSIDE the centered
@@ -518,18 +541,16 @@ export default function ProjectPage() {
           </section>
         )}
 
-        {project.showcaseVideos && project.showcaseVideos.length > 0 && (
-          <section className="project-detail__showcase">
-            <div className="project-detail__showcase-head">
-              <h2>{project.showcaseVideos[0].heading}</h2>
-            </div>
-            <YouTubeCarousel videos={project.showcaseVideos} label={title} />
-          </section>
-        )}
+        {!showcaseVideosAfterOverview && showcaseVideosBlock}
 
         {linksBlock}
 
-        <ProjectCaseStudy caseStudy={caseStudy} />
+        <ProjectCaseStudy
+          caseStudy={caseStudy}
+          afterOverview={
+            showcaseVideosAfterOverview ? showcaseVideosBlock : undefined
+          }
+        />
       </article>
     </>
   );

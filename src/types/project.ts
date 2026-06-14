@@ -57,8 +57,11 @@ export interface ProjectVideoEmbed {
   heading: string;
 }
 
+export type ProjectShowcasePlacement = "before-case-study" | "after-overview";
+
 export interface ProjectCaseStudy {
   overview?: string;
+  creativeProcess?: string;
   role?: string;
   keyFeatures?: string[];
   technicalChallenges?: string;
@@ -131,6 +134,8 @@ export interface Project {
    * indicators. Use this instead of `showcaseVideo` when a project has 2+ clips.
    */
   showcaseVideos?: ProjectVideoEmbed[];
+  /** Controls where a multi-video showcase sits relative to the case study. */
+  showcaseVideosPlacement?: ProjectShowcasePlacement;
   links?: ProjectLinks;
   caseStudy?: ProjectCaseStudy;
 

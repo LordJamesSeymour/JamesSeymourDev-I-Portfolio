@@ -1,1 +1,1 @@
-TODO: What is the Arcade Machine project? Add a short overview.
+Arcade Machine began as a software project and grew into a full physical build. The final system combines a Raspberry Pi, a 7-inch display, USB controllers, external audio, custom power routing and a 3D-printed cabinet into a portable arcade unit. The software includes an arcade hub, playable games, level selection, in-game audio, controller mapping, and editor tools for creating new levels.

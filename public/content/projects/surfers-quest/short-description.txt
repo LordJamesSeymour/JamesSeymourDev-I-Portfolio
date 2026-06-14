@@ -1,1 +1,1 @@
-Placeholder description — a C++ game, 'Surfers Quest'. (Final copy pending.)
+Surfers Quest is a C++/SFML side-scrolling platformer built for the Arcade Machine project. It focuses on responsive movement, animated 2D characters, layered tile-based levels, hazards, enemies, surface-aware audio, and a custom level editor designed for quick iteration.
