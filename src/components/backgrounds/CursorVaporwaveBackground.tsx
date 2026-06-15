@@ -1,11 +1,17 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import ThreeErrorBoundary from "../three/ThreeErrorBoundary";
-import VaporwaveStatue from "./VaporwaveStatue";
 import "./CursorVaporwaveBackground.css";
 
 // Code-split the WebGL scene so three.js only downloads on the Cursor.zip page.
 const CursorVaporwaveScene = lazy(() => import("./CursorVaporwaveScene"));
+
+// Public-domain / CC0 classical statue cutouts (Michelangelo's David — SMK; Roman
+// busts — The Met Open Access). Sources + licence:
+// public/assets/cursor-vaporwave/statues/ASSET_CREDITS.md. Referenced via BASE_URL
+// so deep links work under a GitHub Pages subpath. To swap art, replace the PNGs
+// (see ASSET_CREDITS.md) — no code change needed.
+const STATUES = `${import.meta.env.BASE_URL}assets/cursor-vaporwave/statues`;
 
 /** One-time WebGL capability probe (mirrors the Arcade Machine reveal). */
 function detectWebGL(): boolean {
@@ -98,6 +104,9 @@ export default function CursorVaporwaveBackground() {
         <span className="cvw__sun-stripes" />
       </div>
 
+      {/* 2b — neon horizon glow band (magenta → purple → cyan) */}
+      <div className="cvw__horizon" />
+
       {/* 3 — neon perspective grid floor */}
       <div className="cvw__floor">
         {use3D ? (
@@ -111,12 +120,21 @@ export default function CursorVaporwaveBackground() {
         )}
       </div>
 
-      {/* 4 — Greek marble busts. Cropped right (large), mid-left (small), back
-              fragment. The 3rd is hidden on small screens (see CSS). */}
+      {/* 4 — classical statue cutouts (public-domain / CC0). Large Roman hero head
+              cropped by the right edge, Michelangelo's David bust cropped by the
+              left edge, and a faint floating veiled-head fragment (hidden on small
+              screens — see CSS). Each gets a neon rim + cool tint from CSS so it
+              reads as a vaporwave collage. */}
       <div className="cvw__statues">
-        <VaporwaveStatue className="cvw__statue cvw__statue--right" pedestal />
-        <VaporwaveStatue className="cvw__statue cvw__statue--left" />
-        <VaporwaveStatue className="cvw__statue cvw__statue--back" />
+        <span className="cvw__statue cvw__statue--right">
+          <img src={`${STATUES}/statue-right.png`} alt="" loading="lazy" decoding="async" />
+        </span>
+        <span className="cvw__statue cvw__statue--left">
+          <img src={`${STATUES}/statue-left.png`} alt="" loading="lazy" decoding="async" />
+        </span>
+        <span className="cvw__statue cvw__statue--fragment">
+          <img src={`${STATUES}/statue-fragment.png`} alt="" loading="lazy" decoding="async" />
+        </span>
       </div>
 
       {/* 5 — floating Win95 windows + cursor / archive motifs */}
@@ -131,7 +149,7 @@ export default function CursorVaporwaveBackground() {
 
         <RetroWindow title="SYSTEM MESSAGE" modifier="sys">
           <span className="cvw__icon cvw__icon--warn" />
-          <span className="cvw__win-text">A cursor has stopped responding.</span>
+          <span className="cvw__win-text">Cursor.zip has stopped working</span>
           <span className="cvw__btn">OK</span>
         </RetroWindow>
 

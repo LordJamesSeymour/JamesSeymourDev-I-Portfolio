@@ -15,6 +15,7 @@ import SuperBombermanSpriteShowcase from "../components/projects/SuperBombermanS
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
 import CursorVaporwaveBackground from "../components/backgrounds/CursorVaporwaveBackground";
+import CursorProjectDecorations from "../components/projects/CursorProjectDecorations";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
 
@@ -266,6 +267,7 @@ export default function ProjectPage() {
           showBasiliskBackground ? " project-detail--basilisk" : ""
         }${showVaporwaveBackground ? " project-detail--vaporwave" : ""}`}
       >
+        {showVaporwaveBackground && <CursorProjectDecorations />}
         {breadcrumb}
         {header}
 
