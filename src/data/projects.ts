@@ -259,6 +259,9 @@ export const projects: Project[] = [
     slug: "cursor-zip",
     name: "Cursor.zip",
     category: "C#",
+    // Project-specific vaporwave background (neon grid + retro sun + marble busts
+    // + Win95 windows) rendered behind the case study. See CursorVaporwaveBackground.
+    theme: "vaporwave",
     shortDescription: "Placeholder description — a C# project, 'Cursor.zip'.",
     technologies: ["C#"],
     featured: true,

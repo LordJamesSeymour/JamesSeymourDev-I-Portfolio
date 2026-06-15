@@ -14,6 +14,7 @@ import SurfersQuestSpriteShowcase from "../components/projects/SurfersQuestSprit
 import SuperBombermanSpriteShowcase from "../components/projects/SuperBombermanSpriteShowcase";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
+import CursorVaporwaveBackground from "../components/backgrounds/CursorVaporwaveBackground";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
 
@@ -132,6 +133,9 @@ export default function ProjectPage() {
   // scroll-driven 3D reveal as their hero, in place of the static media panel.
   const showReveal = project.immersive?.revealType === "exploded-view";
   const showBasiliskBackground = project.slug === "basilisk-engine";
+  // Cursor.zip opts into its bespoke vaporwave background via the data `theme`
+  // field (kept off slug strings so new themed pages are a one-line data change).
+  const showVaporwaveBackground = project.theme === "vaporwave";
   const showSurfersQuestDemo = project.slug === "surfers-quest";
   const showBombermanDemo = project.slug === "bomberman-style-game";
 
@@ -255,10 +259,12 @@ export default function ProjectPage() {
           />
       )}
 
+      {showVaporwaveBackground && <CursorVaporwaveBackground />}
+
       <article
         className={`container section project-detail${
           showBasiliskBackground ? " project-detail--basilisk" : ""
-        }`}
+        }${showVaporwaveBackground ? " project-detail--vaporwave" : ""}`}
       >
         {breadcrumb}
         {header}

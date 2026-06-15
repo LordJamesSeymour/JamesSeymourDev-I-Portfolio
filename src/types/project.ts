@@ -73,6 +73,14 @@ export interface ProjectCaseStudy {
 export type ContentPriority = "high" | "medium" | "low";
 
 /**
+ * Optional per-project decorative background treatment for the detail page.
+ * Additive and project-specific — absent means the standard page. Currently only
+ * Cursor.zip opts in ("vaporwave"), which renders <CursorVaporwaveBackground/>
+ * behind the case study. Add new values here when a project earns its own scene.
+ */
+export type ProjectVisualTheme = "vaporwave";
+
+/**
  * How a project should appear in the FUTURE 3D/immersive layer (Phase 3+).
  * Stored now so the data model is ready; ignored by the current 2D site.
  * Fallback chain at render time: model → video → image → placeholder.
@@ -107,6 +115,8 @@ export interface Project {
   /** Public-facing name. */
   name: string;
   category: ProjectCategory;
+  /** Optional decorative background treatment for the detail page (see ProjectVisualTheme). */
+  theme?: ProjectVisualTheme;
   shortDescription: string;
   technologies: string[];
   /** Surfaced on the home "Featured Projects" grid when true. */
