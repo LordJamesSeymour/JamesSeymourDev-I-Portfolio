@@ -275,7 +275,7 @@ export const projects: Project[] = [
       alt: "Cursor.zip gameplay preview",
     },
     logo: {
-      src: "/Cursor/cursor-zip-logo.png",
+      src: "/Cursor/optimized/cursor-zip-logo-480.webp",
       alt: "Cursor.zip project logo",
     },
     showcaseVideo: {

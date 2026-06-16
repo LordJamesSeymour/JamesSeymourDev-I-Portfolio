@@ -5,6 +5,7 @@ import { getProjectBySlug } from "../lib/projects";
 import { placeholderCaption } from "../lib/placeholder";
 import { useProjectText } from "../content/content";
 import ProjectMedia from "../components/projects/ProjectMedia";
+import CursorProjectMedia from "../components/projects/CursorProjectMedia";
 import ProjectCaseStudy from "../components/projects/ProjectCaseStudy";
 import ProjectLogo from "../components/projects/ProjectLogo";
 import YouTubeEmbed from "../components/projects/YouTubeEmbed";
@@ -529,7 +530,11 @@ export default function ProjectPage() {
           </SuperBombermanSpriteShowcase>
         ) : (
           <div className="project-detail__media">
-            <ProjectMedia cover={heroCover} label={title} caption={caption} />
+            {showVaporwaveBackground ? (
+              <CursorProjectMedia cover={heroCover} label={title} caption={caption} />
+            ) : (
+              <ProjectMedia cover={heroCover} label={title} caption={caption} />
+            )}
           </div>
         )}
 

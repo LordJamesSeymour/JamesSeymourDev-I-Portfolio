@@ -28,72 +28,77 @@
   position: absolute;
   display: block;
   opacity: 0.9;
+  contain: paint;
 }
 
+.cursor-deco__art,
 .cursor-deco img {
   display: block;
   width: 100%;
+}
+
+.cursor-deco img {
   height: auto;
   user-select: none;
+}
+
+.cursor-deco__art {
   /* crisp illustration + cyan/pink neon separation from the vaporwave scene */
   filter:
-    drop-shadow(0 0 14px rgba(39, 230, 255, 0.34))
-    drop-shadow(0 0 24px rgba(255, 45, 155, 0.22))
-    drop-shadow(0 14px 16px rgba(0, 0, 0, 0.45));
-  animation: cursor-float-a 8s ease-in-out infinite;
+    drop-shadow(0 0 10px rgba(39, 230, 255, 0.3))
+    drop-shadow(0 10px 12px rgba(0, 0, 0, 0.42));
 }
 
 /* --- dash: top-right, near the header/overview, dashing across the corner --- */
 .cursor-deco--dash {
-  top: 1%;
-  right: calc((100vw - 100%) / -2 + 18px);
-  width: clamp(150px, 17vw, 250px);
+  top: 4%;
+  /* inset ≥ scrollbar width so the 100vw anchor never spills past the viewport */
+  right: calc((100vw - 100%) / -2 + 30px);
+  width: clamp(140px, 16vw, 240px);
   transform: rotate(-7deg);
 }
 
 /* --- wall-jump: left edge of the cover-media card (vertical action) --------- */
 .cursor-deco--walljump {
-  top: 25%;
+  top: 30%;
   left: calc((100vw - 100%) / -2 + 14px);
-  width: clamp(120px, 13vw, 196px);
+  width: clamp(118px, 13vw, 190px);
   transform: rotate(5deg);
-}
-.cursor-deco--walljump img {
-  animation-name: cursor-float-b;
-  animation-duration: 9s;
 }
 
 /* --- grapple: right edge near the gameplay-trailer video, angled grapple ---- */
 .cursor-deco--grapple {
-  top: 47%;
-  right: calc((100vw - 100%) / -2 + 12px);
-  width: clamp(150px, 17vw, 248px);
+  top: 58%;
+  right: calc((100vw - 100%) / -2 + 30px);
+  width: clamp(146px, 16vw, 236px);
   transform: rotate(-11deg);
 }
-.cursor-deco--grapple img {
-  animation-duration: 10s;
+.cursor-deco--dash .cursor-deco__art,
+.cursor-deco--grapple .cursor-deco__art {
+  animation: cursor-float-a 14s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* --- ball transform: lower-left, video → case-study transition (wide) ------- */
 .cursor-deco--ball {
-  top: 72%;
+  top: 80%;
   left: calc((100vw - 100%) / -2 + 16px);
-  width: clamp(210px, 24vw, 340px);
+  width: clamp(190px, 21vw, 250px);
   transform: rotate(4deg);
 }
-.cursor-deco--ball img {
+.cursor-deco--grapple .cursor-deco__art {
   animation-name: cursor-float-b;
-  animation-duration: 11s;
+  animation-duration: 16s;
 }
 
 /* ------------------------------ idle float ------------------------------- */
 @keyframes cursor-float-a {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-7px); }
 }
 @keyframes cursor-float-b {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(9px); }
+  50% { transform: translateY(6px); }
 }
 
 /* ------------------------------ responsive ------------------------------- */
@@ -115,5 +120,5 @@
 
 /* ---------------------------- reduced motion ----------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .cursor-deco img { animation: none !important; }
+  .cursor-deco__art { animation: none !important; }
 }
