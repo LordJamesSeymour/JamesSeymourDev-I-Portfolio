@@ -14,6 +14,7 @@ import PlayableDemo from "../components/projects/PlayableDemo";
 import SurfersQuestSpriteShowcase from "../components/projects/SurfersQuestSpriteShowcase";
 import SuperBombermanSpriteShowcase from "../components/projects/SuperBombermanSpriteShowcase";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
+import ArcadeMachineGallery from "../components/projects/ArcadeMachineGallery";
 import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
 import CursorVaporwaveBackground from "../components/backgrounds/CursorVaporwaveBackground";
 import CursorProjectDecorations from "../components/projects/CursorProjectDecorations";
@@ -263,6 +264,8 @@ export default function ProjectPage() {
         </article>
 
         <ArcadeMachineReveal />
+
+        <ArcadeMachineGallery />
 
         <article className="container section project-detail project-detail--study">
           {linksBlock}

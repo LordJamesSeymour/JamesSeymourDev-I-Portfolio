@@ -43,7 +43,7 @@ export interface PartConfig {
   spin?: [number, number, number];
   /** Human label shown in the hover callout. */
   label: string;
-  /** Placeholder descriptive copy for the hover callout. */
+  /** Descriptive copy for the hover callout. */
   tip: string;
 }
 
@@ -56,10 +56,10 @@ export interface PartConfig {
  *
  *   Coin panel ─ lower-left  (coinpannel  → straight forward −X, −Y; no Z drift)
  *   Button deck ─ mid-left   (buttonpannel → straight forward −X, +Y; no Z drift)
- *   Chassis ─ left-of-centre anchor                 (chasis → fixed; pan puts it left)
+ *   Chassis ─ left-of-centre anchor                 (chassis → fixed; pan puts it left)
  *   Marquee ─ above the chassis, modestly up        (lable  → +Y, small)
  *   Screen  ─ centre, separated + up                (screem → +Z right, +Y)
- *   Raspberry Pi ─ centre-right, internal reveal    (raspberrypi → +Z)
+ *   Raspberry Pi ─ centre-right, internal reveal    (raspberryPi → +Z)
  *   Lid ─ far right, the side panel, farthest        (lid    → +Z, largest)
  *
  * KEY GEOMETRY:
@@ -76,12 +76,12 @@ export interface PartConfig {
  */
 export const ARCADE_PARTS: Record<string, PartConfig> = {
   // Body tucks toward the LEFT border (−Z) to anchor the diagram and free up the right.
-  chasis: {
-    match: ["Chasis", "Chassis"],
+  chassis: {
+    match: ["Chassis", "Chasis"],
     offset: [0, 0, -0.25],
     window: [0, 1],
     label: "Chassis",
-    tip: "Placeholder: main printed arcade cabinet body.",
+    tip: "A custom chassis designed in Tinkercad and 3D-printed in tough PLA. Its hollow interior houses the electronics that power the arcade machine.",
   },
   // Marquee / sign rises modestly (FIX 4) and tracks the chassis left so it sits above it.
   lable: {
@@ -89,7 +89,7 @@ export const ARCADE_PARTS: Record<string, PartConfig> = {
     offset: [-0.05, 0.4, -0.25],
     window: [0.25, 0.7],
     label: "Marquee",
-    tip: "Placeholder: custom cabinet branding/signage.",
+    tip: "A decorative marquee that gives the machine a distinctive identity and completes its arcade cabinet styling.",
   },
   // Button deck pulled forward off the front (−X) toward the LEFT edge (−Z), up a touch
   // → upper-left. Clears the chassis in X before sliding, so no diagonal clip.
@@ -97,8 +97,8 @@ export const ARCADE_PARTS: Record<string, PartConfig> = {
     match: ["Butttonpannel", "Buttonpannel", "ButtonPanel", "Button"],
     offset: [-0.42, 0.22, -0.42],
     window: [0.28, 0.82],
-    label: "Button panel",
-    tip: "Placeholder: arcade controls and player input panel.",
+    label: "Button Panel",
+    tip: "A decorative control panel that frames the buttons and completes the machine’s arcade-inspired appearance.",
   },
   // Coin panel pulled forward (−X) toward the LEFT edge (−Z) + lower → lower-left,
   // clear of and below the button deck.
@@ -106,8 +106,8 @@ export const ARCADE_PARTS: Record<string, PartConfig> = {
     match: ["Coinpannel", "CoinPanel", "Coin"],
     offset: [-0.52, -0.32, -0.38],
     window: [0.3, 0.88],
-    label: "Coin panel",
-    tip: "Placeholder: front cabinet interface and coin panel detail.",
+    label: "Coin Panel",
+    tip: "A decorative coin panel that reinforces the machine’s classic arcade aesthetic.",
   },
   // Screen slides PURE sideways out the +Z side (≈no Y) → finishes to the RIGHT of the
   // chassis, upright, fully clear of it (no clip, no diagonal-up).
@@ -116,15 +116,15 @@ export const ARCADE_PARTS: Record<string, PartConfig> = {
     offset: [0, 0.03, 0.6],
     window: [0.45, 0.9],
     label: "Screen",
-    tip: "Placeholder: 7-inch display used for the arcade interface.",
+    tip: "A 7-inch Elecrow display selected for its compatibility with the Raspberry Pi 5 and its suitability for the console’s required dimensions.",
   },
   // The Pi pulls further +Z, just below the line, kept clear to the right of the screen.
-  raspberrypi: {
-    match: ["RaspberryPi", "Raspberry", "Pi"],
+  raspberryPi: {
+    match: ["Raspberry Pi", "RaspberryPi", "Raspberry", "Pi"],
     offset: [0.05, -0.08, 1.0],
     window: [0.6, 1.0],
     label: "Raspberry Pi",
-    tip: "Placeholder: Raspberry Pi hardware running the deployed build.",
+    tip: "A Raspberry Pi 5 kit running Linux and providing the computing hardware required to run the games and operate the machine.",
   },
   // Lid is the +Z side panel — lifts straight off its thin axis to the FAR right,
   // the last and farthest piece, settling right at the end of the scroll.
@@ -133,7 +133,7 @@ export const ARCADE_PARTS: Record<string, PartConfig> = {
     offset: [0, 0.1, 1.45],
     window: [0.6, 1.0],
     label: "Lid",
-    tip: "Placeholder: removable side cover / access panel.",
+    tip: "A removable enclosure that conceals and protects the cables, connections and accessories stored inside the machine.",
   },
 };
 

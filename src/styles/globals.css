@@ -1710,7 +1710,7 @@ img {
   top: -64px;
   transform: translateY(-50%);
   width: max-content;
-  max-width: 210px;
+  max-width: min(250px, 32vw);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -1760,6 +1760,8 @@ img {
   font-size: 0.72rem;
   line-height: 1.45;
   color: var(--color-ash);
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 @keyframes amx-tip-in {
   from {

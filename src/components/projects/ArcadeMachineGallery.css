@@ -1,0 +1,221 @@
+.arcade-gallery-section {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-16);
+}
+
+.arcade-gallery-section + .project-detail--study {
+  padding-top: var(--space-12);
+}
+
+.arcade-gallery__head {
+  margin-bottom: var(--space-8);
+}
+
+.arcade-gallery {
+  outline: none;
+}
+
+.arcade-gallery__figure {
+  margin: 0;
+}
+
+.arcade-gallery__stage,
+.arcade-gallery__empty {
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-deep);
+}
+
+.arcade-gallery__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.arcade-gallery:focus-visible .arcade-gallery__stage {
+  border-color: var(--color-plum-bright);
+  box-shadow: var(--ring-focus);
+}
+
+.arcade-gallery__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  animation: arcade-gallery-image-in var(--dur-mid) var(--ease-out);
+}
+
+.arcade-gallery__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  background: rgba(5, 5, 7, 0.82);
+  color: var(--color-bone);
+  font: inherit;
+  font-size: 1.65rem;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  transition: transform var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+
+.arcade-gallery__arrow--prev {
+  left: var(--space-4);
+}
+
+.arcade-gallery__arrow--next {
+  right: var(--space-4);
+}
+
+.arcade-gallery__arrow:hover {
+  transform: translateY(-50%) scale(1.06);
+  border-color: var(--color-plum-bright);
+  background: rgba(128, 82, 255, 0.24);
+}
+
+.arcade-gallery__arrow:focus-visible,
+.arcade-gallery__dot:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+}
+
+.arcade-gallery__caption {
+  max-width: 70ch;
+  margin-top: var(--space-4);
+  color: var(--color-ash);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.arcade-gallery__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  min-height: 44px;
+  margin-top: var(--space-5);
+}
+
+.arcade-gallery__dots {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.arcade-gallery__dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+
+.arcade-gallery__dot::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: var(--radius-pill);
+}
+
+.arcade-gallery__dot:hover {
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.arcade-gallery__dot--active {
+  transform: scale(1.35);
+  border-color: var(--color-plum-bright);
+  background: var(--color-plum);
+}
+
+.arcade-gallery__position {
+  flex: none;
+  margin: 0;
+  color: var(--color-smoke);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+.arcade-gallery__empty {
+  display: grid;
+  min-height: clamp(220px, 38vw, 420px);
+  place-items: center;
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.arcade-gallery__empty p {
+  max-width: 42ch;
+  margin: 0;
+  color: var(--color-smoke);
+}
+
+@keyframes arcade-gallery-image-in {
+  from {
+    opacity: 0.45;
+    transform: scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .arcade-gallery-section {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-12);
+  }
+
+  .arcade-gallery__stage {
+    border-radius: var(--radius);
+  }
+
+  .arcade-gallery__arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .arcade-gallery__arrow--prev {
+    left: var(--space-3);
+  }
+
+  .arcade-gallery__arrow--next {
+    right: var(--space-3);
+  }
+
+  .arcade-gallery__controls {
+    gap: var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arcade-gallery__image {
+    animation: none;
+  }
+}
