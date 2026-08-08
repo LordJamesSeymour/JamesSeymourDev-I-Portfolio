@@ -262,8 +262,9 @@ export const projects: Project[] = [
     // Project-specific vaporwave background (neon grid + retro sun + marble busts
     // + Win95 windows) rendered behind the case study. See CursorVaporwaveBackground.
     theme: "vaporwave",
-    shortDescription: "Placeholder description — a C# project, 'Cursor.zip'.",
-    technologies: ["C#"],
+    shortDescription:
+      "A fast-paced speedrunner set in a Techno-Wave world, where the player controls Cursor, a wallrunning, grappling, ball-transforming character racing through levels at high speed while searching for his wife.",
+    technologies: ["Unity", "C#"],
     featured: true,
     featuredPriority: 4,
     status: "completed",
@@ -286,16 +287,24 @@ export const projects: Project[] = [
     },
     priority: "medium",
     immersive: { showcaseType: "video-screen" },
-    missingAssets: [
-      "Clarify what Cursor.zip is (one-line definition)",
-      "Decide final public-facing title",
-      "Screenshots",
-    ],
+    missingAssets: ["Gameplay screenshots"],
     links: {
       video: "https://youtu.be/g4LTAYN-QgE",
     },
+    // Prose fallbacks mirror public/content/projects/cursor-zip/*.txt (the live,
+    // editable source). The .txt files win at runtime; these keep the page intact
+    // if a fetch fails.
     caseStudy: {
-      overview: "TODO: What is Cursor.zip? Add a short overview.",
+      overview:
+        "Cursor.zip is a high-speed 3D speedrunning game built in Unity over an eight-week university production cycle. The player controls Cursor, a character who can wallrun, grapple and transform into a ball while travelling through a stylised Techno-Wave world. The experience is built around maintaining momentum, mastering its movement mechanics and beating your own completion times.",
+      role:
+        "I worked as Senior Programmer on the project, leading development of the majority of the game's core mechanics. My main focus was the advanced character controller — the system responsible for how Cursor moves, and for the speed and responsiveness that define how the game feels to play.",
+      contributions:
+        "I developed the high-speed movement system at the heart of the game, including wallrunning, grappling, ball transformation and the overall feel of the player's traversal. Alongside this I helped build the input system, the score and completion-time system, and several other critical gameplay systems. A number of experimental features, including an in-game level editor, were prototyped during production but did not make it into the final release.",
+      technicalHighlights:
+        "To speed up level creation, I built a spline-based wallrunning system that let wallrun surfaces be authored and adjusted easily during level design. I also developed an audio-reactive material system that responded dynamically to the music, reinforcing the game's Techno-Wave visual identity.",
+      developmentContext:
+        "Cursor.zip was a group project created by Group 26 at the University of Staffordshire, developed over an eight-week production cycle. Working within the team, I took a senior programming role and owned the core gameplay systems and character controller while collaborating on the features that brought the whole experience together.",
     },
   },
   {
@@ -330,30 +339,39 @@ export const projects: Project[] = [
     name: "Hammer Engine Moonbase Map",
     category: "Level Design",
     shortDescription:
-      "Placeholder description — a moonbase map built in the Hammer (Source) editor.",
+      "An eight-week university level-design project for Team Fortress 2, built in Hammer Editor during the first module of my final year. This King of the Hill map supports 4v4 to 8v8 matches inside a space station on the Moon, where RED and BLU battle over a central rocket—their only route home.",
     technologies: ["Hammer Editor", "Source Engine"],
     featured: false, // intentionally excluded from Featured Projects; stays under Level Design
     status: "completed",
     thumbnail: "/Hammer/HammerMap.png",
-    showcaseVideo: {
-      youtubeId: "TF4499mnCWE",
-      externalUrl: "https://www.youtube.com/watch?v=TF4499mnCWE",
-      title: "Hammer Moonbase Map flyby",
-      heading: "Moonbase map flyby",
-    },
+    showcaseVideos: [
+      {
+        youtubeId: "TF4499mnCWE",
+        externalUrl: "https://www.youtube.com/watch?v=TF4499mnCWE",
+        title: "Hammer Moonbase Map flyby",
+        heading: "Moonbase videos",
+      },
+      {
+        youtubeId: "Vxw3PRF2Iw8",
+        externalUrl: "https://youtu.be/Vxw3PRF2Iw8",
+        title: "KOTH Moonbase map commentary",
+        heading: "Moonbase videos",
+      },
+    ],
     priority: "medium",
     immersive: { showcaseType: "environment" },
     missingAssets: [
       "Hammer editor screenshot",
       "Top-down layout image",
-      "Written design explanation",
     ],
     links: {
       video: "https://www.youtube.com/watch?v=TF4499mnCWE",
     },
     caseStudy: {
-      overview: "TODO: Describe the level. Confirm target game / Source branch.",
-      designDecisions: "TODO: layout, flow, and pacing decisions.",
+      overview:
+        "The project explored how a compact competitive space could remain fair while carrying a clear narrative. Designed for 8 to 16 players, the map uses King of the Hill to concentrate both teams on a single control point built around the station’s central rocket. RED and BLU approach equivalent playable spaces within a symmetrical layout, supporting orientation and equal access to the objective. Around that shared geometry, team-specific architecture, props and environmental decoration distinguish the two halves and explain the conflict: both companies are stranded on the Moon and the rocket is their only means of returning home.",
+      designDecisions:
+        "King of the Hill suited the project because a single contested objective keeps attention on the story’s most important element: the rocket. Positioning the control point at the centre makes each team’s goal immediately legible and gives every match a clear focus. The intended 4v4 to 8v8 scale keeps encounters concentrated around that objective.\n\nThe layout is mirrored between RED and BLU so neither team gains a geometric advantage and players can understand the opposing half through what they learn on their own. The route plan uses matching tunnels, cover, stairs, elevated positions and flank hatches around the central arena; these elements remain equivalent even when their presentation changes.\n\nThe visual concept draws on the lunar-station setting of the Overwatch Moonbase map while translating it into Team Fortress 2’s stylised industrial world and RED-versus-BLU fiction. Distinct company decoration gives each half its own identity without changing the playable space. This set dressing also carries the narrative, framing the fight as a struggle between two stranded companies for the only rocket capable of taking them home.",
     },
   },
 ];

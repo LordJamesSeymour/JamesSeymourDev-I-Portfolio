@@ -15,6 +15,10 @@ export type ProjectTextField =
   | "long-description"
   | "inside-description"
   | "creative-process"
+  | "role"
+  | "contributions"
+  | "technical-highlights"
+  | "development-context"
   | "needs";
 
 export const siteContentPath = (name: string): string => `content/site/${name}.txt`;

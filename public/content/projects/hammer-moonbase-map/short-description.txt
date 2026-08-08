@@ -1,1 +1,1 @@
-Placeholder description — a moonbase map built in the Hammer (Source) editor.
+An eight-week university level-design project for Team Fortress 2, built in Hammer Editor during the first module of my final year. This King of the Hill map supports 4v4 to 8v8 matches inside a space station on the Moon, where RED and BLU battle over a central rocket—their only route home.

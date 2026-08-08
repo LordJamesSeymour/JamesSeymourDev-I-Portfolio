@@ -60,6 +60,22 @@ export default function ProjectPage() {
     "creative-process",
     project?.caseStudy?.creativeProcess ?? "",
   );
+  const role = useProjectText(safeSlug, "role", project?.caseStudy?.role ?? "");
+  const contributions = useProjectText(
+    safeSlug,
+    "contributions",
+    project?.caseStudy?.contributions ?? "",
+  );
+  const technicalHighlights = useProjectText(
+    safeSlug,
+    "technical-highlights",
+    project?.caseStudy?.technicalHighlights ?? "",
+  );
+  const developmentContext = useProjectText(
+    safeSlug,
+    "development-context",
+    project?.caseStudy?.developmentContext ?? "",
+  );
 
   useEffect(() => {
     const handleDemoMessage = (event: MessageEvent) => {
@@ -118,15 +134,19 @@ export default function ProjectPage() {
   const caption = placeholderCaption(project.immersive?.showcaseType);
 
   // Editable text files supply the case-study prose while structural metadata stays
-  // in projects.ts.
-  const caseStudy =
-    longDesc || creativeProcess
-      ? {
-          ...(project.caseStudy ?? {}),
-          overview: longDesc || undefined,
-          creativeProcess: creativeProcess || undefined,
-        }
-      : project.caseStudy;
+  // in projects.ts. Each field falls back to projects.ts (the fetch fallback), so an
+  // empty/missing .txt keeps the data-driven value rather than blanking the section.
+  const editableCaseStudy = {
+    overview: longDesc || undefined,
+    role: role || undefined,
+    contributions: contributions || undefined,
+    creativeProcess: creativeProcess || undefined,
+    technicalHighlights: technicalHighlights || undefined,
+    developmentContext: developmentContext || undefined,
+  };
+  const caseStudy = Object.values(editableCaseStudy).some(Boolean)
+    ? { ...(project.caseStudy ?? {}), ...editableCaseStudy }
+    : project.caseStudy;
 
   const { links } = project;
   const hasLinks = links && Object.values(links).some(Boolean);

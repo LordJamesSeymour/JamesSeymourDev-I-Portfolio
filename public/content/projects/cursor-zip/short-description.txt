@@ -1,1 +1,1 @@
-Placeholder description — a C# project, 'Cursor.zip'.
+A fast-paced speedrunner set in a Techno-Wave world, where the player controls Cursor, a wallrunning, grappling, ball-transforming character racing through levels at high speed while searching for his wife.

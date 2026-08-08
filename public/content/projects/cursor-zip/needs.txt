@@ -1,3 +1,2 @@
-Clarify what Cursor.zip is (one-line definition)
-Decide final public-facing title
-Screenshots
+Gameplay screenshots (in-engine)
+Optional: screenshots of the spline wallrun tool and audio-reactive materials

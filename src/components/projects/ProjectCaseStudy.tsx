@@ -17,10 +17,13 @@ export default function ProjectCaseStudy({
 
   const textSections: { label: string; value?: string }[] = [
     { label: "Overview", value: caseStudy.overview },
-    { label: "Creative Process", value: caseStudy.creativeProcess },
     { label: "My Role", value: caseStudy.role },
+    { label: "Key Contributions", value: caseStudy.contributions },
+    { label: "Creative Process", value: caseStudy.creativeProcess },
+    { label: "Technical Highlights", value: caseStudy.technicalHighlights },
     { label: "Technical Challenges", value: caseStudy.technicalChallenges },
     { label: "Design Decisions", value: caseStudy.designDecisions },
+    { label: "Development Context", value: caseStudy.developmentContext },
     { label: "Final Result", value: caseStudy.finalResult },
   ];
 
@@ -35,6 +38,20 @@ export default function ProjectCaseStudy({
 
       {afterOverview}
 
+      {caseStudy.role && (
+        <section className="case-study__block">
+          <h3>My Role</h3>
+          <p>{caseStudy.role}</p>
+        </section>
+      )}
+
+      {caseStudy.contributions && (
+        <section className="case-study__block">
+          <h3>Key Contributions</h3>
+          <p>{caseStudy.contributions}</p>
+        </section>
+      )}
+
       {caseStudy.creativeProcess && (
         <section className="case-study__block">
           <h3>Creative Process</h3>
@@ -42,10 +59,10 @@ export default function ProjectCaseStudy({
         </section>
       )}
 
-      {caseStudy.role && (
+      {caseStudy.technicalHighlights && (
         <section className="case-study__block">
-          <h3>My Role</h3>
-          <p>{caseStudy.role}</p>
+          <h3>Technical Highlights</h3>
+          <p>{caseStudy.technicalHighlights}</p>
         </section>
       )}
 
@@ -71,6 +88,13 @@ export default function ProjectCaseStudy({
         <section className="case-study__block">
           <h3>Design Decisions</h3>
           <p>{caseStudy.designDecisions}</p>
+        </section>
+      )}
+
+      {caseStudy.developmentContext && (
+        <section className="case-study__block">
+          <h3>Development Context</h3>
+          <p>{caseStudy.developmentContext}</p>
         </section>
       )}
 

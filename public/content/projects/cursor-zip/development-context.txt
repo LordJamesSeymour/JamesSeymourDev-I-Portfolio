@@ -1,0 +1,1 @@
+Cursor.zip was a group project created by Group 26 at the University of Staffordshire, developed over an eight-week production cycle. Working within the team, I took a senior programming role and owned the core gameplay systems and character controller while collaborating on the features that brought the whole experience together.

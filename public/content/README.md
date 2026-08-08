@@ -46,9 +46,15 @@ Each project folder (e.g. `projects/cursor-zip/`) has:
 | `title.txt` | Project name on the card and detail page |
 | `short-description.txt` | One-line description on the card + detail intro |
 | `long-description.txt` | The "Overview" paragraph in the case study |
+| `role.txt` | The "My Role" paragraph in the case study, when present |
+| `contributions.txt` | The "Key Contributions" paragraph in the case study, when present |
 | `creative-process.txt` | The "Creative Process" paragraph in the case study, when present |
+| `technical-highlights.txt` | The "Technical Highlights" paragraph in the case study, when present |
+| `development-context.txt` | The "Development Context" paragraph in the case study, when present |
 | `inside-description.txt` | Optional project-specific showcase intro |
 | `needs.txt` | Your private "still needed" checklist — one item per line. **Dev-only**, never shown on the live site. |
+
+Each case-study file is one paragraph. Leave a file out to hide that section.
 
 The project slugs are: `arcade-machine`, `surfers-quest`, `bomberman-style-game`,
 `eos-dedicated-server`, `basilisk-engine`, `cursor-zip`, `zombies-vr`,

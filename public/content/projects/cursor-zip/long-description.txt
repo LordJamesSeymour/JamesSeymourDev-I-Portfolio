@@ -1,1 +1,1 @@
-TODO: What is Cursor.zip? Add a short overview.
+Cursor.zip is a high-speed 3D speedrunning game built in Unity over an eight-week university production cycle. The player controls Cursor, a character who can wallrun, grapple and transform into a ball while travelling through a stylised Techno-Wave world. The experience is built around maintaining momentum, mastering its movement mechanics and beating your own completion times.

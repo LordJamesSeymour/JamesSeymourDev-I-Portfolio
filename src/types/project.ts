@@ -63,9 +63,15 @@ export interface ProjectCaseStudy {
   overview?: string;
   creativeProcess?: string;
   role?: string;
+  /** "Key Contributions" — what the author personally built/owned. */
+  contributions?: string;
   keyFeatures?: string[];
+  /** "Technical Highlights" — standout systems/tech worth calling out. */
+  technicalHighlights?: string;
   technicalChallenges?: string;
   designDecisions?: string;
+  /** "Development Context" — team, timeframe, course/brief framing. */
+  developmentContext?: string;
   finalResult?: string;
 }
 

@@ -1,0 +1,1 @@
+I worked as Senior Programmer on the project, leading development of the majority of the game's core mechanics. My main focus was the advanced character controller — the system responsible for how Cursor moves, and for the speed and responsiveness that define how the game feels to play.
