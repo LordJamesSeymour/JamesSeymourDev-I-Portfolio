@@ -263,7 +263,7 @@ export const projects: Project[] = [
     // + Win95 windows) rendered behind the case study. See CursorVaporwaveBackground.
     theme: "vaporwave",
     shortDescription:
-      "A fast-paced speedrunner set in a Techno-Wave world, where the player controls Cursor, a wallrunning, grappling, ball-transforming character racing through levels at high speed while searching for his wife.",
+      "Cursor.zip is a third-person 3D platformer built in Unity, where players use wallrunning, grappling and ball transformation to complete an early-internet-inspired track as quickly as possible. Its movement-focused structure rewards maintaining speed, linking abilities and improving each run.",
     technologies: ["Unity", "C#"],
     featured: true,
     featuredPriority: 4,
@@ -296,15 +296,15 @@ export const projects: Project[] = [
     // if a fetch fails.
     caseStudy: {
       overview:
-        "Cursor.zip is a high-speed 3D speedrunning game built in Unity over an eight-week university production cycle. The player controls Cursor, a character who can wallrun, grapple and transform into a ball while travelling through a stylised Techno-Wave world. The experience is built around maintaining momentum, mastering its movement mechanics and beating your own completion times.",
+        "Developed over eight weeks for my final university module, Cursor.zip was created by a multidisciplinary team of 21 people, including five programmers. The game pairs high-speed third-person platforming with a 3D setting shaped by the visual style and culture of the early internet. Players navigate the track, link movement abilities and work towards faster completion times, with Haste and Clustertruck providing the main reference points for its pace and momentum.",
       role:
-        "I worked as Senior Programmer on the project, leading development of the majority of the game's core mechanics. My main focus was the advanced character controller — the system responsible for how Cursor moves, and for the speed and responsiveness that define how the game feels to play.",
+        "As Senior Programmer, I developed the complete character controller and the complete player movement system, including all major character mechanics. I also contributed substantially to the input system and provided technical oversight across the wider Unity project, helping ensure that the screen flow, core gameplay loop and connected systems worked together correctly. My remit centred on programming ownership and integration within the wider multidisciplinary team.",
       contributions:
-        "I developed the high-speed movement system at the heart of the game, including wallrunning, grappling, ball transformation and the overall feel of the player's traversal. Alongside this I helped build the input system, the score and completion-time system, and several other critical gameplay systems. A number of experimental features, including an in-game level editor, were prototyped during production but did not make it into the final release.",
+        "My core contribution was end-to-end ownership of the character controller and movement code, including the wallrunning, grappling and ball-transformation mechanics used by the player. Beyond those systems, I made significant contributions to input and helped connect the screen flow and gameplay loop across the project. Throughout production, I supported the structure, reliability and overall quality of the codebase while overseeing how the major gameplay systems fitted together.",
       technicalHighlights:
-        "To speed up level creation, I built a spline-based wallrunning system that let wallrun surfaces be authored and adjusted easily during level design. I also developed an audio-reactive material system that responded dynamically to the music, reinforcing the game's Techno-Wave visual identity.",
+        "To speed up level creation, I built a spline-based wallrunning system that allowed wallrun surfaces to be authored and adjusted during level design. I also developed an audio-reactive material system that responded dynamically to the music, reinforcing the game's early-internet-inspired visual identity.",
       developmentContext:
-        "Cursor.zip was a group project created by Group 26 at the University of Staffordshire, developed over an eight-week production cycle. Working within the team, I took a senior programming role and owned the core gameplay systems and character controller while collaborating on the features that brought the whole experience together.",
+        "Cursor.zip was developed by Group 26 at the University of Staffordshire during an eight-week final-module production. The team comprised 21 people across multiple disciplines, including five programmers. The module was structured to develop collaboration, communication and other professional working practices by asking a comparatively large student team to build a complete game together. Working at that scale demonstrates my ability to take ownership of complex gameplay systems while contributing to a shared technical direction.",
     },
   },
   {

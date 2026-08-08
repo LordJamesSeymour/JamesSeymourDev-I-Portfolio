@@ -1,1 +1,1 @@
-A fast-paced speedrunner set in a Techno-Wave world, where the player controls Cursor, a wallrunning, grappling, ball-transforming character racing through levels at high speed while searching for his wife.
+Cursor.zip is a third-person 3D platformer built in Unity, where players use wallrunning, grappling and ball transformation to complete an early-internet-inspired track as quickly as possible. Its movement-focused structure rewards maintaining speed, linking abilities and improving each run.
