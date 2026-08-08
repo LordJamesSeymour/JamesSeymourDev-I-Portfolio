@@ -1,1 +1,1 @@
-Placeholder description — a custom C++ game engine, 'Basilisk Engine'.
+Basilisk Engine is an ongoing personal C++ project: a focused 3D game engine and editor developed as a practical environment for strengthening my C++ skills and understanding game-engine architecture. Its long-term purpose is to support the creation of a small playable game.

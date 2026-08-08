@@ -215,7 +215,7 @@ export const projects: Project[] = [
     name: "Basilisk Engine",
     category: "C++",
     shortDescription:
-      "Placeholder description — a custom C++ game engine, 'Basilisk Engine'.",
+      "Basilisk Engine is an ongoing personal C++ project: a focused 3D game engine and editor developed as a practical environment for strengthening my C++ skills and understanding game-engine architecture. Its long-term purpose is to support the creation of a small playable game.",
     technologies: ["C++"],
     featured: true,
     featuredPriority: 1,
@@ -247,10 +247,21 @@ export const projects: Project[] = [
       video: "https://youtu.be/EFVWiAf81z0",
     },
     caseStudy: {
-      overview: "TODO: Describe the engine's scope and goals.",
-      keyFeatures: ["TODO: engine subsystem"],
-      technicalChallenges: "TODO: graphics / architecture challenges.",
-      designDecisions: "TODO: architectural decisions.",
+      overview:
+        "I began Basilisk Engine as a hands-on way to understand how rendering, scene data, editor tooling, physics and runtime behaviour work together inside a game engine. The project takes workflow inspiration from editors such as Unity and Unreal Engine, while remaining deliberately smaller and more focused in scope. I introduce systems when I understand them and expect them to serve a concrete purpose in my own projects, rather than attempting to reproduce the breadth of a commercial general-purpose engine. This makes each feature a practical C++ and architecture exercise while keeping the engine aligned with my own development workflow. My long-term objective is to use Basilisk Engine to create a small playable game.",
+      keyFeatures: [
+        "An OpenGL-based 3D renderer currently supporting cube, pyramid and low-poly sphere meshes within a dedicated scene viewport.",
+        "A parent-and-child scene hierarchy, object selection, camera controls and move, rotate and scale gizmos with optional snapping.",
+        "An Inspector for editing object names and transforms, alongside a component workflow currently demonstrated through an attachable Physics Component.",
+        "Basic physics functionality covering gravity, primitive collision and friction during simulation.",
+        "Project and scene persistence, including project descriptors, scene serialisation and restoration of the most recently opened project.",
+        "A content browser with folder navigation and creation, plus reusable prefabs that can preserve and instantiate complete object hierarchies.",
+        "Separate editing and runtime modes, with Play, Pause and Stop controls, an independent Game View camera and restoration of the original editing scene when simulation ends.",
+      ],
+      technicalChallenges:
+        "Developing the 3D rendering pipeline has been the most difficult part of Basilisk Engine. It required coordinating SFML’s window and OpenGL context with GLAD function loading, GPU-managed mesh data, shader compilation, depth and viewport state, and the model, view and projection transforms handled through GLM. As the editor developed, the renderer also needed to support multiple cameras, bounded viewports, selection outlines, scene grids and transform gizmos without allowing one system’s render state to interfere with another. Working through this process has given me a clearer practical understanding of how scene data moves through a rendering pipeline and how rendering systems must support both runtime content and editor tooling.",
+      designDecisions:
+        "Basilisk Engine uses a component-based object architecture inspired by workflows found in Unity and Unreal Engine. Objects can be extended through attachable components rather than having every responsibility built directly into a single object type. The current implementation demonstrates this through the Physics Component, which exposes gravity, friction and collision settings in the Inspector while connecting them to the runtime simulation. Keeping the engine’s feature set deliberately restricted is another central decision. Systems are added when they support a practical requirement or a specific area I want to understand, allowing me to follow their behaviour from editor input through to runtime execution. C++ will continue to power the engine core and editor, while C# gameplay scripting remains a future objective. The intended scripting layer would support game-specific behaviours and components, but it is not currently operational. The exact integration approach—potentially involving an established .NET toolchain and bindings between C# and the C++ engine—is still being researched.",
     },
   },
 
