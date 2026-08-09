@@ -43,6 +43,11 @@ export interface ProjectLinks {
   demo?: string;
   video?: string;
   download?: string;
+  /** Additional labelled external links, such as a studio or project website. */
+  external?: Array<{
+    label: string;
+    url: string;
+  }>;
 }
 
 export interface ProjectLogo {

@@ -51,7 +51,7 @@ export default function Button({
     // mailto: links should navigate in place.
     const external = /^https?:\/\//i.test(href);
     const target = external ? "_blank" : undefined;
-    const rel = external ? "noreferrer" : undefined;
+    const rel = external ? "noopener noreferrer" : undefined;
     return (
       <a className={classes} href={href} target={target} rel={rel}>
         {content}

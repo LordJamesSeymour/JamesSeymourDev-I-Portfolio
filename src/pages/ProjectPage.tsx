@@ -236,6 +236,11 @@ export default function ProjectPage() {
           Download
         </Button>
       )}
+      {links?.external?.map((link) => (
+        <Button key={`${link.label}-${link.url}`} href={link.url} variant="ghost">
+          {link.label}
+        </Button>
+      ))}
     </div>
   ) : null;
 

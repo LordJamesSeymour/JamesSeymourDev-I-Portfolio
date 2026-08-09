@@ -1,1 +1,1 @@
-Placeholder description — a dedicated server using Epic Online Services (EOS).
+The EOS Dedicated Server framework is a reusable Unreal Engine 5.4 multiplayer foundation developed during my industry placement at BinaryBox Studios. It supports player-hosted and dedicated-server sessions through Epic Online Services, alongside Steam invitations and platform interface integration.

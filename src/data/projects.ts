@@ -162,8 +162,13 @@ export const projects: Project[] = [
     name: "EOS Dedicated Server",
     category: "C++",
     shortDescription:
-      "Placeholder description — a dedicated server using Epic Online Services (EOS).",
-    technologies: ["C++", "Epic Online Services"],
+      "The EOS Dedicated Server framework is a reusable Unreal Engine 5.4 multiplayer foundation developed during my industry placement at BinaryBox Studios. It supports player-hosted and dedicated-server sessions through Epic Online Services, alongside Steam invitations and platform interface integration.",
+    technologies: [
+      "C++",
+      "Unreal Engine 5.4",
+      "Epic Online Services",
+      "Steamworks API",
+    ],
     featured: true,
     featuredPriority: 2,
     status: "completed",
@@ -203,11 +208,30 @@ export const projects: Project[] = [
     ],
     links: {
       video: "https://www.youtube.com/watch?v=qfgG6GS0QKE",
+      external: [
+        {
+          label: "BinaryBox Studios",
+          url: "https://binaryboxstudios.es/",
+        },
+      ],
     },
     caseStudy: {
-      overview: "TODO: Describe the EOS dedicated server / networking work.",
-      keyFeatures: ["TODO: networking feature"],
-      technicalChallenges: "TODO: networking / multiplayer challenges.",
+      overview:
+        "This project focused on the infrastructure surrounding a multiplayer game rather than gameplay replication alone. It supports both player-hosted sessions and standalone dedicated servers, with separate Unreal Engine client and server targets reflecting the different responsibilities of each application. Servers advertise public sessions through Unreal Engine's Online Subsystem interfaces, allowing clients to search for and join available player-hosted sessions or dedicated servers. Epic Online Services provides the Epic-facing discovery, invitation and interface functionality, while the Steamworks API integrates Steam invitations and its platform UI. A manually supplied server address is also supported as an alternative connection method.",
+      keyFeatures: [
+        "Separate game, client, editor and dedicated-server build targets.",
+        "Support for player-hosted sessions and standalone dedicated servers.",
+        "Public session and server advertising through Unreal Engine's Online Subsystem.",
+        "End-to-end discovery and joining of player-hosted sessions and dedicated servers.",
+        "Epic Online Services integration for Epic invitations, discovery and interface functionality.",
+        "Steamworks API integration for Steam invitations and platform UI.",
+        "Manual server-address connections as an alternative to online discovery.",
+        "Dedicated-server-specific initialisation that keeps client and server runtime paths distinct.",
+      ],
+      technicalChallenges:
+        "The most difficult aspect was making public session and server advertising work reliably for users. Creating a multiplayer session was only one part of the process: it also needed to be announced through the selected online service, returned by client searches and represented with enough connection information for another user to join it successfully. Resolving this required me to trace behaviour across Unreal Engine's session interfaces, asynchronous discovery callbacks, dedicated-server runtime and the external EOS and Steam platform layers. The process gave me a much stronger understanding of how public multiplayer sessions are published, discovered and connected to across separate applications.",
+      developmentContext:
+        "I developed the framework during my university placement year at BinaryBox Studios, a company specialising in virtual reality development. The industry setting required a reusable technical foundation that could separate multiplayer infrastructure from project-specific gameplay. Developing the framework expanded my understanding of multiplayer engineering beyond replicated actors and gameplay logic. It required me to consider build targets, server authority, application lifecycles, online-service configuration and the complete route through which sessions are advertised, discovered and joined.",
     },
   },
   {
