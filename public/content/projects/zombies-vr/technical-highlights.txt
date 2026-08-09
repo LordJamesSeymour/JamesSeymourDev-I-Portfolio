@@ -1,0 +1,1 @@
+The Unity XR Interaction Toolkit provides the VR interaction foundation for the project. My focus was on connecting that framework to the game's economy, objective and survival systems so that each element supports a complete playable experience rather than functioning as a separate prototype.

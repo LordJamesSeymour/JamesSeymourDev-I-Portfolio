@@ -1,1 +1,1 @@
-Placeholder description — a VR zombies game built in C# (likely Unity + XR).
+Zombies VR is a Unity virtual-reality zombie-survival vertical slice developed during my second year at university. Players balance ammunition purchases and objective work against increasingly dangerous hordes, creating a repeatable loop built around resource management and survival.

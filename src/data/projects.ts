@@ -347,24 +347,41 @@ export const projects: Project[] = [
     name: "Zombies VR",
     category: "C#",
     shortDescription:
-      "Placeholder description — a VR zombies game built in C# (likely Unity + XR).",
-    technologies: ["C#", "Unity", "VR"],
+      "Zombies VR is a Unity virtual-reality zombie-survival vertical slice developed during my second year at university. Players balance ammunition purchases and objective work against increasingly dangerous hordes, creating a repeatable loop built around resource management and survival.",
+    technologies: ["C#", "Unity", "Unity XR Interaction Toolkit", "VR"],
     featured: true,
     featuredPriority: 3,
     status: "in-progress",
     priority: "high",
     immersive: { showcaseType: "video-screen" },
     missingAssets: [
-      "VR gameplay video",
       "Interaction / combat clip",
       "Screenshots",
       "Platform / headset information",
       "Card thumbnail",
     ],
-    links: {},
+    showcaseVideo: {
+      youtubeId: "dYu7pb0Y944",
+      externalUrl: "https://www.youtube.com/watch?v=dYu7pb0Y944",
+      title: "Zombies VR gameplay demonstration",
+      heading: "Gameplay demonstration",
+    },
+    links: {
+      video: "https://www.youtube.com/watch?v=dYu7pb0Y944",
+    },
     caseStudy: {
-      overview: "TODO: Describe the VR game. Confirm engine + target headset.",
-      keyFeatures: ["TODO: VR interaction feature"],
+      overview:
+        "Developed in Unity using the Unity XR Interaction Toolkit, Zombies VR was designed as a vertical slice rather than a collection of isolated VR mechanics. The player must manage an in-game economy, purchase ammunition, complete objectives and survive escalating zombie pressure. These systems reinforce one another: available resources affect how effectively the player can prepare for combat, objectives create priorities beyond survival alone, and increasingly dangerous hordes apply pressure throughout each run. The project demonstrates my experience of combining Unity, VR interaction tooling and gameplay systems into a cohesive survival loop.",
+      technicalHighlights:
+        "The Unity XR Interaction Toolkit provides the VR interaction foundation for the project. My focus was on connecting that framework to the game's economy, objective and survival systems so that each element supports a complete playable experience rather than functioning as a separate prototype.",
+      keyFeatures: [
+        "Unity VR vertical slice built using the Unity XR Interaction Toolkit.",
+        "An in-game economy that requires players to manage resources.",
+        "Ammunition purchases that directly support continued survival.",
+        "Objectives to complete while managing combat pressure.",
+        "Increasingly dangerous zombie hordes that escalate the survival challenge.",
+        "A connected gameplay loop that brings economy management, objectives, combat and enemy pressure together.",
+      ],
     },
   },
 

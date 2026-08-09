@@ -34,7 +34,7 @@ export default function Header() {
           <NavLink to="/projects" className="nav__link">
             Projects
           </NavLink>
-          <a className="nav__link nav__link--secondary" href="/#contact">
+          <a className="nav__link nav__link--secondary" href="/#about">
             About
           </a>
           <Button href="/#contact" className="nav__cta">

@@ -15,6 +15,7 @@ import SurfersQuestSpriteShowcase from "../components/projects/SurfersQuestSprit
 import SuperBombermanSpriteShowcase from "../components/projects/SuperBombermanSpriteShowcase";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import ArcadeMachineGallery from "../components/projects/ArcadeMachineGallery";
+import MoonbaseHeroCarousel from "../components/projects/MoonbaseHeroCarousel";
 import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
 import CursorVaporwaveBackground from "../components/backgrounds/CursorVaporwaveBackground";
 import CursorProjectDecorations from "../components/projects/CursorProjectDecorations";
@@ -133,6 +134,9 @@ export default function ProjectPage() {
     project.media?.[0] ??
     (project.thumbnail ? { type: "image", src: project.thumbnail } : undefined);
   const caption = placeholderCaption(project.immersive?.showcaseType);
+  // A single hosted showcase video can stand in for missing hero media. This keeps
+  // project pages with a supplied YouTube clip from falling back to a generic placeholder.
+  const showcaseVideoAsHero = !heroCover ? project.showcaseVideo : undefined;
 
   // Editable text files supply the case-study prose while structural metadata stays
   // in projects.ts. Each field falls back to projects.ts (the fetch fallback), so an
@@ -161,6 +165,7 @@ export default function ProjectPage() {
   const showVaporwaveBackground = project.theme === "vaporwave";
   const showSurfersQuestDemo = project.slug === "surfers-quest";
   const showBombermanDemo = project.slug === "bomberman-style-game";
+  const showMoonbaseCarousel = project.slug === "hammer-moonbase-map";
 
   const handleDemoFullscreen = () => {
     const demoContainer = demoContainerRef.current;
@@ -556,6 +561,22 @@ export default function ProjectPage() {
               </section>
             </PlayableDemo>
           </SuperBombermanSpriteShowcase>
+        ) : showMoonbaseCarousel ? (
+          <MoonbaseHeroCarousel />
+        ) : showcaseVideoAsHero ? (
+          <section className="project-detail__showcase">
+            <div className="project-detail__showcase-head">
+              <h2>{showcaseVideoAsHero.heading}</h2>
+              <a
+                href={showcaseVideoAsHero.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Watch on YouTube <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <YouTubeEmbed video={showcaseVideoAsHero} />
+          </section>
         ) : (
           <div className="project-detail__media">
             {showVaporwaveBackground ? (
@@ -566,7 +587,7 @@ export default function ProjectPage() {
           </div>
         )}
 
-        {project.showcaseVideo && (
+        {project.showcaseVideo && !showcaseVideoAsHero && (
           <section className="project-detail__showcase">
             <div className="project-detail__showcase-head">
               <h2>{project.showcaseVideo.heading}</h2>

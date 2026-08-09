@@ -23,6 +23,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Keep anchored section headings clear of the sticky primary navigation. */
+.section[id] {
+  scroll-margin-top: var(--space-16);
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
