@@ -3,20 +3,54 @@ import type { ProjectCarouselImage } from "./ProjectImageCarousel";
 interface MoonbaseGalleryMetadata {
   alt: string;
   caption?: string;
+  width: number;
+  height: number;
 }
 
 /**
  * Optional copy keyed by the exact filename. Add an entry here to override the
- * neutral generated alt text or to show a caption beneath a photograph.
+ * neutral generated alt text or to show a caption beneath a photograph. Native
+ * dimensions keep each slide at its real aspect ratio before the image loads.
  */
 export const MOONBASE_GALLERY_METADATA: Record<
   string,
   MoonbaseGalleryMetadata
 > = {
-  // "01-moonbase-overview.jpg": {
-  //   alt: "Custom alternative text",
-  //   caption: "Optional caption shown beneath the photograph.",
-  // },
+  "1.png": {
+    alt: "Hammer Engine – Moonbase project screenshot 1",
+    width: 1685,
+    height: 942,
+  },
+  "2.png": {
+    alt: "Hammer Engine – Moonbase project screenshot 2",
+    width: 732,
+    height: 863,
+  },
+  "3.png": {
+    alt: "Hammer Engine – Moonbase project screenshot 3",
+    width: 1780,
+    height: 883,
+  },
+  "4.png": {
+    alt: "Hammer Engine – Moonbase project screenshot 4",
+    width: 1920,
+    height: 1080,
+  },
+  "5.png": {
+    alt: "Hammer Engine – Moonbase project screenshot 5",
+    width: 1919,
+    height: 1043,
+  },
+  "6.png": {
+    alt: "Hammer Engine – Moonbase project screenshot 6",
+    width: 1919,
+    height: 1040,
+  },
+  "7.png": {
+    alt: "Hammer Engine – Moonbase project screenshot 7",
+    width: 1920,
+    height: 1080,
+  },
 };
 
 // Vite discovers numbered images in this project folder at build time. Requiring
@@ -50,13 +84,15 @@ export const moonbaseGalleryImages: ProjectCarouselImage[] = Object.entries(
 )
   .map(([path, src]) => {
     const fileName = fileNameFromPath(path);
-    const metadata = MOONBASE_GALLERY_METADATA[fileName];
+    const metadata = MOONBASE_GALLERY_METADATA[fileName.toLowerCase()];
 
     return {
       fileName,
       src,
       alt: metadata?.alt ?? defaultAlt(fileName),
       caption: metadata?.caption,
+      width: metadata?.width,
+      height: metadata?.height,
     };
   })
   .filter((image) => isNumberedCarouselImage(image.fileName))

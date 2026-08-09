@@ -352,6 +352,13 @@ export const projects: Project[] = [
     featured: true,
     featuredPriority: 3,
     status: "in-progress",
+    youtubeCardPreview: {
+      youtubeId: "dYu7pb0Y944",
+      startSeconds: 75,
+      endSeconds: 83,
+      poster: "https://i.ytimg.com/vi/dYu7pb0Y944/maxresdefault.jpg",
+      alt: "Zombies VR gameplay preview",
+    },
     priority: "high",
     immersive: { showcaseType: "video-screen" },
     missingAssets: [

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { KeyboardEvent, PointerEvent } from "react";
 import "./ProjectImageCarousel.css";
 
@@ -7,6 +7,8 @@ export interface ProjectCarouselImage {
   src: string;
   alt: string;
   caption?: string;
+  width?: number;
+  height?: number;
 }
 
 interface ProjectImageCarouselProps {
@@ -14,7 +16,7 @@ interface ProjectImageCarouselProps {
   ariaLabel: string;
   imageLabel: string;
   emptyMessage: string;
-  variant?: "default" | "hero";
+  variant?: "default" | "hero" | "adaptive";
   prioritiseFirstImage?: boolean;
 }
 
@@ -35,10 +37,33 @@ export default function ProjectImageCarousel({
   prioritiseFirstImage = false,
 }: ProjectImageCarouselProps) {
   const [active, setActive] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState(() =>
+    typeof window === "undefined" ? 900 : window.innerHeight,
+  );
   const swipeStart = useRef<SwipeStart | null>(null);
   const count = images.length;
   const safeActive = count > 0 ? Math.min(active, count - 1) : 0;
   const current = images[safeActive];
+
+  useEffect(() => {
+    if (count < 2) return;
+
+    const adjacent = [
+      images[(safeActive - 1 + count) % count],
+      images[(safeActive + 1) % count],
+    ];
+    adjacent.forEach((image) => {
+      const preload = new Image();
+      preload.src = image.src;
+    });
+  }, [count, images, safeActive]);
+
+  useEffect(() => {
+    if (variant !== "adaptive") return;
+    const updateViewportHeight = () => setViewportHeight(window.innerHeight);
+    window.addEventListener("resize", updateViewportHeight);
+    return () => window.removeEventListener("resize", updateViewportHeight);
+  }, [variant]);
 
   const step = (delta: number) => {
     if (count < 2) return;
@@ -91,6 +116,19 @@ export default function ProjectImageCarousel({
     );
   }
 
+  const adaptiveStageStyle =
+    variant === "adaptive" && current.width && current.height
+      ? {
+          aspectRatio: `${current.width} / ${current.height}`,
+          maxWidth: `${Math.min(
+            current.width,
+            1200,
+            Math.min(viewportHeight * 0.72, 760, current.height) *
+              (current.width / current.height),
+          )}px`,
+        }
+      : undefined;
+
   return (
     <div
       className={`project-image-carousel project-image-carousel--${variant}`}
@@ -103,6 +141,7 @@ export default function ProjectImageCarousel({
       <figure className="project-image-carousel__figure">
         <div
           className="project-image-carousel__stage"
+          style={adaptiveStageStyle}
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
           onPointerCancel={() => {
@@ -114,6 +153,8 @@ export default function ProjectImageCarousel({
             className="project-image-carousel__image"
             src={current.src}
             alt={current.alt}
+            width={current.width}
+            height={current.height}
             loading={prioritiseFirstImage && safeActive === 0 ? "eager" : "lazy"}
             fetchPriority={
               prioritiseFirstImage && safeActive === 0 ? "high" : "auto"

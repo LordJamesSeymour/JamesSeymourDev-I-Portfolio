@@ -3,6 +3,7 @@ import type { Project, ProjectCover } from "../../types/project";
 import { placeholderCaption } from "../../lib/placeholder";
 import { useProjectText } from "../../content/content";
 import ProjectMedia from "./ProjectMedia";
+import YouTubeCardPreview from "./YouTubeCardPreview";
 import Tag from "../ui/Tag";
 
 interface ProjectCardProps {
@@ -64,7 +65,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <Link to={`/projects/${project.slug}`} className="card">
       <div className="card__inner">
         <div className="card__media">
-          <ProjectMedia cover={cover} label={title} caption={caption} />
+          {project.youtubeCardPreview ? (
+            <YouTubeCardPreview preview={project.youtubeCardPreview} />
+          ) : (
+            <ProjectMedia cover={cover} label={title} caption={caption} />
+          )}
           <span className={`card__badge ${badge.className}`}>{badge.label}</span>
           {showDevNote && (
             <CardDevNote slug={project.slug} fallback={project.missingAssets ?? []} />

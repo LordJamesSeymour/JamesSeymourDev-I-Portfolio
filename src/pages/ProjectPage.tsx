@@ -15,7 +15,7 @@ import SurfersQuestSpriteShowcase from "../components/projects/SurfersQuestSprit
 import SuperBombermanSpriteShowcase from "../components/projects/SuperBombermanSpriteShowcase";
 import ArcadeMachineReveal from "../components/three/ArcadeMachineReveal";
 import ArcadeMachineGallery from "../components/projects/ArcadeMachineGallery";
-import MoonbaseHeroCarousel from "../components/projects/MoonbaseHeroCarousel";
+import MoonbaseProjectGallery from "../components/projects/MoonbaseProjectGallery";
 import SplitFlapAsciiBackground from "../components/backgrounds/SplitFlapAsciiBackground";
 import CursorVaporwaveBackground from "../components/backgrounds/CursorVaporwaveBackground";
 import CursorProjectDecorations from "../components/projects/CursorProjectDecorations";
@@ -165,7 +165,7 @@ export default function ProjectPage() {
   const showVaporwaveBackground = project.theme === "vaporwave";
   const showSurfersQuestDemo = project.slug === "surfers-quest";
   const showBombermanDemo = project.slug === "bomberman-style-game";
-  const showMoonbaseCarousel = project.slug === "hammer-moonbase-map";
+  const showMoonbaseGallery = project.slug === "hammer-moonbase-map";
 
   const handleDemoFullscreen = () => {
     const demoContainer = demoContainerRef.current;
@@ -561,8 +561,6 @@ export default function ProjectPage() {
               </section>
             </PlayableDemo>
           </SuperBombermanSpriteShowcase>
-        ) : showMoonbaseCarousel ? (
-          <MoonbaseHeroCarousel />
         ) : showcaseVideoAsHero ? (
           <section className="project-detail__showcase">
             <div className="project-detail__showcase-head">
@@ -586,6 +584,8 @@ export default function ProjectPage() {
             )}
           </div>
         )}
+
+        {showMoonbaseGallery && <MoonbaseProjectGallery />}
 
         {project.showcaseVideo && !showcaseVideoAsHero && (
           <section className="project-detail__showcase">

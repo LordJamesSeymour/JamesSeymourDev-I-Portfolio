@@ -1,0 +1,10 @@
+.moonbase-project-gallery {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-hairline);
+}
+
+@media (max-width: 640px) {
+  .moonbase-project-gallery {
+    padding-top: var(--space-6);
+  }
+}

@@ -62,6 +62,14 @@ export interface ProjectVideoEmbed {
   heading: string;
 }
 
+export interface ProjectYouTubeCardPreview {
+  youtubeId: string;
+  startSeconds: number;
+  endSeconds: number;
+  poster: string;
+  alt: string;
+}
+
 export type ProjectShowcasePlacement = "before-case-study" | "after-overview";
 
 export interface ProjectCaseStudy {
@@ -144,6 +152,8 @@ export interface Project {
    * If omitted, a generated placeholder is used (no missing-file references).
    */
   cover?: ProjectCover;
+  /** Optional muted, bounded YouTube fragment used only by the landing-page card. */
+  youtubeCardPreview?: ProjectYouTubeCardPreview;
   media?: ProjectMedia[];
   /** Optional transparent project mark shown near the detail-page title. */
   logo?: ProjectLogo;

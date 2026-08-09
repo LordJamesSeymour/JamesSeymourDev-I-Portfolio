@@ -38,6 +38,21 @@
   aspect-ratio: 16 / 9;
 }
 
+.project-image-carousel--adaptive .project-image-carousel__stage {
+  min-height: 80px;
+  max-height: min(72vh, 760px);
+  margin-inline: auto;
+  transition: aspect-ratio var(--dur-mid) var(--ease-out),
+    max-width var(--dur-mid) var(--ease-out);
+}
+
+.project-image-carousel--adaptive .project-image-carousel__image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+}
+
 .project-image-carousel:focus-visible .project-image-carousel__stage {
   border-color: var(--color-plum-bright);
   box-shadow: var(--ring-focus);
@@ -224,7 +239,8 @@
   }
 
   .project-image-carousel__arrow,
-  .project-image-carousel__dot {
+  .project-image-carousel__dot,
+  .project-image-carousel--adaptive .project-image-carousel__stage {
     transition: none;
   }
 }
