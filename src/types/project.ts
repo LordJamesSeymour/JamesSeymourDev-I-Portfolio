@@ -133,6 +133,8 @@ export interface Project {
   slug: string;
   /** Public-facing name. */
   name: string;
+  /** Hides a redundant text heading when the project's logo already supplies its title. */
+  hideDisplayTitle?: boolean;
   category: ProjectCategory;
   /** Optional decorative background treatment for the detail page (see ProjectVisualTheme). */
   theme?: ProjectVisualTheme;

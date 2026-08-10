@@ -34,10 +34,10 @@ export default function Header() {
           <NavLink to="/projects" className="nav__link">
             Projects
           </NavLink>
-          <a className="nav__link nav__link--secondary" href="/#about">
+          <Link className="nav__link nav__link--secondary" to="/#about">
             About
-          </a>
-          <Button href="/#contact" className="nav__cta">
+          </Link>
+          <Button to="/#contact" className="nav__cta">
             Get in touch
           </Button>
         </nav>

@@ -207,7 +207,9 @@ export default function ProjectPage() {
     <header className="project-detail__header">
       {project.logo && <ProjectLogo logo={project.logo} />}
       <div className="project-detail__heading">
-        <h1>{title}</h1>
+        <h1 className={project.hideDisplayTitle ? "visually-hidden" : undefined}>
+          {title}
+        </h1>
         <Tag emphasis>{project.category}</Tag>
       </div>
       <p className="prose">{shortDesc}</p>

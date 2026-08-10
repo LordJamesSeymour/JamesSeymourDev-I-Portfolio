@@ -35,7 +35,7 @@ export const profile: Profile = {
     "Building gameplay systems, engine tools and interactive experiences across " +
     "C++, C#, VR and level design.",
   bio:
-    "I am a developer with a BSc (Hons) in Game Design and Programming from the " +
+    "I am a software developer with a BSc (Hons) in Game Design and Programming from the " +
     "University of Staffordshire. My passion for development began through modding my " +
     "favourite games, which led me towards programming and building original projects " +
     "of my own. I work across C++, C#, VR, engine tools and level design, combining " +

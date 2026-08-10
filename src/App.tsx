@@ -14,10 +14,11 @@ const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
  * Reset scroll to the top on every route change. Without this, navigating from a
  * scrolled list into a project page (e.g. the tall Arcade Machine 3D reveal) would
  * keep the previous scroll offset and open the page part-way down the animation.
- * Anchor navigation (a `#hash` in the URL) is left alone so in-page links still work.
+ * Hash links are resolved after the destination route renders so section navigation
+ * also works when the visitor starts on an individual project page.
  */
 function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
   // Take control of scroll position once so the browser doesn't restore a mid-page offset.
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -25,9 +26,18 @@ function ScrollToTop() {
     }
   }, []);
   useEffect(() => {
-    if (hash) return; // honour explicit anchor links
-    window.scrollTo(0, 0);
-  }, [pathname, hash]);
+    if (!hash) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    const targetId = decodeURIComponent(hash.slice(1));
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, hash, key]);
   return null;
 }
 

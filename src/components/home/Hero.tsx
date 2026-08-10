@@ -43,7 +43,7 @@ export default function Hero() {
                 <Button to="/projects" arrow>
                   {primaryCta}
                 </Button>
-                <Button href="/#contact" variant="ghost">
+                <Button to="/#contact" variant="ghost">
                   {secondaryCta}
                 </Button>
               </div>

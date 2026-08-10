@@ -77,7 +77,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
         <div className="card__body">
           <p className="card__kicker">{project.category}</p>
-          <h3 className="card__title">{title}</h3>
+          <h3 className={project.hideDisplayTitle ? "visually-hidden" : "card__title"}>
+            {title}
+          </h3>
           <p className="card__desc">{shortDesc}</p>
           <div className="tag-row">
             {project.technologies.map((tech) => (
