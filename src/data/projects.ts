@@ -110,7 +110,7 @@ export const projects: Project[] = [
   {
     // ⚠ Trademark: pick an original public-facing name and use non-copyrighted art.
     slug: "bomberman-style-game",
-    name: "Super Bomberman",
+    name: "Super Bomberman Remake",
     hideDisplayTitle: true,
     category: "C++",
     shortDescription:
