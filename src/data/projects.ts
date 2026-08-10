@@ -111,7 +111,6 @@ export const projects: Project[] = [
     // ⚠ Trademark: pick an original public-facing name and use non-copyrighted art.
     slug: "bomberman-style-game",
     name: "Super Bomberman Remake",
-    hideDisplayTitle: true,
     category: "C++",
     shortDescription:
       "A C++/SFML maze-action game built for the Arcade Machine project, featuring grid-based movement, bombs, chain explosions, enemies, power-ups, hidden exits, level progression, audio, controller support and a custom editor for building playable stages.",
@@ -123,11 +122,11 @@ export const projects: Project[] = [
       type: "video",
       src: "/SuperBomberman/Videos/bomberman-short.mp4",
       sources: ["/SuperBomberman/Videos/bomberman-short.mp4"],
-      alt: "Bomberman-style game gameplay preview",
+      alt: "Super Bomberman Remake gameplay preview",
     },
     logo: {
       src: "/SuperBomberman/bomberman-logo.png",
-      alt: "Bomberman-style game project logo",
+      alt: "Super Bomberman Remake project logo",
     },
     showcaseVideos: [
       {

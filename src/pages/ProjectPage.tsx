@@ -207,9 +207,7 @@ export default function ProjectPage() {
     <header className="project-detail__header">
       {project.logo && <ProjectLogo logo={project.logo} />}
       <div className="project-detail__heading">
-        <h1 className={project.hideDisplayTitle ? "visually-hidden" : undefined}>
-          {title}
-        </h1>
+        <h1>{title}</h1>
         <Tag emphasis>{project.category}</Tag>
       </div>
       <p className="prose">{shortDesc}</p>
@@ -484,12 +482,12 @@ export default function ProjectPage() {
           >
             <PlayableDemo
               demoUrl={BOMBERMAN_DEMO_URL}
-              title="Bomberman"
-              heading="Play the Bomberman Demo"
+              title="Super Bomberman Remake"
+              heading="Play Super Bomberman Remake"
               muteMessageType="BOMBERMAN_AUDIO_MUTE"
               messagePrefix="bomberman"
               muteStorageKey="bomberman-demo-muted"
-              resetConfirmText="Delete all Bomberman maps saved in this browser and restore the defaults?"
+              resetConfirmText="Delete all Super Bomberman Remake maps saved in this browser and restore the defaults?"
             >
               <section
                 className="project-demo__control-card"
